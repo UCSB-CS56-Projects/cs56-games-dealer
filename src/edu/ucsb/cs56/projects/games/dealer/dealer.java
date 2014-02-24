@@ -11,7 +11,7 @@ import java.lang.*;
    @version cs56 W14 2/23/14
 */
 
-public class dealer extends Deck{
+public class dealer{
 
     /**
        Main function to interact with the user,
@@ -32,7 +32,7 @@ public class dealer extends Deck{
 	do{   
 	    System.out.println("Do you want the deck shuffled? (y/n)");
 	    if (stdin.next().startsWith("y"))
-		shuffle(deck.getDeck());
+		deck.shuffle();
 	    else
 		System.out.println("The cards will remain unshuffled");
 	   
@@ -42,11 +42,11 @@ public class dealer extends Deck{
 	    else{
 		System.out.println("No number entered, five cards will be dealt");
 		numCards = 5;
-		printDeck(deck.getDeck(), numCards);
+		deck.printDeck(numCards);
 		break;
 	    }
 	   
-	    printDeck(deck.getDeck(), numCards);
+	    deck.printDeck(numCards);
 	 
 	    System.out.println("Do you want to continue? (y/n)");
 	    if(stdin.next().startsWith("y"))

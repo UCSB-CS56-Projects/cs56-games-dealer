@@ -42,16 +42,15 @@ public class Deck {
      A random number is used to swap values at
      array indices repeeatedly.
 
-     @param cards The deck of cards to be shuffled
      */
-    public static void shuffle(String[] cards){
+    public void shuffle(){
         Random rand = new Random();
         for (int i=0; i<500; i++){
             int x = Math.abs(rand.nextInt())%52;
             int y = Math.abs(rand.nextInt())%52;
-            String hold = cards[x];
-            cards[x] = cards[y];
-            cards[y] = hold;
+            String hold = deck[x];
+            deck[x] = deck[y];
+            deck[y] = hold;
         }
     }
 
@@ -59,22 +58,21 @@ public class Deck {
      This function is used to print the deck
      based off of the desired number of cards the user inputs
 
-     @param cards The deck of cards to be printed
      @param xCards The number of cards to be printed
      */
-    public static void printDeck(String[] cards, int xCards){
+    public void printDeck(int xCards){
         System.out.println("Your hand:");
 
         if(xCards==1){
-            System.out.println("" + cards[0]);
+            System.out.println("" + deck[0]);
         }
         else{
             for (int i=0; i<xCards; i++){
                 if(i==xCards-1){
-                    System.out.println(""+cards[i]);
+                    System.out.println(""+deck[i]);
                 }
                 else{
-                    System.out.print("" + cards[i] + ", ");
+                    System.out.print("" + deck[i] + ", ");
                 }
             }
         }
