@@ -8,7 +8,7 @@ import java.lang.*;
 
    @author Jeremy White and Andrew Cooney
    @author Antonio Cantor
-   @version cs56 W14 2/23/14
+   @version cs56 W14 2/26/14
 */
 
 public class dealer{

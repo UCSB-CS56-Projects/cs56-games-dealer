@@ -1,13 +1,14 @@
 package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
 import java.lang.*;
+import java.security.*;
 
 /**
  This class is to provide functions to a standard 52 cards deck such as shuffling.
 
  @author Jeremy White and Andrew Cooney
  @author Antonio Cantor
- @version cs56 W14 2/23/14
+ @version cs56 W14 2/26/14
  */
 
 public class Deck {
@@ -39,19 +40,16 @@ public class Deck {
 
     /**
      This function is used to shuffle the deck
-     A random number is used to swap values at
-     array indices repeeatedly.
-
+     by using the shuffle function from the Collections
+     class and a SecureRandom seed. It randomly permutes deck using
+     the seed.
      */
     public void shuffle(){
-        Random rand = new Random();
-        for (int i=0; i<500; i++){
-            int x = Math.abs(rand.nextInt())%52;
-            int y = Math.abs(rand.nextInt())%52;
-            String hold = deck[x];
-            deck[x] = deck[y];
-            deck[y] = hold;
-        }
+        List shuffleddeck = Arrays.asList(deck);
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[64];
+        random.nextBytes(bytes);
+        Collections.shuffle(shuffleddeck,random);
     }
 
     /**
@@ -85,5 +83,4 @@ public class Deck {
     public String[] getDeck(){
         return deck;
     }
-
 }
