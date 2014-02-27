@@ -13,14 +13,15 @@ import java.security.*;
 
 public class Deck {
 
-    private String[] deck;
+    private ArrayList<String> deck;
+
 
     /**
-    Deck constructor to make deck array contained an unshuffle deck.
+    Deck constructor to make deck arraylist contained an unshuffle deck.
      */
 
     public Deck(){
-        deck = new String[]{
+        deck = new ArrayList<String>(Arrays.asList(new String[]{
                 "2 of Clubs", "3 of Clubs", "4 of Clubs", "5 of Clubs",
                 "6 of Clubs", "7 of Clubs", "8 of Clubs", "9 of Clubs", "10 of Clubs",
                 "Jack of Clubs", "Queen of Clubs", "King of Clubs", "Ace of Clubs",
@@ -35,7 +36,7 @@ public class Deck {
 
                 "2 of Spades", "3 of Spades", "4 of Spades", "5 of Spades",
                 "6 of Spades", "7 of Spades", "8 of Spades", "9 of Spades", "10 of Spades",
-                "Jack of Spaces", "Queen of Spades", "King of Spades", "Ace of Spades", };
+                "Jack of Spaces", "Queen of Spades", "King of Spades", "Ace of Spades"}));
     }
 
     /**
@@ -45,42 +46,51 @@ public class Deck {
      the seed.
      */
     public void shuffle(){
-        List shuffleddeck = Arrays.asList(deck);
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[64];
         random.nextBytes(bytes);
-        Collections.shuffle(shuffleddeck,random);
+        Collections.shuffle(deck,random);
     }
 
     /**
-     This function is used to print the deck
-     based off of the desired number of cards the user inputs
-
-     @param xCards The number of cards to be printed
+     This function is used to print the deck.
      */
-    public void printDeck(int xCards){
-        System.out.println("Your hand:");
+    public void printDeck(){
+        System.out.println("Your deck:");
 
-        if(xCards==1){
-            System.out.println("" + deck[0]);
+        if (deck.size()==1){
+            System.out.println(""+deck.get(0));
         }
+
         else{
-            for (int i=0; i<xCards; i++){
-                if(i==xCards-1){
-                    System.out.println(""+deck[i]);
+            for (int i = 0; i<deck.size(); i++){
+                if (i%5==0){
+                    System.out.println();}
+                if(i == deck.size()-1){
+                    System.out.println(""+deck.get(i));
                 }
                 else{
-                    System.out.print("" + deck[i] + ", ");
+                    System.out.print("" + deck.get(i) + ", ");
                 }
             }
         }
-        System.out.println();
     }
 
     /**
      This function is gain access to the deck array.
      */
-    public String[] getDeck(){
+    public ArrayList<String> getDeck(){
         return deck;
     }
+
+    /**
+     This function is gain access to the deck array.
+
+     @param differentDeck A new deck to be assigned for deck
+     */
+    public void setDeck(ArrayList<String> differentDeck){
+        deck = differentDeck;
+    }
+
+
 }
