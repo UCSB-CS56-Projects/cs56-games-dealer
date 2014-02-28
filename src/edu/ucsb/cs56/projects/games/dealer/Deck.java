@@ -8,7 +8,7 @@ import java.security.*;
 
  @author Jeremy White and Andrew Cooney
  @author Antonio Cantor
- @version cs56 W14 2/26/14
+ @version cs56 W14 2/27/14
  */
 
 public class Deck {
@@ -61,6 +61,8 @@ public class Deck {
         if (deck.size()==1){
             System.out.println(""+deck.get(0));
         }
+		else if (deck.size()==0){
+			System.out.println("NO MORE CARDS IN THE DECK");}
 
         else{
             for (int i = 0; i<deck.size(); i++){

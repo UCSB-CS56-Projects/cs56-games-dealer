@@ -2,6 +2,14 @@ package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
 import java.lang.*;
 
+
+/**
+   This class is used to add cards to the hand.
+
+   @author Antonio Cantor
+   @version cs56 W14 2/27/14
+*/
+
 public class Hand{
     private ArrayList hand;
     private int handSize=0;
@@ -28,10 +36,14 @@ public class Hand{
     public void addtoHand(int xCards, Deck D){
         ArrayList copy = new ArrayList(D.getDeck());
 
+		if (xCards>copy.size()){
+			xCards=copy.size();}
+
         for (int i=0;i<xCards;i++){
             hand.add(copy.get(i));
             handSize++;
         }
+
 
         for(Iterator<String> iterator = copy.iterator(); iterator.hasNext();) {
             String card = iterator.next();
