@@ -1,4 +1,4 @@
 cs56-games-dealer
 =================
 
-W14 | jcneally | TBD | Application to shuffle a deck of 52 playing cards and deal them to the user
+W14 | jcneally | acantor | Application to shuffle a deck of 52 playing cards and deal them to the user
