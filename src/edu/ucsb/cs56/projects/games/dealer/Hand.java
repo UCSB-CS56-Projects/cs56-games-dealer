@@ -12,14 +12,14 @@ import java.lang.*;
 
 public class Hand{
     private ArrayList hand;
-    private int handSize=0;
+    private int handSize;
 
     /**
      Hand constructor to make hand arraylist be an empty hand
      and the handSize be 0.
      */
 
-    Hand(){
+    public Hand(){
         hand = new ArrayList();
         handSize=0;
     }

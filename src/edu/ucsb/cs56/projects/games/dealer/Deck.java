@@ -61,13 +61,12 @@ public class Deck {
         if (deck.size()==1){
             System.out.println(""+deck.get(0));
         }
-		else if (deck.size()==0){
-			System.out.println("NO MORE CARDS IN THE DECK");}
-
+		
         else{
             for (int i = 0; i<deck.size(); i++){
                 if (i%5==0){
-                    System.out.println();}
+                    System.out.println();
+				}
                 if(i == deck.size()-1){
                     System.out.println(""+deck.get(i));
                 }
@@ -75,6 +74,9 @@ public class Deck {
                     System.out.print("" + deck.get(i) + ", ");
                 }
             }
+			if (deck.size()==0){
+				System.out.println("NO MORE CARDS IN THE DECK");
+			}
         }
     }
 

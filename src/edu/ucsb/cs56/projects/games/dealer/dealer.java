@@ -51,7 +51,9 @@ public class dealer{
                 hand.printHand();
                 break;
             }
+
             hand.addtoHand(numCards, deck);
+			hand.printHand();
         }
         else{
             System.out.println("No number entered, five cards will be dealt");
@@ -60,8 +62,7 @@ public class dealer{
             hand.printHand();
 		    break;
 	    }
-	    hand.printHand();
-
+	    
 	    System.out.println("Do you want to continue? (y/n)");
 	    if(stdin.next().startsWith("y"))
 		    System.out.println("OK");
