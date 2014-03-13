@@ -53,32 +53,35 @@ public class Deck {
     }
 
     /**
-     This function is used to print the deck.
-     */
-    public void printDeck(){
-        System.out.println("Your deck:");
+     Overridden toString function to print cards remaining in the deck.
 
+	@return result a string of the cards remaining in the deck
+     */
+	
+	public String toString(){
+		String result="Your deck"+"\n";
         if (deck.size()==1){
-            System.out.println(""+deck.get(0));
+            result+=deck.get(0);
         }
 		
-        else{
+        else{	
             for (int i = 0; i<deck.size(); i++){
                 if (i%5==0){
-                    System.out.println();
+                    result+="\n";
 				}
                 if(i == deck.size()-1){
-                    System.out.println(""+deck.get(i));
+                    result+=deck.get(i);
                 }
                 else{
-                    System.out.print("" + deck.get(i) + ", ");
+                    result+=deck.get(i) + ", ";
                 }
             }
 			if (deck.size()==0){
-				System.out.println("NO MORE CARDS IN THE DECK");
+				result="NO MORE CARDS IN THE DECK";
 			}
         }
-    }
+		return 	result;
+	}
 
     /**
      This function is gain access to the deck array.

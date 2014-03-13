@@ -71,8 +71,9 @@ public class dealer{
 
 
 	}while(true);
+		
+	System.out.println(deck);
 
-        deck.printDeck();
 
     System.out.println();
 	System.out.println("Goodbye");
