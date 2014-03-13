@@ -48,18 +48,18 @@ public class dealer{
                 System.out.println("Five cards will be dealt");
                 numCards = 5;
                 hand.addtoHand(numCards, deck);
-                hand.printHand();
+                System.out.println(hand);
                 break;
             }
 
             hand.addtoHand(numCards, deck);
-			hand.printHand();
+				System.out.println(hand);
         }
         else{
             System.out.println("No number entered, five cards will be dealt");
             numCards = 5;
             hand.addtoHand(numCards, deck);
-            hand.printHand();
+			System.out.println(hand);			
 		    break;
 	    }
 	    

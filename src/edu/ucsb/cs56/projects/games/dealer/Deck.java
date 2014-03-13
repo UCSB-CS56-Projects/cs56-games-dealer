@@ -55,32 +55,32 @@ public class Deck {
     /**
      Overridden toString function to print cards remaining in the deck.
 
-	@return result a string of the cards remaining in the deck
+	@return deckResult a string of the cards remaining in the deck
      */
 	
 	public String toString(){
-		String result="Your deck"+"\n";
+		String deckResult="Your deck"+"\n";
         if (deck.size()==1){
-            result+=deck.get(0);
+            deckResult+=deck.get(0);
         }
 		
         else{	
             for (int i = 0; i<deck.size(); i++){
                 if (i%5==0){
-                    result+="\n";
+                    deckResult+="\n";
 				}
                 if(i == deck.size()-1){
-                    result+=deck.get(i);
+                    deckResult+=deck.get(i);
                 }
                 else{
-                    result+=deck.get(i) + ", ";
+                    deckResult+=deck.get(i) + ", ";
                 }
             }
 			if (deck.size()==0){
-				result="NO MORE CARDS IN THE DECK";
+				deckResult="NO MORE CARDS IN THE DECK";
 			}
         }
-		return 	result;
+		return 	deckResult;
 	}
 
     /**

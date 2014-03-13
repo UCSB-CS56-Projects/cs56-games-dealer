@@ -57,26 +57,30 @@ public class Hand{
 
 
     /**
-     This function is used to print the cards in the hand
+     Overridden toString function to print cards in the hand.
+
+	@return handResult a string of the cards in the hand
      */
-    public void printHand(){
-        System.out.println("Your hand:");
+	public String toString(){
+        String handResult="Your hand:"+"\n";
 
         if(handSize == 1){
-            System.out.println("" + hand.get(0));
+            handResult+=hand.get(0);
         }
         else{
             for (int i = 0; i<handSize; i++){
 				if (i%5==0){
-					System.out.println();}
+					handResult+="\n";
+				}
                 if(i == handSize-1){
-                    System.out.println(""+hand.get(i));
+                    handResult+=hand.get(i);
                 }
                 else{
-                    System.out.print("" + hand.get(i) + ", ");
+                    handResult+=hand.get(i) + ", ";
                 }
             }
         }
+		return handResult;
     }
 
 
