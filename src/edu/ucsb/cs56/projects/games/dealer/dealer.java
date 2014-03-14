@@ -64,10 +64,23 @@ public class dealer{
 	    }
 	    
 	    System.out.println("Do you want to continue? (y/n)");
-	    if(stdin.next().startsWith("y"))
+	    if(stdin.next().startsWith("y")){
+			if (deck.getDeck().size()<=0){
+		    	System.out.println(deck);
+				System.out.println("Do you want to reset? (y/n)");
+				if(stdin.next().startsWith("y")){
+					deck = new Deck();
+					hand = new Hand();
+				}
+				else{
+					break;
+				}
+			}
 		    System.out.println("OK");
-	    else
+		}
+	    else{
 		    break;
+		}
 
 
 	}while(true);
