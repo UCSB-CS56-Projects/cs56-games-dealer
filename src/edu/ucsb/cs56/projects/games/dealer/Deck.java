@@ -8,7 +8,7 @@ import java.security.*;
 
  @author Jeremy White and Andrew Cooney
  @author Antonio Cantor
- @version cs56 W14 2/27/14
+ @version cs56 W14 3/13/14
  */
 
 public class Deck {
@@ -45,6 +45,7 @@ public class Deck {
      class and a SecureRandom seed. It randomly permutes deck using
      the seed.
      */
+
     public void shuffle(){
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[64];
@@ -83,21 +84,34 @@ public class Deck {
 		return 	deckResult;
 	}
 
+
+    /**
+	 Removes cards from the deck by xCards
+
+     @param xCards the number of cards user inputted
+     */
+
+	public void removeCard(int xCards){
+		int i = 0;
+        for(Iterator<String> iterator = deck.iterator(); iterator.hasNext();) {
+            String card = iterator.next();
+            if(i<xCards){
+                iterator.remove();
+				i++;
+            }
+		}
+	}
+
+
+
     /**
      This function is gain access to the deck array.
+
+	 @return deck the arraylist of deck
      */
+
     public ArrayList<String> getDeck(){
         return deck;
     }
-
-    /**
-     This function is gain access to the deck array.
-
-     @param differentDeck A new deck to be assigned for deck
-     */
-    public void setDeck(ArrayList<String> differentDeck){
-        deck = differentDeck;
-    }
-
 
 }

@@ -7,7 +7,7 @@ import java.lang.*;
    This class is used to add cards to the hand.
 
    @author Antonio Cantor
-   @version cs56 W14 2/27/14
+   @version cs56 W14 3/13/14
 */
 
 public class Hand{
@@ -28,31 +28,23 @@ public class Hand{
      This function adds cards to the hand based on the
      user input. After the cards to the hand, it removes
      the cards from the deck that were added to the hand
+	 by calling the removeCard function in the Deck class
 
      @param xCards the number of cards user inputted
-     @param D .the Deck deck used in the dealer class
+     @param D the Deck deck used in the dealer class
      */
 
     public void addtoHand(int xCards, Deck D){
-        ArrayList copy = new ArrayList(D.getDeck());
 
-		if (xCards>copy.size()){
-			xCards=copy.size();}
+		if (xCards>D.getDeck().size()){
+			xCards=D.getDeck().size();}
 
         for (int i=0;i<xCards;i++){
-            hand.add(copy.get(i));
+            hand.add(D.getDeck().get(i));
             handSize++;
         }
-
-
-        for(Iterator<String> iterator = copy.iterator(); iterator.hasNext();) {
-            String card = iterator.next();
-            if(hand.contains(card)){
-                iterator.remove();
-            }
-        }
-
-        D.setDeck(copy);
+				
+		D.removeCard(xCards);
     }
 
 
@@ -61,6 +53,7 @@ public class Hand{
 
 	@return handResult a string of the cards in the hand
      */
+
 	public String toString(){
         String handResult="Your hand:"+"\n";
 
