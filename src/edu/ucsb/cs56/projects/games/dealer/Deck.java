@@ -47,10 +47,13 @@ public class Deck {
      */
 
     public void shuffle(){
-        SecureRandom random = new SecureRandom();
+		//Creates the seed
+		SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[64];
         random.nextBytes(bytes);
-        Collections.shuffle(deck,random);
+		
+        //Shuffles the deck with a 64 bit seed 
+		Collections.shuffle(deck,random);
     }
 
     /**
@@ -61,15 +64,17 @@ public class Deck {
 	
 	public String toString(){
 		String deckResult="Your deck"+"\n";
-        if (deck.size()==1){
+		//Only one card to add to deckResult
+		if (deck.size()==1){
             deckResult+=deck.get(0);
-        }
-		
+        }		
         else{	
             for (int i = 0; i<deck.size(); i++){
-                if (i%5==0){
+                //5 cards per line
+				if (i%5==0){
                     deckResult+="\n";
 				}
+				//No comma at the end of the string
                 if(i == deck.size()-1){
                     deckResult+=deck.get(i);
                 }
@@ -77,6 +82,7 @@ public class Deck {
                     deckResult+=deck.get(i) + ", ";
                 }
             }
+			//deck is empty
 			if (deck.size()==0){
 				deckResult="NO MORE CARDS IN THE DECK";
 			}
@@ -93,9 +99,13 @@ public class Deck {
 
 	public void removeCard(int xCards){
 		int i = 0;
+		//Loops up to index xCard-1 in the deck
+		//Using an Iterator instead of using for loop is safer
+		//There won't be an index out of bounds exception
         for(Iterator<String> iterator = deck.iterator(); iterator.hasNext();) {
             String card = iterator.next();
             if(i<xCards){
+				//removes first element in the ArrayList
                 iterator.remove();
 				i++;
             }
@@ -107,9 +117,10 @@ public class Deck {
     /**
      This function is gain access to the deck array.
 
-	 @return deck the arraylist of deck
+	 @return deck the ArrayList of deck
      */
-
+	
+	//Necessary for dealer class and addtoHand function in Hand class
     public ArrayList<String> getDeck(){
         return deck;
     }

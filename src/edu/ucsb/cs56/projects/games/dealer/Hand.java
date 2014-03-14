@@ -35,15 +35,20 @@ public class Hand{
      */
 
     public void addtoHand(int xCards, Deck D){
-
+		/*If desire number of cards greater than 
+		the amount of cards in the deck draw
+		then all the cards in the deck */
 		if (xCards>D.getDeck().size()){
-			xCards=D.getDeck().size();}
+			xCards=D.getDeck().size();
+		}
 
+		//Add cards to the hand
         for (int i=0;i<xCards;i++){
             hand.add(D.getDeck().get(i));
             handSize++;
         }
-				
+		
+		//Removes the number of cards drawn from deck
 		D.removeCard(xCards);
     }
 
@@ -56,15 +61,17 @@ public class Hand{
 
 	public String toString(){
         String handResult="Your hand:"+"\n";
-
+		//One card in hand
         if(handSize == 1){
             handResult+=hand.get(0);
         }
         else{
             for (int i = 0; i<handSize; i++){
+				//5 cards per line
 				if (i%5==0){
 					handResult+="\n";
 				}
+				//No comma added to the last card in string
                 if(i == handSize-1){
                     handResult+=hand.get(i);
                 }

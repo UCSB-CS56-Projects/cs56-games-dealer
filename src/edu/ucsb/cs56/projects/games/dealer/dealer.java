@@ -43,6 +43,7 @@ public class dealer{
         System.out.println("How many cards do you want?");
 	    if(stdin.hasNextInt()){
 		    numCards = stdin.nextInt();
+			//Checks if numCards is from 0 to 52 is inputted
             if (numCards<0||numCards>53){
                 System.out.println("An integer from 0 to 52 was not entered");
                 System.out.println("Five cards will be dealt");
@@ -53,7 +54,8 @@ public class dealer{
             }
 
             hand.addtoHand(numCards, deck);
-				System.out.println(hand);
+			//Prints hand
+			System.out.println(hand);
         }
         else{
             System.out.println("No number entered, five cards will be dealt");
@@ -65,26 +67,31 @@ public class dealer{
 	    
 	    System.out.println("Do you want to continue? (y/n)");
 	    if(stdin.next().startsWith("y")){
+			//Want to continue but no cards in deck
 			if (deck.getDeck().size()<=0){
 		    	System.out.println(deck);
 				System.out.println("Do you want to reset? (y/n)");
 				if(stdin.next().startsWith("y")){
+					//Resets both hand and deck to default 
 					deck = new Deck();
 					hand = new Hand();
 				}
 				else{
+					//Doesn't want to reset
 					break;
 				}
 			}
 		    System.out.println("OK");
 		}
 	    else{
+			//No longer wants to continue 
 		    break;
 		}
 
 
 	}while(true);
-		
+	
+	//prints the deck
 	System.out.println(deck);
 
 
