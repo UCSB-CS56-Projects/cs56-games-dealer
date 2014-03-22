@@ -7,19 +7,19 @@ import java.lang.*;
    This class is used to add cards to the hand.
 
    @author Antonio Cantor
-   @version cs56 W14 2/27/14
+   @version cs56 W14 3/13/14
 */
 
 public class Hand{
     private ArrayList hand;
-    private int handSize=0;
+    private int handSize;
 
     /**
      Hand constructor to make hand arraylist be an empty hand
      and the handSize be 0.
      */
 
-    Hand(){
+    public Hand(){
         hand = new ArrayList();
         handSize=0;
     }
@@ -28,55 +28,59 @@ public class Hand{
      This function adds cards to the hand based on the
      user input. After the cards to the hand, it removes
      the cards from the deck that were added to the hand
+	 by calling the removeCard function in the Deck class
 
      @param xCards the number of cards user inputted
-     @param D .the Deck deck used in the dealer class
+     @param D the Deck deck used in the dealer class
      */
 
     public void addtoHand(int xCards, Deck D){
-        ArrayList copy = new ArrayList(D.getDeck());
+		/*If desire number of cards greater than 
+		the amount of cards in the deck draw
+		then all the cards in the deck */
+		if (xCards>D.getDeck().size()){
+			xCards=D.getDeck().size();
+		}
 
-		if (xCards>copy.size()){
-			xCards=copy.size();}
-
+		//Add cards to the hand
         for (int i=0;i<xCards;i++){
-            hand.add(copy.get(i));
+            hand.add(D.getDeck().get(i));
             handSize++;
         }
-
-
-        for(Iterator<String> iterator = copy.iterator(); iterator.hasNext();) {
-            String card = iterator.next();
-            if(hand.contains(card)){
-                iterator.remove();
-            }
-        }
-
-        D.setDeck(copy);
+		
+		//Removes the number of cards drawn from deck
+		D.removeCard(xCards);
     }
 
 
     /**
-     This function is used to print the cards in the hand
-     */
-    public void printHand(){
-        System.out.println("Your hand:");
+     Overridden toString function to print cards in the hand.
 
+	@return handResult a string of the cards in the hand
+     */
+
+	public String toString(){
+        String handResult="Your hand:"+"\n";
+		//One card in hand
         if(handSize == 1){
-            System.out.println("" + hand.get(0));
+            handResult+=hand.get(0);
         }
         else{
             for (int i = 0; i<handSize; i++){
+				//5 cards per line
 				if (i%5==0){
-					System.out.println();}
+					handResult+="\n";
+				}
+				//No comma added to the last card in string
                 if(i == handSize-1){
-                    System.out.println(""+hand.get(i));
+                    handResult+=hand.get(i);
                 }
                 else{
-                    System.out.print("" + hand.get(i) + ", ");
+                    handResult+=hand.get(i) + ", ";
                 }
             }
         }
+		return handResult;
     }
 
 
