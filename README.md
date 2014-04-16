@@ -1,7 +1,11 @@
 cs56-games-dealer
 =================
 
-W14 | jcneally | acantor | 
+project history
+===============
+```
+ W14 | jcneally 4pm | acantor | Application to shuffle a deck of 52 playing cards and deal them to the user
+```
 
 What is this?
 =============
