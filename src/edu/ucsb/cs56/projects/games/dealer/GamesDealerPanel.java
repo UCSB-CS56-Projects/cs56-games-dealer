@@ -31,35 +31,46 @@ public class GamesDealerPanel extends JPanel{
 
     JTextField playerInput;
 
-    static JTextArea cardDisplay;
+    static JScrollPane cardDisplay;
     static JScrollPane scroller;
+    JPanel cardOutputPanel;
     
     JPanel display;
 
     public GamesDealerPanel(){
 	super(new BorderLayout());
-	 
-	 JPanel labelPanel = new JPanel(new GridLayout(7,1));
-	 JPanel fieldPanel = new JPanel(new GridLayout(7,1));
+	
+	 JPanel playerInputPanel = new JPanel(new FlowLayout());
+	 JPanel cardOutputPanel = new JPanel(new BorderLayout());
 	 display = new JPanel();
 	 
-	 add(labelPanel, BorderLayout.WEST);
-	 add(fieldPanel, BorderLayout.CENTER);
-	 add(display, BorderLayout.SOUTH);
+	 add(playerInputPanel, BorderLayout.NORTH);
+	 add(cardOutputPanel, BorderLayout.CENTER);
+
+	 //set up the command line prompt(label) and text field for input
+	 playerInput=new JTextField(5);
+	 String prompt="stub(How many hands/how many cards/...)";
+	 JLabel promptLabel=new JLabel(prompt, JLabel.RIGHT);
+	 promptLabel.setLabelFor(playerInput);
+	 playerInputPanel.add(promptLabel);
+
+	 //playerInput= new JTextField(5);
+	 JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	 inputPanel.add(playerInput);
+	 playerInputPanel.add(inputPanel); 
+
+	 //set up the pane for displaying the cards dealt
+	 //for displaying the images of the cards, I think we want the JScrollPane https://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/scrollpane.html
+	 cardDisplay= new JScrollPane();
+	 String wordOutput="stub(Player 1: here are your cards)";
+	 JLabel wordOutputLabel=new JLabel(wordOutput);
+	 wordOutputLabel.setLabelFor(cardDisplay);
+	 wordOutputLabel.setVerticalTextPosition(JLabel.TOP);
+	 cardOutputPanel.add(wordOutputLabel);
+
+	 cardOutputPanel.add(cardDisplay); 
 	 
-	 //create a weight label & text field
-	 weightField = new JTextField();
-	 weightField.setColumns(10);	 
-
-	 JLabel weightLabel = new JLabel("Weight ",JLabel.RIGHT);
-	 weightLabel.setLabelFor(weightField);
-
-	 labelPanel.add(weightLabel);
-	 
-	 JPanel weightPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	 weightPanel.add(weightField);
-	 fieldPanel.add(weightPanel);
-
+	 /*
 	//create a lbs/kgs combo box
 	String weightArray[] = {"Pounds", "Kilograms"};
 
@@ -184,10 +195,10 @@ public class GamesDealerPanel extends JPanel{
 		
 	    }
 	    });
-
-	  display.add(submit);
+	 */
+	 // display.add(submit);
 	  
-
+	
     }
 
 }

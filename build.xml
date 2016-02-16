@@ -14,7 +14,7 @@
 <property name="projectPath" value="${course}/${quarter}/issues/${issueNum}"/>
 <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc"/>
 <property name="javadocURL" value="${webBaseUrl}/${projectName}/javadoc"/>
-<property name="mainClass" value="edu.ucsb.cs56.projects.games.dealer.dealer"/>
+<property name="mainClass" value="edu.ucsb.cs56.projects.games.dealer.GamesDealerGui"/>
 <property name="mainClassGUI" value="edu.ucsb.cs56.projects.games.dealer.GamesDealerPanel"/>
 <property name="fullPkg" value="edu.ucsb.cs56.projects.games.${projectName}" />
 
