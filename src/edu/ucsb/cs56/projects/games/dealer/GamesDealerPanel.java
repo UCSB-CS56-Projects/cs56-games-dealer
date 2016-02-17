@@ -97,6 +97,7 @@ public class GamesDealerPanel extends JPanel{
 		    scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		    cardDisplayPanel.add(scroller);
 		    cardOutputPanel.add(cardDisplayPanel);
+		    cardOutputPanel.revalidate();
 		    cardOutputPanel.repaint();
 		}
 	    });
