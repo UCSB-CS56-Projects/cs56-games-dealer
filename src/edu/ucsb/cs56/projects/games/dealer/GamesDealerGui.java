@@ -45,7 +45,7 @@ public class GamesDealerGui{
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.getContentPane().add(BorderLayout.CENTER, panel);
 	frame.pack();
-	frame.setSize(1600,800);
+	frame.setSize(800,600);
 	frame.setVisible(true);
     }
 }
