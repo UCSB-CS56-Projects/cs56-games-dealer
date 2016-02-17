@@ -34,9 +34,14 @@ public class GamesDealerPanel extends JPanel{
     static JScrollPane cardDisplay;
     static JScrollPane scroller;
     JPanel cardOutputPanel;
-    
+    static JTextArea outputText;
+    JPanel playerPrompt;
     JPanel display;
 
+    JPanel playerPromptsPanel;
+    JPanel playerInputsPanel;
+    JTextField[] playerInputArray;
+    
     public GamesDealerPanel(){
 	super(new BorderLayout());
 	
@@ -49,7 +54,7 @@ public class GamesDealerPanel extends JPanel{
 
 	 //set up the command line prompt(label) and text field for input
 	 playerInput=new JTextField(5);
-	 String prompt="stub(How many hands/how many cards/...)";
+	 String prompt="How many hands do you want? (Enter an integer greater than 0)";
 	 JLabel promptLabel=new JLabel(prompt, JLabel.RIGHT);
 	 promptLabel.setLabelFor(playerInput);
 	 playerInputPanel.add(promptLabel);
@@ -57,18 +62,67 @@ public class GamesDealerPanel extends JPanel{
 	 //playerInput= new JTextField(5);
 	 JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	 inputPanel.add(playerInput);
-	 playerInputPanel.add(inputPanel); 
+	 playerInputPanel.add(inputPanel);
 
 	 //set up the pane for displaying the cards dealt
 	 //for displaying the images of the cards, I think we want the JScrollPane https://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/scrollpane.html
-	 cardDisplay= new JScrollPane();
-	 String wordOutput="stub(Player 1: here are your cards)";
-	 JLabel wordOutputLabel=new JLabel(wordOutput);
-	 wordOutputLabel.setLabelFor(cardDisplay);
-	 wordOutputLabel.setVerticalTextPosition(JLabel.TOP);
-	 cardOutputPanel.add(wordOutputLabel);
 
-	 cardOutputPanel.add(cardDisplay); 
+	 /*	 cardDisplay= new JScrollPane();
+
+	 outputText= new JTextArea(1,1);
+	 outputText.setLineWrap(true);
+	 
+	 scroller = new JScrollPane(outputText);
+	 scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+	 scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	 
+	 cardDisplay.add(scroller);
+	 */
+	 	JButton submit = new JButton("Submit");
+	 
+	submit.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		// outputText.setText(null);
+		int numHands;
+		try
+		{
+		    numHands = Integer.parseInt(playerInput.getText());
+
+		}
+		catch (NumberFormatException nfe)
+		{
+		    numHands = 1;
+
+		}
+		playerInputArray = new JTextField[numHands];
+		
+		playerPromptsPanel = new JPanel(new GridLayout(numHands,1));
+		playerInputsPanel = new JPanel(new GridLayout(numHands, 1));
+		cardOutputPanel.add(playerPromptsPanel, BorderLayout.WEST);
+		cardOutputPanel.add(playerInputsPanel, BorderLayout.EAST);
+		for(int i=1; i<numHands+1;i++){
+		   
+		    JTextField playerCardInput=new JTextField(5);
+		    playerInputArray[i-1]=playerCardInput;
+		    String question="Player " +i+"/"+numHands+": How many cards do you want?";
+		    JLabel playerPromptLabel=new JLabel(question, JLabel.RIGHT);
+		    playerPromptLabel.setLabelFor(playerCardInput);
+		    playerPromptsPanel.add(playerPromptLabel);
+
+		    //playerInput= new JTextField(5);
+		    JPanel playerTextFieldPanel  = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		    playerTextFieldPanel.add(playerCardInput);
+		    playerInputsPanel.add(playerTextFieldPanel);
+		}
+		
+		//	outputText.append(BACMessage.GuiMessage(BAC) + "\n");
+		
+	    }
+	    });
+	playerInputPanel.add(submit);
+	// cardOutputPanel.add(cardDisplay);
+
+	 
 	 
 	 /*
 	//create a lbs/kgs combo box
