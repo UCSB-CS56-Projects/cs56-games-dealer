@@ -97,7 +97,7 @@ public class GamesDealerPanel extends JPanel{
 	JButton displayCardsButton = new JButton("Display Cards");
 	displayCardsButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-		    cardOutputPanel.removeAll();
+
 		    //put all the numbers read in from the playerInputArray into playerInputArrayInts
 		    for(int i=0; i<playerInputArray.length;i++){
 
@@ -118,6 +118,7 @@ public class GamesDealerPanel extends JPanel{
 				
 			    }
 		    }
+		    		    cardOutputPanel.removeAll();
 					    System.out.println("cards");
 		    String cards = "***Player cards go in here***";                                    //call the helper dealer class... input is the numHands and the array of numbers that playerInputArray which is a JTextField reads in
 
