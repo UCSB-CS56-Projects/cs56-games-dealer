@@ -45,12 +45,12 @@ public class GamesDealerPanel extends JPanel{
     
     public GamesDealerPanel(){
 	super(new BorderLayout());
-	
-	JPanel playerInputPanel = new JPanel(new FlowLayout());
+	JPanel playerInputPanelLayout = new JPanel(new BorderLayout());
+	JPanel playerInputPanelnumHands = new JPanel(new FlowLayout());
 	JPanel cardOutputPanel = new JPanel(new BorderLayout());
 	display = new JPanel();
 	 
-	add(playerInputPanel, BorderLayout.NORTH);
+	add(playerInputPanelLayout, BorderLayout.NORTH);
 	add(cardOutputPanel, BorderLayout.CENTER);
 
 	//set up the command line prompt(label) and text field for input
@@ -58,13 +58,27 @@ public class GamesDealerPanel extends JPanel{
 	String prompt="How many hands do you want? (Enter an integer greater than 0 and less than 11)";
 	JLabel promptLabel=new JLabel(prompt);
 	promptLabel.setLabelFor(playerInput);
-	playerInputPanel.add(promptLabel);
+	playerInputPanelnumHands.add(promptLabel);
 
 	//playerInput= new JTextField(5);
 	JPanel inputPanel = new JPanel(new FlowLayout());
 	inputPanel.add(playerInput);
-	playerInputPanel.add(inputPanel);
+	playerInputPanelnumHands.add(inputPanel);
+	playerInputPanelLayout.add(playerInputPanelnumHands, BorderLayout.NORTH);
 
+	JPanel playerInputPanelShuffle=new JPanel(new FlowLayout());
+	JComboBox shuffleBox;
+	String shuffleOptions[] = {"don't shuffle", "shuffle once before dealing","shuffle after every set of cards is dealt"};
+	shuffleBox = new JComboBox(shuffleOptions);
+	 
+	JLabel shuffleLabel = new JLabel("Shuffle?",JLabel.RIGHT);
+	shuffleLabel.setLabelFor(shuffleBox);
+	playerInputPanelShuffle.add(shuffleLabel);
+	 
+	JPanel shuffleBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	shuffleBoxPanel.add(shuffleBox);
+	playerInputPanelShuffle.add(shuffleBoxPanel);
+	playerInputPanelLayout.add(playerInputPanelShuffle, BorderLayout.SOUTH);
 	//set up the pane for displaying the cards dealt
 	//for displaying the images of the cards, I think we want the JScrollPane https://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/scrollpane.html
 
@@ -79,13 +93,14 @@ public class GamesDealerPanel extends JPanel{
 	 
 		 cardDisplay.add(scroller);
 	*/
-	JButton submit = new JButton("Submit");
+
 	JButton displayCardsButton = new JButton("Display Cards");
 	displayCardsButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 		    cardOutputPanel.removeAll();
 		    //put all the numbers read in from the playerInputArray into playerInputArrayInts
 		    for(int i=0; i<playerInputArray.length;i++){
+
 			try
 			    {
 				if(playerInputArray[i].getText()==("")){                  //if the user leaves the text field empty set the default value as 0
@@ -103,10 +118,9 @@ public class GamesDealerPanel extends JPanel{
 				
 			    }
 		    }
-
-		    
-		    
+					    System.out.println("cards");
 		    String cards = "***Player cards go in here***";                                    //call the helper dealer class... input is the numHands and the array of numbers that playerInputArray which is a JTextField reads in
+
 		    JTextArea cardsTextArea = new JTextArea(cards);
 		    cardsTextArea.setLineWrap(true);
 		    
@@ -124,12 +138,12 @@ public class GamesDealerPanel extends JPanel{
 		}
 	    });
 	
-
+	JButton submit = new JButton("Submit");
 	submit.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    // outputText.setText(null);
 		    int numHands;
-
+		    String shuffledAns = (String) shuffleBox.getSelectedItem();
 		    try
 			{
 			    numHands = Integer.parseInt(playerInput.getText());
@@ -138,12 +152,14 @@ public class GamesDealerPanel extends JPanel{
 			    if(numHands > 10)
 				numHands = 10;
 			    System.out.println(numHands);
+
 			}
 		    catch (NumberFormatException nfe)
 			{
 			    numHands = 1;
 
 			}
+		    System.out.println(shuffledAns);
 		    playerInputArray = new JTextField[numHands];
 
 		    GridLayout grid = new GridLayout(numHands,1,1,1);
@@ -178,7 +194,7 @@ public class GamesDealerPanel extends JPanel{
 		    cardOutputPanel.repaint();
 		}
 	    });
-	playerInputPanel.add(submit);
+	playerInputPanelnumHands.add(submit);
 	//cardOutputPanel.add(submit);
 
 	 
