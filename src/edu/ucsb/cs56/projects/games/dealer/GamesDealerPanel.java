@@ -41,6 +41,7 @@ public class GamesDealerPanel extends JPanel{
     JPanel playerPromptsPanel;
     JPanel playerInputsPanel;
     JTextField[] playerInputArray;
+    int[] playerInputArrayInts;
     
     public GamesDealerPanel(){
 	super(new BorderLayout());
@@ -83,8 +84,29 @@ public class GamesDealerPanel extends JPanel{
 	displayCardsButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 		    cardOutputPanel.removeAll();
+		    //put all the numbers read in from the playerInputArray into playerInputArrayInts
+		    for(int i=0; i<playerInputArray.length;i++){
+			try
+			    {
+				if(playerInputArray[i].getText()==("")){                  //if the user leaves the text field empty set the default value as 0
+				    playerInputArrayInts[i]=0;
+				}
+				else{
+				    playerInputArrayInts[i] = Integer.parseInt(playerInputArray[i].getText());
+				    if(playerInputArrayInts[i] < 0)
+					playerInputArrayInts[i] = 0;                       //set the default if the player asks for a negative number of cards is 0
+				}
+			    }
+			catch (NumberFormatException nfe)
+			    {
+				playerInputArrayInts[i] = 0;
+				
+			    }
+		    }
 
-		    String cards = "***Player cards go in here***";
+		    
+		    
+		    String cards = "***Player cards go in here***";                                    //call the helper dealer class... input is the numHands and the array of numbers that playerInputArray which is a JTextField reads in
 		    JTextArea cardsTextArea = new JTextArea(cards);
 		    cardsTextArea.setLineWrap(true);
 		    
@@ -102,12 +124,12 @@ public class GamesDealerPanel extends JPanel{
 		}
 	    });
 	
-	
+
 	submit.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    // outputText.setText(null);
-		
 		    int numHands;
+
 		    try
 			{
 			    numHands = Integer.parseInt(playerInput.getText());
