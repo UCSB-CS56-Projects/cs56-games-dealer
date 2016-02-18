@@ -100,26 +100,28 @@ public class GamesDealerPanel extends JPanel{
 
 		    //put all the numbers read in from the playerInputArray into playerInputArrayInts
 		    for(int i=0; i<playerInputArray.length;i++){
-
-			try
-			    {
-				if(playerInputArray[i].getText()==("")){                  //if the user leaves the text field empty set the default value as 0
-				    playerInputArrayInts[i]=0;
+			if(playerInputArrayInts!=null){
+			    try
+				{
+				    if(playerInputArray[i].getText()==("")){                  //if the user leaves the text field empty set the default value as 0
+					playerInputArrayInts[i]=0;
+				    }
+				    else{
+					playerInputArrayInts[i] = Integer.parseInt(playerInputArray[i].getText());
+					if(playerInputArrayInts[i] < 0)
+					    playerInputArrayInts[i] = 0;                       //set the default if the player asks for a negative number of cards is 0
+				    }
 				}
-				else{
-				    playerInputArrayInts[i] = Integer.parseInt(playerInputArray[i].getText());
-				    if(playerInputArrayInts[i] < 0)
-					playerInputArrayInts[i] = 0;                       //set the default if the player asks for a negative number of cards is 0
-				}
-			    }
-			catch (NumberFormatException nfe)
-			    {
-				playerInputArrayInts[i] = 0;
+			    catch (NumberFormatException nfe)
+				{
+	
+				    playerInputArrayInts[i] = 0;
 				
-			    }
+				}
+			}
 		    }
-		    		    cardOutputPanel.removeAll();
-					    System.out.println("cards");
+		    cardOutputPanel.removeAll();
+		    System.out.println("cards");
 		    String cards = "***Player cards go in here***";                                    //call the helper dealer class... input is the numHands and the array of numbers that playerInputArray which is a JTextField reads in
 
 		    JTextArea cardsTextArea = new JTextArea(cards);
