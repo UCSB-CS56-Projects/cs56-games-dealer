@@ -68,9 +68,9 @@ public class Hand{
         else{
             for (int i = 0; i<handSize; i++){
 				//5 cards per line
-				if (i%5==0){
+		/*	if (i%5==0){
 					handResult+="\n";
-				}
+					}*/
 				//No comma added to the last card in string
                 if(i == handSize-1){
                     handResult+=hand.get(i);

@@ -28,20 +28,22 @@ import java.lang.*;
 
 
 public class GamesDealerPanel extends JPanel{
-
+    DealerPanelHelper helper;
     JTextField playerInput;
-
+    String shuffledAns;
     static JScrollPane cardDisplay;
     static JScrollPane scroller;
     JPanel cardOutputPanel;
     static JTextArea outputText;
     JPanel playerPrompt;
     JPanel display;
-
+    Deck deck;
     JPanel playerPromptsPanel;
     JPanel playerInputsPanel;
     JTextField[] playerInputArray;
     int[] playerInputArrayInts;
+    Hand[] hands;
+    JButton continueButton;
     
     public GamesDealerPanel(){
 	super(new BorderLayout());
@@ -93,11 +95,13 @@ public class GamesDealerPanel extends JPanel{
 	 
 		 cardDisplay.add(scroller);
 	*/
+	deck=new Deck();
 
 	JButton displayCardsButton = new JButton("Display Cards");
 	displayCardsButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-
+		    shuffledAns = (String) shuffleBox.getSelectedItem();
+		    playerInputArrayInts= new int[playerInputArray.length];
 		    //put all the numbers read in from the playerInputArray into playerInputArrayInts
 		    for(int i=0; i<playerInputArray.length;i++){
 			if(playerInputArrayInts!=null){
@@ -121,8 +125,13 @@ public class GamesDealerPanel extends JPanel{
 			}
 		    }
 		    cardOutputPanel.removeAll();
-		    System.out.println("cards");
-		    String cards = "***Player cards go in here***";                                    //call the helper dealer class... input is the numHands and the array of numbers that playerInputArray which is a JTextField reads in
+		    if(hands==null){
+			hands= new Hand[playerInputArray.length];
+		    }
+		    helper=new DealerPanelHelper(playerInputArray.length, playerInputArrayInts, shuffledAns, deck, hands);
+		    deck=helper.getDeck();
+		    hands=helper.getHands();
+		    String cards = helper.playerCardString();                              //call the helper dealer class... input is the numHands and the array of numbers that playerInputArray which is a JTextField reads in
 
 		    JTextArea cardsTextArea = new JTextArea(cards);
 		    cardsTextArea.setLineWrap(true);
@@ -136,17 +145,22 @@ public class GamesDealerPanel extends JPanel{
 		    scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		    cardDisplayPanel.add(scroller);
 		    cardOutputPanel.add(cardDisplayPanel);
+		    shuffleBoxPanel.add(continueButton);
 		    cardOutputPanel.revalidate();
 		    cardOutputPanel.repaint();
+
 		}
 	    });
 	
-	JButton submit = new JButton("Submit");
+	JButton submit = new JButton("Submit/Reset");
 	submit.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+		    cardOutputPanel.removeAll();
+		    deck=new Deck();
+		    hands=null;
 		    // outputText.setText(null);
 		    int numHands;
-		    String shuffledAns = (String) shuffleBox.getSelectedItem();
+
 		    try
 			{
 			    numHands = Integer.parseInt(playerInput.getText());
@@ -198,6 +212,67 @@ public class GamesDealerPanel extends JPanel{
 		}
 	    });
 	playerInputPanelnumHands.add(submit);
+
+
+	continueButton= new JButton("Continue Drawing Cards");
+	continueButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		    cardOutputPanel.removeAll();
+		    shuffleBoxPanel.remove(continueButton);
+     		    // outputText.setText(null);
+		    int numHands;
+		    shuffledAns = (String) shuffleBox.getSelectedItem();
+		    try
+			{
+			    numHands = Integer.parseInt(playerInput.getText());
+			    if(numHands < 1)
+				numHands = 1;
+			    if(numHands > 10)
+				numHands = 10;
+			    System.out.println(numHands);
+
+			}
+		    catch (NumberFormatException nfe)
+			{
+			    numHands = 1;
+
+			}
+		    System.out.println(shuffledAns);
+		    playerInputArray = new JTextField[numHands];
+
+		    GridLayout grid = new GridLayout(numHands,1,1,1);
+		    playerPromptsPanel = new JPanel(grid);
+      
+
+		    //playerInputsPanel = new JPanel(new GridLayout(numHands, 1));
+		
+		    cardOutputPanel.add(playerPromptsPanel, BorderLayout.CENTER);
+		    //cardOutputPanel.add(playerInputsPanel, BorderLayout.EAST);
+	
+		    for(int i=1; i<numHands+1;i++){
+		   
+			JTextField playerCardInput=new JTextField(5);
+			playerInputArray[i-1]=playerCardInput;
+			String question="Player " +i+"/"+numHands+": How many cards do you want?";
+			JLabel playerPromptLabel=new JLabel(question, JLabel.RIGHT);
+			playerPromptLabel.setLabelFor(playerCardInput);
+			JPanel playerPromptLabelPanel = new JPanel(new BorderLayout());
+			playerPromptLabelPanel.add(playerPromptLabel,BorderLayout.NORTH);
+			playerPromptsPanel.add(playerPromptLabelPanel);
+
+			//playerInput= new JTextField(5);
+			JPanel playerTextFieldPanel  = new JPanel(new FlowLayout());
+			playerTextFieldPanel.add(playerCardInput);
+			playerPromptsPanel.add(playerTextFieldPanel);
+		    }
+		    cardOutputPanel.add(displayCardsButton, BorderLayout.SOUTH);
+	        
+		    //	outputText.append(BACMessage.GuiMessage(BAC) + "\n");
+		    cardOutputPanel.revalidate();
+		    cardOutputPanel.repaint();
+		}
+	    });
+ 
 	//cardOutputPanel.add(submit);
 
 	 
