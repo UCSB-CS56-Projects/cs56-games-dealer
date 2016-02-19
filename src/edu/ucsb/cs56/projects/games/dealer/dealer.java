@@ -20,7 +20,7 @@ public class dealer{
 
        @param args Command line arguments entered by user
     */
-
+    
     public static void main(String[] args) throws IOException{
 
 	Scanner stdin = new Scanner(System.in);
@@ -30,8 +30,8 @@ public class dealer{
 
 	//Create unshuffled deck
 	Deck deck=new Deck();
-	//Create empty hand
 
+	// 
 	System.out.println("How many hands do you want? (Enter an integer greater than 0)");
 	if(stdin.hasNextInt()){
 	    numHands = stdin.nextInt();
