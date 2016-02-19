@@ -31,7 +31,7 @@ public class dealer{
 	//Create unshuffled deck
 	Deck deck=new Deck();
 
-	// 
+	// Requests input from player for how many hands they want to play with
 	System.out.println("How many hands do you want? (Enter an integer greater than 0)");
 	if(stdin.hasNextInt()){
 	    numHands = stdin.nextInt();
@@ -47,6 +47,7 @@ public class dealer{
 
 	do{
 	    int currentHand = 0;
+	    // Requests input from player to shuffle the deck
 	    System.out.println("Do you want the deck shuffled? (y/n)");
 	    if (stdin.next().startsWith("y")){
 		deck.shuffle();
@@ -55,6 +56,7 @@ public class dealer{
 		System.out.println("The cards will remain unshuffled");
 	    }
 	    if(numHands < 1){
+		// Requests input from player to 
 		System.out.println("How many hands do you want? (Enter an integer greater than 0)");
 		if(stdin.hasNextInt()){
 		    numHands = stdin.nextInt();
@@ -68,8 +70,6 @@ public class dealer{
 		    hands[i] = new Hand();
 		}
 	    }
-	    // INSERT: How many hands
-	    // INSERT: if 1, default. Else: ask same number of cards per hand?
 	    
 	    for(; currentHand < numHands; currentHand++){
 		
