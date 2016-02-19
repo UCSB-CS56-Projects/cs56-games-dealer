@@ -40,13 +40,16 @@ public class dealer{
 		numHands = 1;
 	    }
 	}
+	// Creates an array of Hand objects
 	Hand[] hands = new Hand[numHands];
 	for(int i = 0; i < numHands; i++){
 	    hands[i] = new Hand();
 	}
 
 	do{
+	    // Position in array that gives us the current hand
 	    int currentHand = 0;
+
 	    // Requests input from player to shuffle the deck
 	    System.out.println("Do you want the deck shuffled? (y/n)");
 	    if (stdin.next().startsWith("y")){
@@ -55,8 +58,9 @@ public class dealer{
 	    else{
 		System.out.println("The cards will remain unshuffled");
 	    }
+
+	    // Requests input from player for wanted number of hands if game gets reset.
 	    if(numHands < 1){
-		// Requests input from player to 
 		System.out.println("How many hands do you want? (Enter an integer greater than 0)");
 		if(stdin.hasNextInt()){
 		    numHands = stdin.nextInt();
@@ -70,7 +74,7 @@ public class dealer{
 		    hands[i] = new Hand();
 		}
 	    }
-	    
+	    // Asks each player how many cards they want.
 	    for(; currentHand < numHands; currentHand++){
 		
 		System.out.println("Player " + (currentHand+1) + "/" + numHands + " : How many cards do you want for your hand?");

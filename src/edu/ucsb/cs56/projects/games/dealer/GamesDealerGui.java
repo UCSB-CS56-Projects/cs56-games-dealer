@@ -37,6 +37,7 @@ public class GamesDealerGui{
     /**
        The places the BACPanel into the frame and makes
        the specifc frame visible
+       @param standard command line parameters for main
      */
     public static void main (String[] args) {
 	

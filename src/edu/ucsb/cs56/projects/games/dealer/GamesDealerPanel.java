@@ -28,27 +28,35 @@ import java.lang.*;
 
 
 public class GamesDealerPanel extends JPanel{
-    DealerPanelHelper helper;
-    JTextField playerInput;
-    String shuffledAns;
-    static JScrollPane cardDisplay;
-    static JScrollPane scroller;
+    DealerPanelHelper helper; // Helper function that deals the hands and shuffles the deck.
+    JTextField playerInput; // Where the user inputs how many hands they want
+    String shuffledAns; // Answer to shuffle dropdown input.
+    static JScrollPane cardDisplay; // 
+    static JScrollPane scroller; // Scroller where the application shows the card output for each hand
     JPanel cardOutputPanel;
     static JTextArea outputText;
-    JPanel playerPrompt;
-    JPanel display;
-    Deck deck;
-    JPanel playerPromptsPanel;
-    JPanel playerInputsPanel;
-    JTextField[] playerInputArray;
-    int[] playerInputArrayInts;
-    Hand[] hands;
-    JButton continueButton;
-    
+    JPanel playerPrompt; //
+    JPanel display; //
+    Deck deck; // Deck being used while program is running.
+    JPanel playerPromptsPanel; // Holds JPanel 
+    JPanel playerInputsPanel; //
+    JTextField[] playerInputArray; // Array of JTextFields that holds the JTextField where the user inputs how many cards each player wants to draw
+    int[] playerInputArrayInts; // Array of ints that hold how many cards each player wants to draw
+    Hand[] hands; // Array of hands to store current hands for all players in.
+    JButton continueButton; // Button that allows for continued drawing for current players.
+    /**
+
+       Constructor for GamesDealerPanel
+       Builds all GUI components of the games dealer application.
+
+     */    
     public GamesDealerPanel(){
 	super(new BorderLayout());
+	// Holds JPanel playerInputPanelnumHands and playerInputPanelShuffle
 	JPanel playerInputPanelLayout = new JPanel(new BorderLayout());
+	// Panel that holds the how many hands label and holds the JPanel inputPanel.
 	JPanel playerInputPanelnumHands = new JPanel(new FlowLayout());
+	// Bottom 2/3rds of JFrame. Holds everything in bottom 2/3rds of the JFrame
 	JPanel cardOutputPanel = new JPanel(new BorderLayout());
 	display = new JPanel();
 	 
@@ -56,25 +64,33 @@ public class GamesDealerPanel extends JPanel{
 	add(cardOutputPanel, BorderLayout.CENTER);
 
 	playerInput=new JTextField(5);
+	
 	String prompt="How many hands do you want? (Enter an integer greater than 0 and less than 11)";
+	// Label to display prompt for user to input how many hands they want.
 	JLabel promptLabel=new JLabel(prompt);
 	promptLabel.setLabelFor(playerInput);
 	playerInputPanelnumHands.add(promptLabel);
 
+	// Panel that holds the playerInput textField.
 	JPanel inputPanel = new JPanel(new FlowLayout());
 	inputPanel.add(playerInput);
 	playerInputPanelnumHands.add(inputPanel);
 	playerInputPanelLayout.add(playerInputPanelnumHands, BorderLayout.NORTH);
 
+	// Panel that holds the shuffleLabel and shuffleBoxPanel
 	JPanel playerInputPanelShuffle=new JPanel(new FlowLayout());
-	JComboBox shuffleBox;
+
+	// Where player can select how they want to shuffle deck.
+	JComboBox shuffleBox; 
 	String shuffleOptions[] = {"don't shuffle", "shuffle once before dealing","shuffle after every set of cards is dealt"};
 	shuffleBox = new JComboBox(shuffleOptions);
-	 
+	
+	// Label to display "Shuffle?" 
 	JLabel shuffleLabel = new JLabel("Shuffle?",JLabel.RIGHT);
 	shuffleLabel.setLabelFor(shuffleBox);
 	playerInputPanelShuffle.add(shuffleLabel);
-	 
+
+	// Panel that holds shuffleBox 
 	JPanel shuffleBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	shuffleBoxPanel.add(shuffleBox);
 	playerInputPanelShuffle.add(shuffleBoxPanel);
@@ -82,10 +98,18 @@ public class GamesDealerPanel extends JPanel{
 
 	deck=new Deck();
 
+	/*
+	  Button used after user has input how many cards each player wants and how they want to shuffle the deck.
+	  Once the button is clicked, it clears cardOutputPanel, then calls the DealerHelperPanel function to get
+	  a string to display to the user each hand for every player, when the deck was shuffled, and what cards
+	  are remaining in the deck.
+	*/
 	JButton displayCardsButton = new JButton("Display Cards");
 	displayCardsButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
+		    // Gets player input for when to shuffle the deck.
 		    shuffledAns = (String) shuffleBox.getSelectedItem();
+		    
 		    playerInputArrayInts= new int[playerInputArray.length];
 		    //put all the numbers read in from the playerInputArray into playerInputArrayInts
 		    for(int i=0; i<playerInputArray.length;i++){
@@ -96,6 +120,7 @@ public class GamesDealerPanel extends JPanel{
 					playerInputArrayInts[i]=0;
 				    }
 				    else{
+					// Gets numbers from playerInputArray for how many cards each player wants to draw.
 					playerInputArrayInts[i] = Integer.parseInt(playerInputArray[i].getText());
 					if(playerInputArrayInts[i] < 0)
 					    playerInputArrayInts[i] = 0;                       //set the default if the player asks for a negative number of cards is 0
@@ -109,19 +134,23 @@ public class GamesDealerPanel extends JPanel{
 				}
 			}
 		    }
+		    // Clears cardOutputPanel
 		    cardOutputPanel.removeAll();
-		    if(hands==null){
+		    // If game is reset, reinitialize hands.
+		    if(hands==null){	      
 			hands= new Hand[playerInputArray.length];
 		    }
+		    // Draws cards for every player from deck.
 		    helper=new DealerPanelHelper(playerInputArray.length, playerInputArrayInts, shuffledAns, deck, hands);
-		    deck=helper.getDeck();
+		    deck=helper.getDeck(); 
 		    hands=helper.getHands();
 		    String cards = helper.playerCardString();                        
-
+		    
+		    // JTextArea where output for cards and deck gets displayed.
 		    JTextArea cardsTextArea = new JTextArea(cards);
 		    cardsTextArea.setLineWrap(true);
 		    
-		    
+		    // Holds the scroller which holds the textarea for the output.
 		    JPanel cardDisplayPanel = new JPanel(new BorderLayout());
 		    cardOutputPanel.add(cardDisplayPanel, BorderLayout.CENTER);
 		    
@@ -130,17 +159,27 @@ public class GamesDealerPanel extends JPanel{
 		    scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		    cardDisplayPanel.add(scroller);
 		    cardOutputPanel.add(cardDisplayPanel);
-		    shuffleBoxPanel.add(continueButton);
+		    shuffleBoxPanel.add(continueButton); // Adds continue button next to shufflebox area.
+
+		    // Sets up cardOutputPanel after being cleaered to show card and deck output.
 		    cardOutputPanel.revalidate();
-		    cardOutputPanel.repaint();
+		    cardOutputPanel.repaint(); 
 
 		}
 	    });
-	
+	/*
+	  Clears all GUI components from cardOutputPanel.
+	  Button used to first submit how many hands the user wants to play with.
+	  Displays the area where the user can enter how many cards they want to 
+	  draw for each player. Also displays the displayCards button.
+	  
+        */
 	JButton submit = new JButton("Submit/Reset");
 	submit.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+		    // Clears all components in cardOutputPanel
 		    cardOutputPanel.removeAll();
+		    // Resets deck and hands.
 		    deck=new Deck();
 		    hands=null;
 
@@ -148,6 +187,7 @@ public class GamesDealerPanel extends JPanel{
 
 		    try
 			{
+			    // Gets user input for how many hands the user wants.
 			    numHands = Integer.parseInt(playerInput.getText());
 			    if(numHands < 1)
 				numHands = 1;
