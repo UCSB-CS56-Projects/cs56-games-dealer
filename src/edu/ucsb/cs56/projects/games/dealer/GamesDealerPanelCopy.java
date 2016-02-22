@@ -144,15 +144,18 @@ public class GamesDealerPanel extends JPanel{
 		    helper=new DealerPanelHelper(playerInputArray.length, playerInputArrayInts, shuffledAns, deck, hands);
 		    deck=helper.getDeck(); 
 		    hands=helper.getHands();
+		    String cardsAndDeck = "";
 		    String[] cards = helper.playerCardString();
 		    for(int i=0; i<cards.size(); i++){
 			//add and display the first thing
 			//JTextArea cardsTextArea = new JTextArea(cards[i]);
-			if(shuffledAns=="shuffle once before dealing"){
+			if(cards[i]=="deck shuffled\n"){
 			    //pause for a second and make a sound
+			    
 			}
-			if(shuffledAns=="shuffle after every set of cards is dealt"&&(i%2==0)){
-			    //pause for a second and make a sound
+			//display cards
+			else{
+
 			}
 	
 		    }
