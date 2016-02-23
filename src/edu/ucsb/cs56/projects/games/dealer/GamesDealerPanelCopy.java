@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -27,8 +27,8 @@ import java.lang.*;
 */
 
 
-public class GamesDealerPanel extends JPanel{
-    DealerPanelHelper helper; // Helper function that deals the hands and shuffles the deck.
+public class GamesDealerPanelCopy extends JPanel{
+    DealerPanelHelperCopy helper; // Helper function that deals the hands and shuffles the deck.
     JTextField playerInput; // Where the user inputs how many hands they want
     String shuffledAns; // Answer to shuffle dropdown input.
     static JScrollPane cardDisplay; // 
@@ -49,8 +49,8 @@ public class GamesDealerPanel extends JPanel{
        Constructor for GamesDealerPanel
        Builds all GUI components of the games dealer application.
 
-     */    
-    public GamesDealerPanel(){
+    */    
+    public GamesDealerPanelCopy(){
 	super(new BorderLayout());
 	// Holds JPanel playerInputPanelnumHands and playerInputPanelShuffle
 	JPanel playerInputPanelLayout = new JPanel(new BorderLayout());
@@ -141,30 +141,14 @@ public class GamesDealerPanel extends JPanel{
 			hands= new Hand[playerInputArray.length];
 		    }
 		    // Draws cards for every player from deck.
-		    helper=new DealerPanelHelper(playerInputArray.length, playerInputArrayInts, shuffledAns, deck, hands);
+		    helper=new DealerPanelHelperCopy(playerInputArray.length, playerInputArrayInts, shuffledAns, deck, hands);
 		    deck=helper.getDeck(); 
 		    hands=helper.getHands();
-		    String cardsAndDeck = "";
-		    String[] cards = helper.playerCardString();
-		    for(int i=0; i<cards.size(); i++){
-			//add and display the first thing
-			//JTextArea cardsTextArea = new JTextArea(cards[i]);
-			if(cards[i]=="deck shuffled\n"){
-			    //pause for a second and make a sound
-			    
-			}
-			//display cards
-			else{
-
-			}
-	
-		    }
-		    
-		    // JTextArea where output for cards and deck gets displayed.
-		    JTextArea cardsTextArea = new JTextArea(cards);
+		    //String cardsAndDeck = "";
+		    ArrayList<String> cards = helper.playerCardString();
+		    JTextArea cardsTextArea = new JTextArea("Each hand and the rest of the deck:\n");
 		    cardsTextArea.setLineWrap(true);
-		    
-		    // Holds the scroller which holds the textarea for the output.
+
 		    JPanel cardDisplayPanel = new JPanel(new BorderLayout());
 		    cardOutputPanel.add(cardDisplayPanel, BorderLayout.CENTER);
 		    
@@ -174,11 +158,47 @@ public class GamesDealerPanel extends JPanel{
 		    cardDisplayPanel.add(scroller);
 		    cardOutputPanel.add(cardDisplayPanel);
 		    shuffleBoxPanel.add(continueButton); // Adds continue button next to shufflebox area.
-
-		    // Sets up cardOutputPanel after being cleaered to show card and deck output.
 		    cardOutputPanel.revalidate();
 		    cardOutputPanel.repaint(); 
-
+		    AnimateShuffle as = new AnimateShuffle();
+		    String cardsAndDeck = "";
+		    for(int i=0; i<cards.size(); i++){
+			cardsTextArea.append(cards.get(i));
+			//System.out.println(cards.get(i));
+			cardsAndDeck += cards.get(i);
+			cardOutputPanel.revalidate();
+			cardOutputPanel.repaint();
+			
+			    
+			//JTextArea cardsTextArea = new JTextArea(cards[i]);
+			if(cards.get(i)=="deck shuffled\n"||cards.get(i) =="\ndeck shuffled\n"){
+			   as.start();
+			   //as.interrupt();
+			    //pause for a second and make a sound
+			    /*try{
+				Thread.currentThread().sleep(1000);
+			    }
+			    catch(InterruptedException ex){
+				Thread.currentThread().interrupt();
+			    }
+			    */
+			}
+			System.out.println(cardsAndDeck);
+			/*scroller.remove(cardsTextArea);
+			cardsTextArea = new JTextArea(cardsAndDeck);
+			scroller.add(cardsTextArea);
+			
+			*/
+			 
+			
+		    }
+		    
+		    // JTextArea where output for cards and deck gets displayed.
+		  		    
+		    // Holds the scroller which holds the textarea for the output.
+		    
+		    // Sets up cardOutputPanel after being cleaered to show card and deck output.
+	
 		}
 	    });
 	/*
@@ -302,5 +322,20 @@ public class GamesDealerPanel extends JPanel{
  
 	
     }
-
+    class AnimateShuffle extends Thread implements Runnable{
+	public void run(){
+	    try{
+		display(1000);
+	    }
+	    catch(Exception ex){
+		System.exit(1);
+	    }
+	}
+	void display(int delay) throws InterruptedException{
+	    cardOutputPanel.repaint();
+	    if(Thread.currentThread().interrupted())
+		throw(new InterruptedException());
+	    Thread.currentThread().sleep(delay);
+	}
+    }
 }

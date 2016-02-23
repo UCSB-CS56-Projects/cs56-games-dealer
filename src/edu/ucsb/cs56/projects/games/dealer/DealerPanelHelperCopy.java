@@ -10,7 +10,7 @@ import java.lang.*;
    @version cs56 W16 2/15/16
 */
 
-public class DealerPanelHelper{
+public class DealerPanelHelperCopy{
 
     /**
        Main function to interact with the gui,
@@ -24,7 +24,8 @@ public class DealerPanelHelper{
     private String shuffle;
     private Deck deck;
     private Hand[] hands;
-    public DealerPanelHelper(int numHands, int[] playerInputArrayInts, String shuffle, Deck deck, Hand[] hands){
+    
+    public DealerPanelHelperCopy(int numHands, int[] playerInputArrayInts, String shuffle, Deck deck, Hand[] hands){
 	this.numHands=numHands;
 	this.playerInputArrayInts=playerInputArrayInts;
 	this.shuffle=shuffle;
@@ -32,37 +33,25 @@ public class DealerPanelHelper{
 	this.hands=hands;
     }
     
-    public String[] playerCardString(){
+    public ArrayList<String> playerCardString(){
+	ArrayList<String> displayedCards = new ArrayList<String>();
 	
-	if(playerInputArrayInts==null){
-	    return "player inputs are null";
-	}
-	if(shuffle==null){
-	    return "shuffle is null";
-	}
-	if(deck==null){
-	    return "deck is null";
-	}
+	/*if(playerInputArrayInts==null){
+	  return "player inputs are null";
+	  }
+	  if(shuffle==null){
+	  return "shuffle is null";
+	  }
+	  if(deck==null){
+	  return "deck is null";
+	  }*/
 	//make the size of the array based on how many times we shuffle	   
-	if(shuffle=="shuffle after every set of cards is dealt"){
-	    String[] displayedCards=new String[playerInputArrayInts.size()*2+2];
-	}
-	if(shuffle=="shuffle once before dealing"){
-	    String[] displayedCards=new String[playerInputArrayInts.size()+3];
-	}
-	else{
-	    String[] displayedCards=new String[playerInputArrayInts.size()+2];
-	}
-	//for every element in displayedCards, initialize it to NULL
-	for(int i=0; i<displayedCards.size(); i++){
-	    displayedCards[i]="";
-	}
+
 	//place holder to where to insert the statement
-	int nextSpot=0;
+
 	if (shuffle=="shuffle once before dealing" || shuffle == "shuffle after every set of cards is dealt"){
 	    deck.shuffle();
-	    displayedCards[nextSpot]="deck shuffled\n";
-	    nextSpot++;
+	    displayedCards.add("deck shuffled\n");
 	}
 	if(hands==null)
 	    hands=new Hand[numHands];
@@ -75,17 +64,15 @@ public class DealerPanelHelper{
 	    }
 
 	    hands[i].addtoHand(playerInputArrayInts[i], deck);
-	    displayedCards[nextSpot]="\n" +"Player "+ (i+1)+ "/" +numHands+ ": "+ hands[i]+"\n";
-	    nextSpot++;
+	    displayedCards.add("\n" +"Player "+ (i+1)+ "/" +numHands+ ": "+ hands[i]+"\n");
 	    if(shuffle=="shuffle after every set of cards is dealt"){
 		deck.shuffle();
-		displayedCards[nextSpot]="\ndeck shuffled\n";
-		nextSpot++;
+		displayedCards.add("\ndeck shuffled\n");
 	    }
 	}
-	displayedCards[nextSpot]="\n\n"+deck;
+	displayedCards.add("\n\n"+deck);
 	if(deck.getDeck().size()<=0){
-	    displayedCards[nextSpot]="\nNo more cards to distribute. Click Submit/Reset button to reset the deck and play again.";
+	    displayedCards.add("\nNo more cards to distribute. Click Submit/Reset button to reset the deck and play again.");
 	}
 	    
 	return displayedCards;	
