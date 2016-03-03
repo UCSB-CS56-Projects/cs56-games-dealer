@@ -26,7 +26,7 @@ Issue #13: https://github.com/UCSB-CS56-Projects/cs56-games-dealer/issues/13
 
 Issue #14: https://github.com/UCSB-CS56-Projects/cs56-games-dealer/issues/14
 
-i) The three classes that are currently used by the program are the Deck, Hand, and dealer classes. The purpose of each class is very clear, including their methods. The dealer class uses one instance of a Deck and one instance of a Hand to run. The dealer is the command line prompter and handles the inputs of the user accordingly. The Deck and Hand class are used exactly as they expectedly would. The code is pretty easy to understand, especially with the comments that explain it. 
+i) The three classes that are currently used by the program are the Deck, Hand, and dealer classes. The purpose of each class is very clear, including their methods. The dealer class uses one instance of a Deck and one instance of a Hand to run. The dealer is the command line prompter and handles the inputs of the user accordingly. The code is pretty easy to understand, especially with the comments that explain it. 
 
 Hand.java: Contains an array member variable that holds the cards in a player's hand. It also has an addToHand method which adds each card that the player is dealt to their hand.
 
