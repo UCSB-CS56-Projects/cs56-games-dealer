@@ -22,7 +22,7 @@ In the directory of where the build.xml is located
 
     Type `ant run` - runs terminal
     Type 'ant runGUI' - runs GUI
- 
+
 
  Other Ant Targets
  =================
