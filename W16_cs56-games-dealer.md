@@ -15,7 +15,7 @@ As a card player, I would like to be able to shuffle the deck after each player 
 
 e) README.md is very minimal, it just contains the project history, a brief description of the program, how to run the program, and a brief description of how the program works. Adding a list and description of Ant targets would help make it easier to read and understand the build.xml file. Screenshots of the program in action would be useful to show what the program looks like before running it.
 
-f) There are several targets that don't have descriptions: These include clean, javadoc, jar, download, and publish. The download and publish targets appear to be legacy JWS stuff that needs to be removed.
+f) There are several targets that don't have descriptions: These include clean, javadoc, jar, download, and publish. The download and publish targets appear to be legacy JWS stuff that needs to be removed. Linenumber target doesn't work.
 
 g) Current issues include: implement a GUI, implement multiple hands functionality, implement sounds when shuffling, and include images of cards instead of just text when displaying the cards. Completing all of these issues would be enough to reach 1000 points . Yes all of the issues are very clear in how to resolve them.
 
