@@ -27,3 +27,11 @@ Issue #13: https://github.com/UCSB-CS56-Projects/cs56-games-dealer/issues/13
 Issue #14: https://github.com/UCSB-CS56-Projects/cs56-games-dealer/issues/14
 
 i) The three classes that are currently used by the program are the Deck, Hand, and dealer classes. The purpose of each class is very clear, including their methods. The dealer class uses one instance of a Deck and one instance of a Hand to run. The dealer is the command line prompter and handles the inputs of the user accordingly. The Deck and Hand class are used exactly as they expectedly would. The code is pretty easy to understand, especially with the comments that explain it. 
+
+Hand.java: Contains an array member variable that holds the cards in a player's hand. It also has an addToHand method which adds each card that the player is dealt to their hand.
+
+Deck.java: Contains an array member variable which holds all the cards of a deck of cards. It has a shuffle deck method as well as a remove card method for when a player takes a card from the deck and adds it to their hand.
+
+dealer.java: The dealer class connects the command line inputs to the methods needed to shuffle a deck, removes cards for a deck, and deal them to a player.
+
+j.) There are no tests or JUnit tests. None of the project is covered by testing. There are opportunities to expand test coverage. One would go about doing this by adding tests for drawing any number of cards from the in between the bounds 0-52 as well as adding tests for the bounds cases. One would also want to add tests for what happens if you draw a negative number of cards or a number greater than 52. We would also want to look at the behavior when the user wants to continue drawing. Are the cards added to the hand? What about when the deck is empty, what happens? Does resetting the deck work?
