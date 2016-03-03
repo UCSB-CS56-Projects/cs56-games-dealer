@@ -22,9 +22,11 @@ In the directory of where the build.xml is located
 
     Type `ant run` - runs terminal
     Type 'ant runGUI' - runs GUI
-    
+ 
+
  Other Ant Targets
  =================
+ 
     compile - compiles code
     linenumbers - creates file containing all source files with line numbers (doesn't work)
     clean - deletes javadoc, .jar, download, temp, and .class files
