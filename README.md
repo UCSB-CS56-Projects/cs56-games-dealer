@@ -25,7 +25,7 @@ In the directory of where the build.xml is located
 
 
  Other Ant Targets
- =================
+
  
     compile - compiles code
     linenumbers - creates file containing all source files with line numbers (doesn't work)
