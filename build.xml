@@ -15,6 +15,7 @@
 <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc"/>
 <property name="javadocURL" value="${webBaseUrl}/${projectName}/javadoc"/>
 <property name="mainClass" value="edu.ucsb.cs56.projects.games.dealer.dealer"/>
+<property name="mainClassGUI" value="edu.ucsb.cs56.projects.games.dealer.GamesDealerGui"/>
 <property name="fullPkg" value="edu.ucsb.cs56.projects.games.${projectName}" />
 
 
@@ -32,6 +33,9 @@
         <java classname="${mainClass}" classpath="build" fork="true" />
 </target>
 
+<target name="runGUI" depends="compile" description="run program">
+        <java classname="${mainClassGUI}" classpath="build" fork="true" />
+</target>
 
 <target name="linenumbers" depends="compile" description="Creates a file containing all source files with line numbers">               
    <exec executable="bash">                                                          <arg value="-c"/>                                                               <arg value='tree -ifQ src | grep \.java\"$ | xargs pr -n > numberedsource.txt'/>                                
