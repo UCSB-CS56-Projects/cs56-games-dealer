@@ -46,5 +46,5 @@ The user is prompted how many hands they want and if they don't want the deck to
     
 Notes for the next set of Students:
 ===================================
-As of now, the card dealer is done. Some smaller things that should be done don't effect the fact the card dealer is done. These include a code clean-up and adding JUnit tests.
+As of now, the card dealer works but isn't perfect. Some smaller things that should be done don't effect the fact the card dealer is done. These include a code clean-up and adding JUnit tests.
 Either more features or implementing a game using the classes implemented would be the next logical step in improving this project.
