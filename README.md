@@ -43,3 +43,8 @@ The user is asked many hands the user wants to be dealt, then if the user wants 
 
 GUI:
 The user is prompted how many hands they want and if they don't want the deck to be shuffled, only shuffled once, or before each player draws. Then a panel is displayed that contains the textfields where the user can input how many cards they want for each hand. Then click the display cards button which replaces that panel with a new panel containing the textarea that displays the cards dealt for each hand and the remaining cards in the deck. The user can choose to continue drawing or reset the deck.
+    
+Notes for the next set of Students:
+===================================
+As of now, the card dealer is done. Some smaller things that should be done don't effect the fact the card dealer is done. These include a code clean-up and adding JUnit tests.
+Either more features or implementing a game using the classes implemented would be the next logical step in improving this project.
