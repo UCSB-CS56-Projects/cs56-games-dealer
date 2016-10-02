@@ -33,7 +33,7 @@
         <java classname="${mainClass}" classpath="build" fork="true" />
 </target>
 
-<target name="runGUI" depends="compile" description="run program">
+<target name="runGUI" depends="compile" description="run GUI of program">
         <java classname="${mainClassGUI}" classpath="build" fork="true" />
 </target>
 
