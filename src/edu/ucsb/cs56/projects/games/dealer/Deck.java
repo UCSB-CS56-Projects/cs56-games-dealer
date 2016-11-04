@@ -14,17 +14,16 @@ import java.security.*;
 public class Deck {
 
     private ArrayList<Card> deck;
-
+    private String[] ranks={"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+    private String[] suits={"Spades","Hearts","Clubs","Diamonds"};
 
     /**
     Deck constructor to make deck arraylist contained an unshuffle deck.
      */
 
-    public Deck(){
-	deck=new ArrayList<Card>();
-	String[] suits={"Spade","Heart","Club","Diamond"};
-	String[] ranks={"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
-	for(int i=0;i<4;i++){
+    public Deck() {
+	deck = new ArrayList<Card>();
+	for(int i=0;i<4;i++) {
 	    for(int j=0;j<13;j++){
 		deck.add(new Card(ranks[j],suits[i]));
 	    }
@@ -38,14 +37,14 @@ public class Deck {
      the seed.
      */
 
-    public void shuffle(){
-		//Creates the seed
-		SecureRandom random = new SecureRandom();
+    public void shuffle() {
+	//Creates the seed
+        SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[64];
         random.nextBytes(bytes);
 		
         //Shuffles the deck with a 64 bit seed 
-		Collections.shuffle(deck,random);
+	Collections.shuffle(deck,random);
     }
 
     /**
@@ -84,37 +83,39 @@ public class Deck {
 
 
     /**
-	 Removes cards from the deck by xCards
-
-     @param xCards the number of cards user inputted
+     *  Draw a number of cards from the deck
+     *
+     *  @param numCards number of cards to draw
+     *  @param h hand to add cards to
      */
 
-	public void removeCard(int xCards){
-		int i = 0;
-		//Loops up to index xCard-1 in the deck
-		//Using an Iterator instead of using for loop is safer
-		//There won't be an index out of bounds exception
-		for(Iterator<Card> iterator = deck.iterator(); 
-		    iterator.hasNext();) {
-		    Card card = iterator.next();
-		    if(i<xCards){
-			//removes first element in the ArrayList
-			iterator.remove();
-			i++;
-		    }
-		}
+    public void draw(int numCards, Hand h) {
+	int i = 0;
+	//Loops up to index numCards-1 in the deck
+	//Using an Iterator instead of using for loop is safer
+	//There won't be an index out of bounds exception
+	for(Iterator<Card> iterator = deck.iterator(); 
+	    iterator.hasNext(); ) {
+	    Card card = iterator.next();
+	    if(i<numCards) {
+		//removes first element in the ArrayList
+	        iterator.remove();
+		i++;
+		h.getHand().add(card);
+	    }
 	}
+    }
 
 
 
     /**
-     This function is gain access to the deck array.
-
-	 @return deck the ArrayList of deck
+     *   This function is gain access to the deck array.
+     *
+     *	 @return deck an ArrayList containing each card in the deck
      */
 	
-	//Necessary for dealer class and addtoHand function in Hand class
-    public ArrayList<Card> getDeck(){
+    //Necessary for dealer class and addtoHand function in Hand class
+    public ArrayList<Card> getDeck() {
         return deck;
     }
 
