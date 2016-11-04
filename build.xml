@@ -37,7 +37,7 @@
         <java classname="${mainClassGUI}" classpath="build" fork="true" />
 </target>
 
-<target name="clean">
+<target name="clean" description="Clean up directory">
   <delete failonerror="false" verbose="true" dir="build" />
   <delete dir="javadoc" quiet="true"/>
   <delete dir="dist" quiet="true"/>
@@ -45,7 +45,7 @@
   <delete dir="temp" quiet="true"/>
 </target>
 
-<target name="javadoc" depends="compile">
+<target name="javadoc" depends="compile" description="create javadoc">
   <delete dir="javadoc" quiet="true"/>
   <javadoc destdir="javadoc" author="true" version="true" use="true">
     <fileset dir="src" includes="**/*.java"/>
@@ -68,7 +68,7 @@
   <echo>Javadoc deployed to ${javadocURL}</echo>
 </target>
 
-<target name="jar" depends="compile">
+<target name="jar" depends="compile" description="make the jar file">
   <mkdir dir="dist"/>
 <jar destfile="dist/${projectName}.jar" basedir="build">
   <manifest>
