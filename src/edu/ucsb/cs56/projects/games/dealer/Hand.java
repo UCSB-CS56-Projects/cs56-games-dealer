@@ -11,7 +11,7 @@ import java.lang.*;
 */
 
 public class Hand{
-    private ArrayList hand;
+    private ArrayList<Card> hand;
     private int handSize;
 
     /**
@@ -19,8 +19,8 @@ public class Hand{
      and the handSize be 0.
      */
 
-    public Hand(){
-        hand = new ArrayList();
+    public Hand() {
+        hand = new ArrayList<Card>();
         handSize=0;
     }
 
@@ -30,28 +30,18 @@ public class Hand{
      the cards from the deck that were added to the hand
 	 by calling the removeCard function in the Deck class
 
-     @param xCards the number of cards user inputted
-     @param D the Deck deck used in the dealer class
+     @param numCards the number of cards user inputted
+     @param d the Deck deck used in the dealer class
      */
 
-    public void addtoHand(int xCards, Deck D){
-		/*If desire number of cards greater than 
-		the amount of cards in the deck draw
-		then all the cards in the deck */
-		if (xCards>D.getDeck().size()){
-			xCards=D.getDeck().size();
-		}
-
-		//Add cards to the hand
-        for (int i=0;i<xCards;i++){
-            hand.add(D.getDeck().get(i));
-            handSize++;
-        }
-		
-		//Removes the number of cards drawn from deck
-		D.removeCard(xCards);
+    public void addtoHand(int numCards, Deck d){
+	d.draw(numCards, this);
+	handSize += numCards;
     }
 
+    public ArrayList<Card> getHand() {
+	return hand;
+    }
 
     /**
      Overridden toString function to print cards in the hand.
