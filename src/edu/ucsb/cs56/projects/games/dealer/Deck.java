@@ -14,7 +14,8 @@ import java.security.*;
 public class Deck {
 
     private ArrayList<Card> deck;
-    private String[] ranks={"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+    private String[] ranks={"Ace","2","3","4","5","6","7","8",
+			    "9","10","Jack","Queen","King"};
     private String[] suits={"Spades","Hearts","Clubs","Diamonds"};
 
     /**
@@ -109,7 +110,7 @@ public class Deck {
 
 
     /**
-     *   This function is gain access to the deck array.
+     *   Returns the ArrayList of the deck
      *
      *	 @return deck an ArrayList containing each card in the deck
      */
