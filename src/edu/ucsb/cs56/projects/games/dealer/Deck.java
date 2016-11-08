@@ -51,7 +51,13 @@ public class Deck {
 		
         //Shuffles the deck with a 64 bit seed 
 	Collections.shuffle(deck,random);
-	Deck.playSound();
+	try {
+	    java.applet.AudioClip clip = java.applet.Applet.newAudioClip(
+									 new java.net.URL("file://sound/shuffle.wav"));
+	         clip.play();
+		 System.out.println("Hello");
+	} catch (java.net.MalformedURLException murle) { System.out.println(murle);
+									 }
     }
 
     /**
@@ -126,7 +132,7 @@ public class Deck {
         return deck;
     }
 
-    public static synchronized void playSound() {
+    /*    public static synchronized void playSound() {
 	new Thread(new Runnable() {
 		public void run() {
 		    try {
@@ -140,5 +146,5 @@ public class Deck {
 		}
 	    }).start();
 	
-    }
+	    }*/
 }
