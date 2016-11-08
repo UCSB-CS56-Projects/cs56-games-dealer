@@ -6,8 +6,9 @@ import java.lang.*;
 /**
  *   This class is used to add cards to the hand.
  *
+ * @author Kin Kwan Poon and Eric Xiao
  * @author Antonio Cantor
- * @version cs56 W14 3/13/14
+ * @version cs56 F16
  */
 
 public class Hand {

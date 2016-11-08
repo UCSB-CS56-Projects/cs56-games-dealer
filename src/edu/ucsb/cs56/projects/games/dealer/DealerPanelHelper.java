@@ -12,18 +12,21 @@ import java.lang.*;
 
 public class DealerPanelHelper{
 
-    /**
-       Main function to interact with the gui,
-       shuffle the deck, and print cards
-
-       @param args Command line arguments entered by user
-    */
-
     private int numHands;
     private int[] playerInputArrayInts;
     private String shuffle;
     private Deck deck;
     private Hand[] hands;
+
+    /**
+     * Constructor of DealerPanelHelper
+     * @param numHands
+     * @param playerInputArrayInts
+     * @param shuffle
+     * @param deck
+     * @param hands
+     */
+
     public DealerPanelHelper(int numHands, int[] playerInputArrayInts, String shuffle, Deck deck, Hand[] hands){
 	this.numHands=numHands;
 	this.playerInputArrayInts=playerInputArrayInts;
@@ -76,10 +79,17 @@ public class DealerPanelHelper{
 	return displayedCards;	
     }
 
+
+    /**
+     * @return Return the deck.
+     */
     public Deck getDeck(){
 	return deck;
     }
 
+    /**
+     * @return Return the array of Hands.
+     */
     public Hand[] getHands(){
 	return hands;
     }

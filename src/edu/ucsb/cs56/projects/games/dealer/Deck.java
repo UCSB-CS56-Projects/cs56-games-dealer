@@ -2,21 +2,17 @@ package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
 import java.lang.*;
 import java.security.*;
-//import javax.sound.sampled.AudioInputStream;
-//import javax.sound.sampled.AudioSystem;
-//import javax.sound.sampled.AudioFormat;
-//import javax.sound.sampled.Clip;
-//import javax.sound.sampled.DataLine.Info;
 import java.io.File;
 import javax.sound.sampled.*;
 
 
 /**
- This class is to provide functions to a standard 52 cards deck such as shuffling.
-
- @author Jeremy White and Andrew Cooney
- @author Antonio Cantor
- @version cs56 W14 3/13/14
+ * This class is to provide functions to a standard 52 cards deck such ashuffling.
+ *
+ * @author Kin Kwan Poon and Eric Xiao
+ * @author Jeremy White and Andrew Cooney
+ * @author Antonio Cantor
+ * @version cs56 F16
  */
 
 public class Deck {
@@ -27,7 +23,7 @@ public class Deck {
     private String[] suits={"Spades","Hearts","Clubs","Diamonds"};
 
     /**
-    Deck constructor to make deck arraylist contained an unshuffle deck.
+     * Deck constructor to make deck arraylist contained an unshuffle deck.
      */
 
     public Deck() {
@@ -40,10 +36,10 @@ public class Deck {
     }
 
     /**
-     This function is used to shuffle the deck
-     by using the shuffle function from the Collections
-     class and a SecureRandom seed. It randomly permutes deck using
-     the seed.
+     * This function is used to shuffle the deck
+     * by using the shuffle function from the Collections
+     * class and a SecureRandom seed. It randomly permutes deck using
+     * the seed.
      */
 
     public void shuffle() {
@@ -54,14 +50,12 @@ public class Deck {
 		
         //Shuffles the deck with a 64 bit seed 
 	Collections.shuffle(deck,random);
-	
 	Deck.playSound("shuffle.wav");
     }
 
     /**
-     Overridden toString function to print cards remaining in the deck.
-
-	@return deckResult a string of the cards remaining in the deck
+     * Overridden toString function to print cards remaining in the deck.
+     * @return deckResult a string of the cards remaining in the deck
      */
 	
 	public String toString(){
