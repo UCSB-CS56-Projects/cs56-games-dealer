@@ -5,6 +5,7 @@ import java.lang.*;
 /**
  * This class represents an individual card in a standard 52 card deck
  *
+ *
  * @author Kin Kwan Poon and Eric Xiao
  * @version cs56 F16
  */

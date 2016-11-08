@@ -2,6 +2,9 @@ package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
 import java.lang.*;
 import java.security.*;
+import java.io.File;
+import javax.sound.sampled.*;
+
 
 /**
  * This class is to provide functions to a standard 52 cards deck such ashuffling.
@@ -47,6 +50,7 @@ public class Deck {
 		
         //Shuffles the deck with a 64 bit seed 
 	Collections.shuffle(deck,random);
+	Deck.playSound("shuffle.wav");
     }
 
     /**
@@ -120,4 +124,23 @@ public class Deck {
         return deck;
     }
 
+     public static synchronized void playSound(String filename) {
+	new Thread(new Runnable() {
+		public void run() {
+		    try {
+			Clip clip;
+			File sound = new File("sound/"+filename);
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(sound);
+			AudioFormat format = inputStream.getFormat();
+			DataLine.Info info=new DataLine.Info(Clip.class,format);
+			clip = (Clip) AudioSystem.getLine(info);
+			clip.open(inputStream);
+			clip.start();
+		    } catch (Exception e) {
+			System.out.println("play sound error: " + e.getMessage() + " for shuffle" );
+		    }
+		}
+	    }).start();
+	
+	    }
 }

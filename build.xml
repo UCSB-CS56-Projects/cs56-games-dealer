@@ -19,7 +19,8 @@
 <property name="fullPkg" value="edu.ucsb.cs56.projects.games.${projectName}" />
 
 <path id="project.class.path">
-  <pathelement location="build"/>                                                <pathelement location="lib/junit-4.8.2.jar"/>
+  <pathelement location="build"/>
+  <pathelement location="lib/junit-4.8.2.jar"/>
 </path>
 
 
