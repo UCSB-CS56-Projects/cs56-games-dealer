@@ -18,15 +18,16 @@
 <property name="mainClassGUI" value="edu.ucsb.cs56.projects.games.dealer.GamesDealerGui"/>
 <property name="fullPkg" value="edu.ucsb.cs56.projects.games.${projectName}" />
 
+<path id="project.class.path">
+  <pathelement location="build"/>                                                <pathelement location="lib/junit-4.8.2.jar"/>
+</path>
+
 
 <target name="compile" description="compile my code">
-        <mkdir dir="build" />
-        <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,source" includeantruntime="false">
-        <classpath>                                                                                            
-                <pathelement location="build"/>                                                                
-                <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>             
-        </classpath>                                                                                           
-        </javac>
+  <mkdir dir="build" />
+  <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,source" includeantruntime="false">
+    <classpath refid="project.class.path" />
+  </javac>
 </target>
 
 <target name="run" depends="compile" description="run program">
@@ -34,7 +35,7 @@
 </target>
 
 <target name="runGUI" depends="compile" description="run GUI of program">
-        <java classname="${mainClassGUI}" classpath="build" fork="true" />
+  <java classname="${mainClassGUI}" classpath="build" fork="true" />
 </target>
 
 <target name="clean" description="Clean up directory">
@@ -49,10 +50,8 @@
   <delete dir="javadoc" quiet="true"/>
   <javadoc destdir="javadoc" author="true" version="true" use="true">
     <fileset dir="src" includes="**/*.java"/>
-    <classpath>
-      <pathelement location = "/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
-    </classpath> 
- </javadoc>
+    <classpath refid="project.class.path" />
+  </javadoc>
   <!-- delete the old javadoc -->
   <delete quiet="true" dir="${javadocDest}"/>
   <!-- copy everything you just made to the javadoc destination, and then make it readable -->
@@ -70,11 +69,23 @@
 
 <target name="jar" depends="compile" description="make the jar file">
   <mkdir dir="dist"/>
-<jar destfile="dist/${projectName}.jar" basedir="build">
-  <manifest>
-    <attribute name="Main-Class" value="edu.ucsb.cs56.W12.cooney.${mainClass}"/>
-  </manifest>
-</jar>
+  <jar destfile="dist/${projectName}.jar" basedir="build">
+    <manifest>
+      <attribute name="Main-Class" value="edu.ucsb.cs56.W12.cooney.${mainClass}"/>
+    </manifest>
+  </jar>
+</target>
+
+<target name="test" depends="compile" description="run a JUnit tests">
+  <junit haltonerror="no" haltonfailure="no">
+    <classpath refid="project.class.path" />
+    <batchtest fork="yes">
+      <fileset dir="src">
+	<include name="**/*Test.java" />
+      </fileset>
+    </batchtest>
+    <formatter type="brief" usefile="false" />
+  </junit>
 </target>
 
 

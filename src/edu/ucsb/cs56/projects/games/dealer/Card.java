@@ -20,4 +20,20 @@ public class Card {
 	return rank + " of " + suit;
     }
 
+    public boolean equals(Object o){
+	if(o==null)
+	    return false;
+	if(!(o instanceof Card))
+	    return false;
+	Card c=(Card) o;
+	if(this.rank.equals(c.rank)&&this.suit.equals(c.suit))
+	    return true;
+	else
+	    return false;
+    }
+
+    public int hashCode(){
+	return this.rank.hashCode()^this.suit.hashCode();
+    }
+
 }
