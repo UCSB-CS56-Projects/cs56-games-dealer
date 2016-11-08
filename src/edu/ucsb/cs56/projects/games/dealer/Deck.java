@@ -2,10 +2,13 @@ package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
 import java.lang.*;
 import java.security.*;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+//import javax.sound.sampled.AudioInputStream;
+//import javax.sound.sampled.AudioSystem;
+//import javax.sound.sampled.AudioFormat;
+//import javax.sound.sampled.Clip;
+//import javax.sound.sampled.DataLine.Info;
 import java.io.File;
+import javax.sound.sampled.*;
 
 
 /**
@@ -51,13 +54,8 @@ public class Deck {
 		
         //Shuffles the deck with a 64 bit seed 
 	Collections.shuffle(deck,random);
-	try {
-	    java.applet.AudioClip clip = java.applet.Applet.newAudioClip(
-									 new java.net.URL("file://sound/shuffle.wav"));
-	         clip.play();
-		 System.out.println("Hello");
-	} catch (java.net.MalformedURLException murle) { System.out.println(murle);
-									 }
+	
+	Deck.playSound("shuffle.wav");
     }
 
     /**
@@ -132,12 +130,16 @@ public class Deck {
         return deck;
     }
 
-    /*    public static synchronized void playSound() {
+     public static synchronized void playSound(String filename) {
 	new Thread(new Runnable() {
 		public void run() {
 		    try {
-			Clip clip = AudioSystem.getClip();
-			AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/dealer/sound/shuffle.wav"));
+			Clip clip;
+			File sound = new File("sound/"+filename);
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(sound);
+			AudioFormat format = inputStream.getFormat();
+			DataLine.Info info=new DataLine.Info(Clip.class,format);
+			clip = (Clip) AudioSystem.getLine(info);
 			clip.open(inputStream);
 			clip.start();
 		    } catch (Exception e) {
@@ -146,5 +148,5 @@ public class Deck {
 		}
 	    }).start();
 	
-	    }*/
+	    }
 }
