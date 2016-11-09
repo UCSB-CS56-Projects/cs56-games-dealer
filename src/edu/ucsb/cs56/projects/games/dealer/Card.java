@@ -1,6 +1,4 @@
 package edu.ucsb.cs56.projects.games.dealer;
-import java.util.*;
-import java.lang.*;
 
 /**
  * This class represents an individual card in a standard 52 card deck

@@ -1,6 +1,5 @@
 package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
-import java.lang.*;
 import java.security.*;
 import java.io.File;
 import javax.sound.sampled.*;
@@ -59,31 +58,27 @@ public class Deck {
      */
 	
 	public String toString(){
-		String deckResult="Your deck"+"\n";
-		//Only one card to add to deckResult
-		if (deck.size()==1){
-            deckResult+=deck.get(0);
-        }		
-        else{	
-            for (int i = 0; i<deck.size(); i++){
-                //5 cards per line
-				if (i%5==0){
-                    deckResult+="\n";
-				}
-				//No comma at the end of the string
-                if(i == deck.size()-1){
-                    deckResult+=deck.get(i);
-                }
-                else{
-                    deckResult+=deck.get(i) + ", ";
-                }
-            }
-			//deck is empty
-			if (deck.size()==0){
-				deckResult="NO MORE CARDS IN THE DECK";
-			}
-        }
-		return 	deckResult;
+	    String deckResult="Your deck"+"\n";
+	    //Only one card to add to deckResult
+	    if (deck.size()==1){
+		deckResult+=deck.get(0);
+	    }		
+	    else{	
+		for (int i = 0; i<deck.size(); i++){
+		    //5 cards per line
+		    if (i%5==0)
+			deckResult+="\n";
+		    //No comma at the end of the string
+		    if(i == deck.size()-1)
+			deckResult+=deck.get(i);
+		    else
+			deckResult+=deck.get(i) + ", ";
+		}
+		//deck is empty
+		if (deck.size()==0)
+		    deckResult="NO MORE CARDS IN THE DECK";
+	    }
+	    return deckResult;
 	}
 
 
@@ -124,7 +119,13 @@ public class Deck {
         return deck;
     }
 
-     public static synchronized void playSound(String filename) {
+    /**
+     * Plays a sound
+     *
+     * @param filename The name of sound file 
+     */
+
+    public static synchronized void playSound(String filename) {
 	new Thread(new Runnable() {
 		public void run() {
 		    try {
@@ -141,6 +142,5 @@ public class Deck {
 		    }
 		}
 	    }).start();
-	
-	    }
+     }
 }

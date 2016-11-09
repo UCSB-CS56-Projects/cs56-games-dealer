@@ -2,7 +2,6 @@ package edu.ucsb.cs56.projects.games.dealer;
 
 import java.awt.*;
 import javax.swing.*;
-import java.lang.*;
 
 /** SimpleGui for our Games Dealer application
 

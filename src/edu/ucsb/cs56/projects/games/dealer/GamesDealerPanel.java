@@ -1,23 +1,8 @@
 package edu.ucsb.cs56.projects.games.dealer;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import java.lang.*;
 
 /** GamesDealerPanel GUI for games-dealer project
     @author Tristan Starck and Kelly Bielaski
@@ -78,7 +63,9 @@ public class GamesDealerPanel extends JPanel{
 
 	// Where player can select how they want to shuffle deck.
 	JComboBox shuffleBox;
-	String shuffleOptions[] = {"don't shuffle", "shuffle once before dealing","shuffle after every set of cards is dealt"};
+	String shuffleOptions[] = {"don't shuffle", 
+				   "shuffle once before dealing",
+				   "shuffle after every set of cards is dealt"};
 	shuffleBox = new JComboBox(shuffleOptions);
 
 	// Label to display "Shuffle?"
@@ -112,21 +99,21 @@ public class GamesDealerPanel extends JPanel{
 			if(playerInputArrayInts!=null){
 			        try
 				    {
-					if(playerInputArray[i].getText()==("")){                  //if the user leaves the text field empty set the default value as 0
+					if(playerInputArray[i].getText()==("")){
+					    //if the user leaves the text field empty set the default value as 0
 					    playerInputArrayInts[i]=0;
 					}
 					else{
 					    // Gets numbers from playerInputArray for how many cards each player wants to draw.
 					    playerInputArrayInts[i] = Integer.parseInt(playerInputArray[i].getText());
 					    if(playerInputArrayInts[i] < 0)
-						playerInputArrayInts[i] = 0;                       //set the default if the player asks for a negative number of cards is 0
+					 //set the default if the player asks for a negative number of cards is 0
+						playerInputArrayInts[i] = 0;
 					}
 				    }
 				catch (NumberFormatException nfe)
 				    {
-
 					playerInputArrayInts[i] = 0;
-
 				    }
 			}
 		    }
@@ -137,7 +124,8 @@ public class GamesDealerPanel extends JPanel{
 			hands= new Hand[playerInputArray.length];
 		    }
 		    // Draws cards for every player from deck.
-		    helper=new DealerPanelHelper(playerInputArray.length, playerInputArrayInts, shuffledAns, deck, hands);
+		    helper=new DealerPanelHelper(playerInputArray.length, playerInputArrayInts, 
+						 shuffledAns, deck, hands);
 		    deck=helper.getDeck();
 		    hands=helper.getHands();
 		    String cards = helper.playerCardString();
@@ -281,8 +269,5 @@ public class GamesDealerPanel extends JPanel{
 			cardOutputPanel.repaint();
 		}
 	    });
-
-
     }
-
 }

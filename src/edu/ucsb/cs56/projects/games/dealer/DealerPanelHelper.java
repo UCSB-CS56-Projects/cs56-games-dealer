@@ -1,7 +1,4 @@
 package edu.ucsb.cs56.projects.games.dealer;
-import java.util.*;
-import java.io.*;
-import java.lang.*;
 
 /**
    This class is used to help the Panel create the string of random cards that it displays.

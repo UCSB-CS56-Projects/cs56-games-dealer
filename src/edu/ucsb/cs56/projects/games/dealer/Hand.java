@@ -1,7 +1,5 @@
 package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
-import java.lang.*;
-
 
 /**
  *   This class is used to add cards to the hand.
@@ -50,6 +48,7 @@ public class Hand {
      * @return handResult a string of the cards in the hand
      */
 
+    @Override
     public String toString() {
         String result = "Your hand:\n";
 	for(int i = 0; i < handSize - 1; i++) {
