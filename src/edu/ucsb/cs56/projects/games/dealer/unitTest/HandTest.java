@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.unitTest;
+package edu.ucsb.cs56.projects.games.dealer.unitTest;
 
 import java.util.ArrayList;
 import org.junit.Test;
