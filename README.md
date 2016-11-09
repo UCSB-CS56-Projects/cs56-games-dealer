@@ -34,6 +34,7 @@ In the directory of where the build.xml is located
     jar - creates a jar file
     download - old JWS target
     publish - old JWS target
+    test - runs a JUnitTest
     
     
 How does the application work?
