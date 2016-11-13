@@ -2,6 +2,8 @@ package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
 import java.io.*;
 import java.lang.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 /**
    This class is used to deal cards to the user.
@@ -12,7 +14,7 @@ import java.lang.*;
    @version cs56 W16 2/15/16
 */
 
-public class dealer{
+public class Dealer {
 
     /**
        Main function to interact with the user,
@@ -21,8 +23,7 @@ public class dealer{
        @param args Command line arguments entered by user
     */
     
-    public static void main(String[] args) throws IOException{
-
+    public static void main(String[] args) throws IOException {
 	Scanner stdin = new Scanner(System.in);
 	int numCards;
 	int numHands = 0;
