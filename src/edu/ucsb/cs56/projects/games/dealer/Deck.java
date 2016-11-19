@@ -43,11 +43,11 @@ public class Deck {
 
     public void shuffle() {
 	//Creates the seed
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[64];
-        random.nextBytes(bytes);
-		
-        //Shuffles the deck with a 64 bit seed 
+	SecureRandom random = new SecureRandom();
+	byte bytes[] = new byte[64];
+	random.nextBytes(bytes);
+
+	//Shuffles the deck with a 64 bit seed
 	Collections.shuffle(deck,random);
 	Deck.playSound("shuffle.wav");
     }
@@ -56,30 +56,30 @@ public class Deck {
      * Overridden toString function to print cards remaining in the deck.
      * @return deckResult a string of the cards remaining in the deck
      */
-	
-	public String toString(){
-	    String deckResult="Your deck"+"\n";
-	    //Only one card to add to deckResult
-	    if (deck.size()==1){
-		deckResult+=deck.get(0);
-	    }		
-	    else{	
-		for (int i = 0; i<deck.size(); i++){
-		    //5 cards per line
-		    if (i%5==0)
-			deckResult+="\n";
-		    //No comma at the end of the string
-		    if(i == deck.size()-1)
-			deckResult+=deck.get(i);
-		    else
-			deckResult+=deck.get(i) + ", ";
-		}
-		//deck is empty
-		if (deck.size()==0)
-		    deckResult="NO MORE CARDS IN THE DECK";
-	    }
-	    return deckResult;
+
+    public String toString(){
+	String deckResult="Your deck"+"\n";
+	//Only one card to add to deckResult
+	if (deck.size()==1){
+	    deckResult+=deck.get(0);
 	}
+	else{
+	    for (int i = 0; i<deck.size(); i++){
+		//5 cards per line
+		if (i%5==0)
+		    deckResult+="\n";
+		//No comma at the end of the string
+		if(i == deck.size()-1)
+		    deckResult+=deck.get(i);
+		else
+		    deckResult+=deck.get(i) + ", ";
+	    }
+	    //deck is empty
+	    if (deck.size()==0)
+		deckResult="NO MORE CARDS IN THE DECK";
+	}
+	return deckResult;
+    }
 
 
     /**
@@ -94,12 +94,12 @@ public class Deck {
 	//Loops up to index numCards-1 in the deck
 	//Using an Iterator instead of using for loop is safer
 	//There won't be an index out of bounds exception
-	for(Iterator<Card> iterator = deck.iterator(); 
+	for(Iterator<Card> iterator = deck.iterator();
 	    iterator.hasNext(); ) {
 	    Card card = iterator.next();
 	    if(i<numCards) {
 		//removes first element in the ArrayList
-	        iterator.remove();
+		iterator.remove();
 		i++;
 		h.getHand().add(card);
 	    }
@@ -111,12 +111,12 @@ public class Deck {
     /**
      *   Returns the ArrayList of the deck
      *
-     *	 @return deck an ArrayList containing each card in the deck
+     * @return deck an ArrayList containing each card in the deck
      */
-	
+
     //Necessary for dealer class and addtoHand function in Hand class
     public ArrayList<Card> getDeck() {
-        return deck;
+	return deck;
     }
 
     /**
@@ -142,5 +142,5 @@ public class Deck {
 		    }
 		}
 	    }).start();
-     }
+    }
 }

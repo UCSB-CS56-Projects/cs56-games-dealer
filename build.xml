@@ -17,7 +17,7 @@
 <property name="javadocURL" value="${webBaseUrl}/${projectName}/javadoc"/>
 <property name="fullPkg" value="edu.ucsb.cs56.projects.games.${projectName}" />
 <property name="mainClass" value="${fullPkg}.Dealer"/>
-<property name="mainClassGUI" value="${fullPkg}.GamesDealerGui"/>
+<property name="mainClassGUI" value="${fullPkg}.MainGui"/>
 
 <path id="project.class.path">
   <pathelement location="build"/>
