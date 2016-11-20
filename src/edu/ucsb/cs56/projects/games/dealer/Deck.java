@@ -2,11 +2,12 @@ package edu.ucsb.cs56.projects.games.dealer;
 import java.util.*;
 import java.security.*;
 import java.io.File;
+
 import javax.sound.sampled.*;
 
 
 /**
- * This class is to provide functions to a standard 52 cards deck such ashuffling.
+ * This class is to provide functions to a standard 52 cards deck such as shuffling.
  *
  * @author Kin Kwan Poon and Eric Xiao
  * @author Jeremy White and Andrew Cooney
@@ -15,7 +16,6 @@ import javax.sound.sampled.*;
  */
 
 public class Deck {
-
     private ArrayList<Card> deck;
     private String[] ranks={"Ace","2","3","4","5","6","7","8",
 			    "9","10","Jack","Queen","King"};
@@ -33,6 +33,22 @@ public class Deck {
 	    }
 	}
     }
+    
+    /**
+     * Deck Constructor to make numOfDecks Decks into one Deck 
+     * for games that require more than one deck. 
+     * @param numOfDecks
+     */
+    public Deck(int numOfDecks) {
+    	deck = new ArrayList<Card>();
+    	for (int k=0;k<numOfDecks;k++){
+    		for(int i=0;i<4;i++) {
+    			for(int j=0;j<13;j++){
+    				deck.add(new Card(ranks[j],suits[i]));
+    			}
+    		}
+        }
+    }
 
     /**
      * This function is used to shuffle the deck
@@ -49,7 +65,12 @@ public class Deck {
 
 	//Shuffles the deck with a 64 bit seed
 	Collections.shuffle(deck,random);
-	Deck.playSound("shuffle.wav");
+	SoundEffect.playSound("shuffle.wav");
+	try {
+		Thread.sleep(1500);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
     }
 
     /**
@@ -125,22 +146,5 @@ public class Deck {
      * @param filename The name of sound file 
      */
 
-    public static synchronized void playSound(String filename) {
-	new Thread(new Runnable() {
-		public void run() {
-		    try {
-			Clip clip;
-			File sound = new File("sound/"+filename);
-			AudioInputStream inputStream = AudioSystem.getAudioInputStream(sound);
-			AudioFormat format = inputStream.getFormat();
-			DataLine.Info info=new DataLine.Info(Clip.class,format);
-			clip = (Clip) AudioSystem.getLine(info);
-			clip.open(inputStream);
-			clip.start();
-		    } catch (Exception e) {
-			System.out.println("play sound error: " + e.getMessage() + " for shuffle" );
-		    }
-		}
-	    }).start();
-    }
+
 }

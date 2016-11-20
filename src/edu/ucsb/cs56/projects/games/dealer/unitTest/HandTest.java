@@ -12,11 +12,11 @@ import edu.ucsb.cs56.projects.games.dealer.Hand;
 import edu.ucsb.cs56.projects.games.dealer.Card;
 
 /**
- * The test class HandTest, to test the Card, Deck, and Hand classes
+ * The test class HandTest, to test the Deck, and Hand classes
  *
  * @author Kin Kwan Poon
- * @version CS56,F16
- * @see Deck,Hand,Card
+ * @version UCSB, CS56,F16
+ * @see Deck,Hand
  */
 public class HandTest{
     private Deck d;
@@ -41,24 +41,7 @@ public class HandTest{
 	d.shuffle();
     }
 
-    @Test 
-    public void testAce_SpadesEqualsAce_Hearts(){
-	Card AS = new Card("Ace","Spades");
-	Card AH = new Card("Ace","Hearts");
-	assertFalse("The Hashcodes of two cards should not be the same",
-		    AS.hashCode()==AH.hashCode());
-    }
-
-    @Test
-    public void test2_ClubsEquals2_Clubs(){
-	Card c1 = new Card("2","Clubs");
-	Card c2 = new Card("2","Clubs");
-	assertTrue("The Hashcodes of two cards should be the same",
-		   c1.hashCode()==c2.hashCode());
-	assertTrue("They should be equal",c1.equals(c2));
-    }
-
-
+    
     @Test
     public void testUnshuffleDeck(){
 	assertEquals(unshuffleDeck,d.getDeck());
@@ -124,5 +107,23 @@ public class HandTest{
 	d.draw(52,new Hand());
 	assertEquals("NO MORE CARDS IN THE DECK",d.toString());
     }
+    
+    @Test
+    public void testRemoveLastCard(){
+    	Hand h1=new Hand();
+    	h1.addtoHand(2, d);
+    	h1.removeLastCard();
+    	assertEquals("Your hand:\nAce of Spades",h1.toString());
+    }
+    
+    @Test
+    public void testTwoDecks(){
+    	Deck d2=new Deck(2);
+    	Hand h1=new Hand();
+    	h1.addtoHand(53, d2);
+    	assertEquals(unshuffleDeck.get(0),h1.getHand().get(52));
+    }
+    
+
 
 }

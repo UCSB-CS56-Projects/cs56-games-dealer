@@ -11,15 +11,17 @@ public class Main{
 	Scanner stdin = new Scanner(System.in);
 	int userInput = stdin.nextInt();
 
-	switch(userInput){
-	case 1:
-	    Dealer d= new Dealer();
-	    d.main(args);
-	    break;
-	default:
-	    break;
-	}
-
+		switch(userInput){
+		case 1:
+			Dealer.main(args);
+			break;
+		case 2:
+			BlackJackMain.main(args);
+			break;
+		default:
+			break;
+		}
+		stdin.close();
 		
 
     }
