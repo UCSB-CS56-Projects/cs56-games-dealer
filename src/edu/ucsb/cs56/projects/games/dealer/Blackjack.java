@@ -56,11 +56,9 @@ public class Blackjack {
 	    } else
 		points += 10;	       
 	}
-	if(numAce > 0 && points > 21) {
-	    while(points > 21) {
-		numAce--;
-		points -= 10;
-	    }
+	while(points > 21 && numAce > 0) {
+	    numAce--;
+	    points -= 10;
 	}
 	return points;
     }
