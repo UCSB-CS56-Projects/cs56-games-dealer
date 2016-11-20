@@ -22,9 +22,23 @@ public class Card {
     }
 
     /**
+     * @return the rank of the card
+     */
+    public String getRank() {
+	return this.rank;
+    }
+
+    /**
+     * @return the suit of the card
+     */
+    public String getSuit() {
+	return this.suit;
+    }
+    
+    /**
      * Overridden toString function to print this Card.
      *
-     * @retrun Returns the rank of suit of the Card
+     * @returnn Returns the rank of suit of the Card
      */
 
     @Override
