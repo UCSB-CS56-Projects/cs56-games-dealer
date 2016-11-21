@@ -62,32 +62,32 @@ public class BlackJackPlayer extends Hand {
  	}
  	
  	/**
- 	 * TODO: write the code for GUI as well
  	 * The action will do if busted.
  	 */
- 	public void busted(){
+ 	public String busted(){
  		System.out.println(name+" busted.");
+ 		return name+" busted.";
  	}
  	/**
- 	 * TODO: write the code for GUI as well
  	 * The action will do if win.
  	 */
- 	public void win(){
+ 	public String win(){
  		System.out.println(name+" wins.");
+ 		return name+" wins.";
  	}
  	/**
- 	 * TODO: write the code for GUI as well
  	 * The action will do if lose.
  	 */
- 	public void lose(){
+ 	public String lose(){
  		System.out.println(name+" loses.");
+ 		return name+" loses.";
  	}
  	/**
- 	 * TODO: write the code for GUI as well
  	 * The action will do if push.
  	 */
- 	public void push(){
+ 	public String push(){
  		System.out.println(name+" pushes.");
+ 		return name+" pushes.";
  	}
  	
  	/**

@@ -2,6 +2,7 @@ package edu.ucsb.cs56.projects.games.dealer;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -12,9 +13,13 @@ import javax.swing.*;
  */
 
 public class BlackJackGui extends JPanel{
-	BlackJackGame bjg;
-	JPanel game;
+	JPanel gamePanel;
 	GridBagConstraints gbc;
+	JLabel dealerPoints,playerPoints;
+	ArrayList<JLabel> images;
+	JPanel resultPanel;
+	boolean standButtonHitted = false;
+	BlackJackGameGui bjgg;
 	
 	public BlackJackGui(){
 		super();
@@ -55,62 +60,138 @@ public class BlackJackGui extends JPanel{
 	}
 	public void game(){
 		
-		BlackJackGameGui bjgg;
-		game = new JPanel(new GridBagLayout());
+		
+		gamePanel = new JPanel(new GridBagLayout());
 		gbc = new GridBagConstraints();
+		images = new ArrayList<JLabel>();
 		JLabel dealerLabel= new JLabel("Dealer: ");
 		JLabel playerLabel = new JLabel("Player: ");
-		gbcConfig("dealer",0);
-		game.add(dealerLabel,gbc);
+		gbcConfig("dealer",0,0);
+		gamePanel.add(dealerLabel,gbc);
 		
-		gbcConfig("player",0);
-		game.add(playerLabel, gbc);
-		add(game);
+		gbcConfig("player",0,0);
+		gamePanel.add(playerLabel, gbc);
+		gbc.gridx=0;
+		gbc.gridy=0;
+		add(gamePanel,gbc);
 		revalidate();
 		repaint();
 		
 		bjgg=new BlackJackGameGui();
+		dealerPoints= new JLabel(Integer.toString(
+				bjgg.getHouse().getHandValue()));
+		playerPoints = new JLabel(Integer.toString(
+				bjgg.getPlayer().getHandValue()));
 		bjgg.start();
 		
 		class hit implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				bjgg.playerHit();
-				game.revalidate();
-				game.repaint();
+				if(!bjgg.getPlayer().isBusted()&&!standButtonHitted){
+					bjgg.playerHit();
+					if(bjgg.getPlayer().isBusted()){
+						resultDisplay(bjgg.getPlayer().busted(),bjgg.result(true));
+					}
+						
+				}
 			}
 		}
 		
 		JButton hitButton = new JButton("Hit");
 		hitButton.addActionListener(new hit());
-		gbc.anchor=GridBagConstraints.PAGE_END;
-		gbc.insets=new Insets(0,0,0,199);
+		gbc.anchor=GridBagConstraints.LAST_LINE_START;
+		gbc.insets=new Insets(0,0,0,10);
+		gbc.gridx=0;
+		gbc.gridy=3;
+		gbc.gridwidth=1;
+		gamePanel.add(hitButton,gbc);
+		
+		class stand implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent arg0){
+				standButtonHitted=true;
+				if(!bjgg.getPlayer().isBusted()){
+					bjgg.houseHit();
+					if(bjgg.getHouse().isBusted()){
+						resultDisplay(bjgg.getHouse().busted(),bjgg.result(true));
+					}else
+						resultDisplay(bjgg.result(true),"");
+					
+				}
+			}
+		}
+		
+		JButton standButton = new JButton("Stand");
+		standButton.addActionListener(new stand());
+		gbc.anchor=GridBagConstraints.LAST_LINE_END;
 		gbc.gridx=0;
 		gbc.gridy=4;
 		gbc.gridwidth=1;
-		game.add(hitButton,gbc);
+		gamePanel.add(standButton,gbc);
 		
-		
-	
 	}
 	
-	public void gbcConfig(String hand, int pos){
+	public void resultDisplay(String state1,String state2){
+		GridBagConstraints gbc1 = new GridBagConstraints();
+		resultPanel = new JPanel(new GridBagLayout());
+		JLabel resultLabel=new JLabel(state1);
+		gbc1.fill=GridBagConstraints.VERTICAL;
+		gbc1.gridx=0;
+		gbc1.gridy=1;
+		resultPanel.add(resultLabel,gbc1);
+		
+		if(!state2.equals("")){
+			resultLabel=new JLabel(state2);
+			gbc1.fill=GridBagConstraints.VERTICAL;
+			gbc1.gridx=0;
+			gbc1.gridy=2;
+			resultPanel.add(resultLabel,gbc1);
+		}
+		
+		class Continue implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				resultPanel.removeAll();
+				gamePanel.removeAll();
+				standButtonHitted=false;
+				bjgg.getPlayer().clearHand();
+				bjgg.getHouse().clearHand();
+				gamePanel.revalidate();
+				gamePanel.repaint();
+				game();
+			}
+		}
+		
+		JButton continueButton = new JButton("Continue");
+		continueButton.addActionListener(new Continue());
+		gbc1.fill=GridBagConstraints.VERTICAL;
+		gbc1.insets=new Insets(50,0,0,0);
+		gbc1.gridx=0;
+		gbc1.gridy=5;
+		resultPanel.add(continueButton,gbc1);
+		
+		gbc.anchor=GridBagConstraints.LINE_START;
+		gbc.gridx=0;
+		gbc.gridy=1;
+		add(resultPanel,gbc);
+	}
+	
+	public void gbcConfig(String hand, int right , int top){
 		if(hand.equals("dealer")){
 			gbc.fill=GridBagConstraints.HORIZONTAL;
 			gbc.anchor=GridBagConstraints.FIRST_LINE_START;
-			gbc.insets=new Insets(50,0,0,600-pos);
+			gbc.insets=new Insets(50+top,0,0,600-right);
 			gbc.gridx=0;
 			gbc.gridy=0;
 		}else if(hand.equals("player")){
 			gbc.anchor= GridBagConstraints.LAST_LINE_START;
-			gbc.insets=new Insets(100,0,0,600-pos);
+			gbc.insets=new Insets(250,0,top,600-right);
 			gbc.gridx=0;
-			gbc.gridy=3;
+			gbc.gridy=0;
 		}
 	}
 	
 	class BlackJackGameGui extends BlackJackGame{
-		
+		Card hiddenCard;
 		public BlackJackGameGui(){
 			super(4,"Player");
 		}
@@ -119,12 +200,13 @@ public class BlackJackGui extends JPanel{
 		public void start(){
 			for(int i=0;i<2;i++){
 				this.getHouse().addtoHand(1, d);
-				if(i==0)
-					this.getHouse().getHand().get(0).hide();
+				if(i==0){
+					house.getHand().get(0).hide();
+					hiddenCard=house.getHand().get(0);
+				}
 				display(house);
 				playerHit();
 			}
-			
 		}
 		
 		@Override
@@ -135,6 +217,32 @@ public class BlackJackGui extends JPanel{
 				player.busted();
 		}
 		
+		@Override
+		public void houseHit(){
+			house.getHand().get(0).showHidden();
+				images.get(0).setIcon(new ImageIcon(path(hiddenCard)));
+			SoundEffect.playSound("deal", 1,4);
+			display(house);
+			while(house.isHitting()&&!house.isBusted()){
+				house.addtoHand(1, d);
+				display(house);
+			}
+			
+		}
+		
+		public String result(boolean gui){
+			if((house.isBusted()||
+					player.getHandValue()>house.getHandValue())
+					&&!player.isBusted())
+				return player.win();
+			else if(player.isBusted()||
+					!house.isBusted()&&
+					player.getHandValue()<house.getHandValue())
+				return player.lose();
+			else
+				return player.push();
+		}
+		
 		
 		public void display(Hand h){
 			int i=200;
@@ -142,19 +250,34 @@ public class BlackJackGui extends JPanel{
 			for(Card c:h.getHand()){
 				ImageIcon image = new ImageIcon(path(c));
 				JLabel label = new JLabel("",image,JLabel.CENTER);
-				if(h==house)
-					gbcConfig("dealer",i);
-				else if (h==player)
-					gbcConfig("player",i);
-				game.add(label,gbc);
-				game.revalidate();
-				game.repaint();
-				
+				images.add(label);
+				if(h==house){
+					gbcConfig("dealer",i,0);
+					gamePanel.add(images.get(images.size()-1),gbc);
+					gbcConfig("dealer",0,20);
+					pointsUpdate();
+					gamePanel.add(dealerPoints,gbc);
+				}
+					
+				else if (h==player){
+					gbcConfig("player",i,0);
+					gamePanel.add(images.get(images.size()-1),gbc);
+					gbcConfig("player",0,20);
+					pointsUpdate();
+					gamePanel.add(playerPoints,gbc);
+				}
+				gamePanel.revalidate();
+				gamePanel.repaint();
 				i+=200;
 			}
 			sleep(500);
 		}
 		
+		
+		public void pointsUpdate(){
+			dealerPoints.setText(Integer.toString(house.getHandValue()));
+			playerPoints.setText(Integer.toString(player.getHandValue()));
+		}
 		
 	    /**
 	     * returns a path to the specified card
@@ -186,4 +309,5 @@ public class BlackJackGui extends JPanel{
 	    }
 		
 	}
+	
 }
