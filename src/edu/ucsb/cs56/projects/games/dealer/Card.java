@@ -27,14 +27,20 @@ public class Card implements Comparable<Card>{
      * @return the rank of the card
      */
     public String getRank() {
-	return this.rank;
+    	if(!hidden)
+    		return this.rank;
+    	else
+    		return "X";
     }
 
     /**
      * @return the suit of the card
      */
     public String getSuit() {
-	return this.suit;
+    	if(!hidden)
+    		return this.suit;
+    	else
+    		return "X";
     }
     
     /**

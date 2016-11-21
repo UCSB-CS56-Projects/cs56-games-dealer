@@ -6,9 +6,9 @@ package edu.ucsb.cs56.projects.games.dealer;
  * @version UCSB, cs56, F16
  */
 public class BlackJackGame {
-	private BlackJackHouse house;
-	private BlackJackPlayer player;
-	private Deck d;
+	protected BlackJackHouse house;
+	protected BlackJackPlayer player;
+	protected Deck d;
 	/**
 	 * Constructor of BlackJackGame 
 	 */
