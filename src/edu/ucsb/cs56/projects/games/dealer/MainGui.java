@@ -52,7 +52,7 @@ public class MainGui {
 
     class BlackjackListener implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
-	    frame.setSize(1024, 600);
+		frame.setSize(800, 600);
 	    frame.setContentPane(new BlackJackGui());
 	    frame.invalidate();
 	    frame.validate();

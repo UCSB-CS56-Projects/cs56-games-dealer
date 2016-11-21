@@ -2,6 +2,7 @@ package edu.ucsb.cs56.projects.games.dealer;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 /**
@@ -10,47 +11,54 @@ import javax.swing.*;
  *
  */
 
-public class BlackJackGui {
-	JPanel mainPanel;
-	JFrame frame;
+public class BlackJackGui extends JPanel{
 	BlackJackGame bjg;
 	
-	public static void main(String[] args){
-		new BlackJackGui().buildGUI();
-		
+	public BlackJackGui(){
+		super();
+		buildGUI();
 	}
-	
-	class BackgroundJFrame extends JFrame{
-		public BackgroundJFrame(){
-			setTitle("BlackJack");
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setLayout(new BorderLayout());
-			setContentPane(new JLabel(new ImageIcon("images/tableBackground.jpg")));
-			setLayout(new FlowLayout());
-		}
-	}
-	
 	
 	public void buildGUI(){
-		frame = new BackgroundJFrame();
-		BorderLayout layout = new BorderLayout();
-		JPanel background = new JPanel(layout);
-		background.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));;
-		JLabel welcome = new JLabel("Welcome to BlackJack!");
-		welcome.setFont(new Font("Sans Serif",Font.PLAIN,20));
-		welcome.setBackground(new Color(0,0,0,0));
-		welcome.setOpaque(true);
+		JPanel welcome = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		JLabel welcomePrompt = new JLabel("Welcome to BlackJack!");
+		welcomePrompt.setFont(new Font("Sans Serif",Font.PLAIN,20));
 		
-		background.add(welcome,BorderLayout.CENTER);
-//		welcome.setHorizontalAlignment(SwingConstants.CENTER);
+		c.fill=GridBagConstraints.HORIZONTAL;
+		c.anchor=GridBagConstraints.CENTER;
+		c.insets=new Insets(250,0,0,0);
+		c.gridx=1;
+		c.gridy=1;
+		welcome.add(welcomePrompt,c);
+		
+		class play implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				welcome.removeAll();
+				repaint();
+			}
+			
+		}
+		JButton playButton = new JButton("Play");
+		playButton.addActionListener(new play());
+		c.insets=new Insets(80,0,0,0);
+		c.gridx=1;
+		c.gridy=2;
+		welcome.add(playButton,c);
+		add(welcome);
+		
+
 		
 		
-		frame.getContentPane().add(background);
 		
-		frame.pack();
-		frame.setSize(1136,640);
-		frame.setVisible(true);
+//		frame.getContentPane().add(background);
+//		frame.pack();
+//		frame.setSize(1136,640);
+//		frame.setVisible(true);
 	}
+	
+	
 
 
 
