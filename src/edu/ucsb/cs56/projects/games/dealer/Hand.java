@@ -10,8 +10,8 @@ import java.util.*;
  */
 
 public class Hand {
-    private ArrayList<Card> hand;
-    private int handSize;
+    protected ArrayList<Card> hand;
+    protected int handSize;
 
     /**
      * Hand constructor to make hand arraylist be an empty hand
@@ -24,7 +24,7 @@ public class Hand {
     }
 
     /**
-     * Add a number of cards to the hand
+     * Add a number of cards to the hand, and play a sound effect
      *
      * @param numCards number of cards to draw
      * @param d the deck to draw from
@@ -32,8 +32,14 @@ public class Hand {
 
      public void addtoHand(int numCards, Deck d) {
          d.draw(numCards, this);
-	 handSize += numCards;
+         handSize += numCards;
+         SoundEffect.playSound("deal",1,4);
     }
+     
+     public void removeLastCard(){
+    	 hand.remove(handSize-1);
+    	 handSize--;
+     }
 
     /**
      * @return an ArrayList containing each card in the hand
