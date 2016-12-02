@@ -51,5 +51,6 @@ GUI:
 The user is prompted how many hands they want and if they don't want the deck to be shuffled, only shuffled once, or before each player draws. Then a panel is displayed that contains the textfields where the user can input how many cards they want for each hand. Then click the display cards button which replaces that panel with a new panel containing the textarea that displays the cards dealt for each hand and the remaining cards in the deck. The user can choose to continue drawing or reset the deck.
 
 F16 final remarks:
+===================
 The dealer interface has been updated to include card images and the game Blackjack has been created. Both console and GUI versions exist which can be run with 'ant run' and 'ant runGUI'. The code for the main menu is located in 'MainGui.java' and here additional games that are created can be added. One thing that can be improved for the Blackjack game is that when the player wins or loses, the continue button pushes the other GUI components to the left. This can be fixed so that they remain stationary instead. Also, the card class can be refactored. At the moment there are methods in the card class that are used specifically for Blackjack such as the rankValue method. These methods can be refactored into the Blackjack game so that Card remains generalized for other games.   
 
