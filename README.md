@@ -10,6 +10,8 @@ project history
  
  F16 | eric-xiao8 kpoon1 5 pm | Added main menu and Blackjack game
  
+ F17 | JamesW121 KiwanSung 5pm | 
+ 
 ```
 
 What is this?
