@@ -8,7 +8,6 @@ package edu.ucsb.cs56.projects.games.dealer;
 */
 
 public class DealerPanelHelper{
-
     private int numHands;
     private int[] playerInputArrayInts;
     private String shuffle;
@@ -62,6 +61,7 @@ public class DealerPanelHelper{
 	    }
 
 	    hands[i].addtoHand(playerInputArrayInts[i], deck);
+        
 	    displayedCards+="\n" +"Player "+ (i+1)+ "/" +numHands+ ": "+ hands[i]+"\n";
 	    if(shuffle=="shuffle after every set of cards is dealt"){
 		deck.shuffle();

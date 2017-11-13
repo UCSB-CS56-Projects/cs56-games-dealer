@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 public class BlackJackPlayer extends Hand {
 	private String name;
+     private int score = 10;
 	
 	/**
 	 * Constructor of BlackJackPlayer
@@ -26,6 +27,15 @@ public class BlackJackPlayer extends Hand {
 	public String getName(){
 		return name;
 	}
+    public int get_score(){
+        return score;
+    }
+    public void lose_score(int point){
+        score = score - point;
+    }
+    public void gain_score(int point){
+        score = score + point;
+    }
 	
 	/**
 	 * 

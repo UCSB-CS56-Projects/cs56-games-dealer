@@ -43,7 +43,7 @@ public class MainGui {
 
     class DealerListener implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
-	    frame.setSize(800, 600);
+	    frame.setSize(1000, 1000);
 	    frame.setContentPane(new GamesDealerPanel());
 	    frame.invalidate();
 	    frame.validate();

@@ -107,15 +107,19 @@ public class BlackJackGame {
 	/**
 	 * To determine the player wins or loses or pushes.
 	 */
-	public void result(){
+	public void result(int points){
 		if((house.isBusted()||
 				player.getHandValue()>house.getHandValue())
-				&&!player.isBusted())
+           &&!player.isBusted()){
 			player.win();
+            player.gain_score(points);
+        }
 		else if(player.isBusted()||
 				!house.isBusted()&&
-				player.getHandValue()<house.getHandValue())
+                player.getHandValue()<house.getHandValue()){
 			player.lose();
+            player.lose_score(points);
+        }
 		else
 			player.push();
 	}
