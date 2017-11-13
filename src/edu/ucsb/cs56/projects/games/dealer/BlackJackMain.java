@@ -1,8 +1,6 @@
 package edu.ucsb.cs56.projects.games.dealer;
-
 import static java.lang.System.in;
 import static java.lang.System.out;
-
 import java.util.Scanner;
 
 /**
