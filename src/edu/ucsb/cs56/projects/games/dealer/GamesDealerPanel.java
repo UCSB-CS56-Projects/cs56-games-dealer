@@ -46,7 +46,7 @@ public class GamesDealerPanel extends JPanel{
         
         playerInput=new JTextField(5);
         
-        String prompt="How many hands do you want? (Enter an integer greater than 0 and less than 52)";
+        String prompt="How many hands do you want? (Enter an integer greater than 0 and less than 53)";
         // Label to display prompt for user to input how many hands they want.
         JLabel promptLabel=new JLabel(prompt);
         promptLabel.setLabelFor(playerInput);
@@ -118,21 +118,21 @@ public class GamesDealerPanel extends JPanel{
                         {
                             //playerInputArrayInts[i] = 0;
                             System.out.println("hahaha");
-                            String prompt2="The Sum of Cards for All Players Should be Less Than 52. Please reset.";
+                            String prompt2="The Sum of Cards for All Players Should be Less Than 53. Please reset.";
                             promptLabel.setText(prompt2);
                         }
                     }
                         else
                         {
                             System.out.println("hahaha");
-                            String prompt2="The Sum of Cards for All Players Should be Less Than 52. Please reset.";
+                            String prompt2="The Sum of Cards for All Players Should be Less Than 53. Please reset.";
                             promptLabel.setText(prompt2);
                         }
                     }
                     else
                     {
                         System.out.println("hahaha");
-                        String prompt2="The Sum of Cards for All Players Should be Less Than 52. Please reset.";
+                        String prompt2="The Sum of Cards for All Players Should be Less Than 53. Please reset.";
                         promptLabel.setText(prompt2);
                     }
                     
@@ -198,11 +198,11 @@ public class GamesDealerPanel extends JPanel{
                     // Gets user input for how many hands the user wants.
                     numHands = Integer.parseInt(playerInput.getText());
                     if(numHands < 1){
-                        String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 52)";
+                        String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 53)";
                         promptLabel.setText(prompt1);
                     }
                     else if(numHands > 52){
-                        String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 52)";
+                        String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 53)";
                         promptLabel.setText(prompt1);
                         numHands = 0;
                     }
@@ -212,7 +212,7 @@ public class GamesDealerPanel extends JPanel{
                 catch (NumberFormatException nfe)
                 {
                     //numHands = 1;
-                    String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 52)";
+                    String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 53)";
                     promptLabel.setText(prompt1);
                 }
                 System.out.println(shuffledAns);
