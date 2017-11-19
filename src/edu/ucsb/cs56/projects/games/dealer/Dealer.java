@@ -65,8 +65,8 @@ public class Dealer {
                 System.out.println("How many hands do you want? (Enter an integer from 1 to 52)");
                 if(stdin.hasNextInt()){
                     numHands = stdin.nextInt();
-                    while(numHands < 1 || numHands > 52){
-                        System.out.println("Please enter a valid number of hand.(Enter an integer from 1 to 52)");
+                    while(numHands < 1 || numHands >= 53){
+                        System.out.println("Invalid number of hand entered.(Enter an integer from 1 to 52)");
                         numHands = stdin.nextInt();
                     }
                 }
