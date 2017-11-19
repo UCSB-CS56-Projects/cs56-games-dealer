@@ -110,7 +110,7 @@ public class GamesDealerPanel extends JPanel{
                                 playerInputArrayInts[i] = Integer.parseInt(playerInputArray[i].getText());
                             }
                        
-                    }
+                        }
                         else
                         {
                          //If user enters number larger than the total number of cards on deck, reset the game
