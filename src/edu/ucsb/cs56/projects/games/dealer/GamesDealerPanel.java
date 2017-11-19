@@ -280,7 +280,6 @@ public class GamesDealerPanel extends JPanel{
                 cardOutputPanel.add(playerPromptsPanel, BorderLayout.CENTER);
                 
                 for(int i=1; i<numHands+1;i++){
-                    
                     JTextField playerCardInput=new JTextField(5);
                     playerInputArray[i-1]=playerCardInput;
                     String question="Player " +i+"/"+numHands+": How many cards do you want?";
@@ -289,7 +288,6 @@ public class GamesDealerPanel extends JPanel{
                     JPanel playerPromptLabelPanel = new JPanel(new BorderLayout());
                     playerPromptLabelPanel.add(playerPromptLabel,BorderLayout.NORTH);
                     playerPromptsPanel.add(playerPromptLabelPanel);
-                    
                     JPanel playerTextFieldPanel  = new JPanel(new FlowLayout());
                     playerTextFieldPanel.add(playerCardInput);
                     playerPromptsPanel.add(playerTextFieldPanel);
