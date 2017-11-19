@@ -26,6 +26,7 @@ public class GamesDealerPanel extends JPanel{
     int[] playerInputArrayInts; // Array of ints that hold how many cards each player wants to draw
     Hand[] hands; // Array of hands to store current hands for all players in.
     JButton continueButton; // Button that allows for continued drawing for current players.
+    int total_count = 0;
     
     /**
      Constructor for GamesDealerPanel
@@ -93,50 +94,33 @@ public class GamesDealerPanel extends JPanel{
                 // Gets player input for when to shuffle the deck.
                 shuffledAns = (String) shuffleBox.getSelectedItem();
                 playerInputArrayInts= new int[playerInputArray.length];
-                int total_count = 0;
+          
                 //put all the numbers read in from the playerInputArray into playerInputArrayInts
                 for(int i=0; i<playerInputArray.length;i++){
                     
                     if(playerInputArrayInts!=null){
                         total_count = total_count +Integer.parseInt(playerInputArray[i].getText());
-                        System.out.println("hahaha" + total_count);
-                        if(total_count <= 52){
-                        try
-                        {
+                        if(total_count <= 52 && Integer.parseInt(playerInputArray[i].getText()) > 0){
                             if(playerInputArray[i].getText()==("")){
                                 //if the user leaves the text field empty set the default value as 0
                                 playerInputArrayInts[i]=0;
                             }
                             else{
                                 // Gets numbers from playerInputArray for how many cards each player wants to draw.
-                                //System.out.println("hahaha" + total_count);
                                 playerInputArrayInts[i] = Integer.parseInt(playerInputArray[i].getText());
-                                
                             }
-                        }
-                        catch (NumberFormatException nfe)
-                        {
-                            //playerInputArrayInts[i] = 0;
-                            System.out.println("hahaha");
-                            String prompt2="The Sum of Cards for All Players Should be Less Than 53. Please reset.";
-                            promptLabel.setText(prompt2);
-                        }
+                       
                     }
                         else
                         {
-                            System.out.println("hahaha");
-                            String prompt2="The Sum of Cards for All Players Should be Less Than 53. Please reset.";
+                         //If user enters number larger than the total number of cards on deck, reset the game
+                            String prompt2="Please make sure the sum of cards for all players is less than 53, positive number only. Please reset.";
                             promptLabel.setText(prompt2);
                         }
                     }
-                    else
-                    {
-                        System.out.println("hahaha");
-                        String prompt2="The Sum of Cards for All Players Should be Less Than 53. Please reset.";
-                        promptLabel.setText(prompt2);
-                    }
-                    
                 }
+             
+              if(total_count <= 52){
                 // Clears cardOutputPanel
                 cardOutputPanel.removeAll();
                 // If game is reset, reinitialize hands.
@@ -168,6 +152,7 @@ public class GamesDealerPanel extends JPanel{
                 // Sets up cardOutputPanel after being cleaered to show card and deck output.
                 cardOutputPanel.revalidate();
                 cardOutputPanel.repaint();
+               }
             }
         }
         JButton displayCardsButton = new JButton("Display Cards");
@@ -190,6 +175,7 @@ public class GamesDealerPanel extends JPanel{
                 // Resets deck and hands.
                 deck=new Deck();
                 hands=null;
+                total_count = 0;
                 
                 int numHands = 0;
                 
@@ -198,11 +184,11 @@ public class GamesDealerPanel extends JPanel{
                     // Gets user input for how many hands the user wants.
                     numHands = Integer.parseInt(playerInput.getText());
                     if(numHands < 1){
-                        String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 53)";
+                        String prompt1="Invalid Number Entered. Enter an integer greater than 0 and less than 53)";
                         promptLabel.setText(prompt1);
                     }
                     else if(numHands > 52){
-                        String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 53)";
+                        String prompt1="Invalid Number Entered. Enter an integer greater than 0 and less than 53)";
                         promptLabel.setText(prompt1);
                         numHands = 0;
                     }
@@ -211,8 +197,7 @@ public class GamesDealerPanel extends JPanel{
                 }
                 catch (NumberFormatException nfe)
                 {
-                    //numHands = 1;
-                    String prompt1="Invalid Number Entered, enter an integer greater than 0 and less than 53)";
+                    String prompt1="Invalid Number Entered. Enter an integer greater than 0 and less than 53)";
                     promptLabel.setText(prompt1);
                 }
                 System.out.println(shuffledAns);
@@ -257,20 +242,8 @@ public class GamesDealerPanel extends JPanel{
                 
                 int numHands;
                 shuffledAns = (String) shuffleBox.getSelectedItem();
-                try
-                {
-                    numHands = Integer.parseInt(playerInput.getText());
-                    if(numHands < 1)
-                        numHands = 1;
-                    if(numHands > 10)
-                        numHands = 10;
-                    System.out.println(numHands);
-                    
-                }
-                catch (NumberFormatException nfe)
-                {
-                    numHands = 1;
-                }
+                numHands = Integer.parseInt(playerInput.getText());
+                //no need to reset the number of hand when you continue the game
                 System.out.println(shuffledAns);
                 playerInputArray = new JTextField[numHands];
                 
