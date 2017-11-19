@@ -28,26 +28,32 @@ public class Dealer {
         int numCards;
         int numHands = 0;
         boolean keepDealing = true;
+        Hand[] hands  = new Hand[numHands];
         
         //Create unshuffled deck
         Deck deck=new Deck();
         
-        // Requests input from player for how many hands they want to play with
-        System.out.println("How many hands do you want? (Enter an integer from 1 to 52)");
-        if(stdin.hasNextInt()){
-            numHands = stdin.nextInt();
-            while(numHands <= 0 || numHands > 52){
-                System.out.println("Please enter a valid number of hand.(Enter an integer from 1 to 52)");
-                numHands = stdin.nextInt();
-            }
-        }
-        // Creates an array of Hand objects
-        Hand[] hands = new Hand[numHands];
-        for(int i = 0; i < numHands; i++){
-            hands[i] = new Hand();
-        }
         
         do{
+         
+         if(numHands == 0){
+            // Requests input from player for how many hands they want to play with
+            System.out.println("How many hands do you want? (Enter an integer from 1 to 52)");
+            if(stdin.hasNextInt()){
+                numHands = stdin.nextInt();
+                while(numHands <= 0 || numHands > 52){
+                    System.out.println("Please enter a valid number of hand.(Enter an integer from 1 to 52)");
+                    
+                    numHands = stdin.nextInt();
+                }
+            }
+            // Creates an array of Hand objects
+            hands = new Hand[numHands];
+            for(int i = 0; i < numHands; i++){
+                hands[i] = new Hand();
+            }
+            }
+         
             // Position in array that gives us the current hand
             int currentHand = 0;
             
@@ -60,23 +66,6 @@ public class Dealer {
                 System.out.println("The cards will remain unshuffled");
             }
             
-            // Requests input from player for wanted number of hands if game gets reset.
-            if(numHands < 1){
-                System.out.println("How many hands do you want? (Enter an integer from 1 to 52)");
-                if(stdin.hasNextInt()){
-                    numHands = stdin.nextInt();
-                    while(numHands < 1 || numHands >= 53){
-                     
-                        System.out.println("Invalid number of hand entered.(Enter an integer from 1 to 52)");
-                    
-                        numHands = stdin.nextInt();
-                    }
-                }
-                hands = new Hand[numHands];
-                for(int i = 0; i < numHands; i++){
-                    hands[i] = new Hand();
-                }
-            }
             // Asks each player how many cards they want.
             // for(; currentHand < numHands; currentHand++){
             
