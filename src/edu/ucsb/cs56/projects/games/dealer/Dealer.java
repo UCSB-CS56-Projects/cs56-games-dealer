@@ -33,13 +33,12 @@ public class Dealer {
         Deck deck=new Deck();
         
         // Requests input from player for how many hands they want to play with
-        System.out.println("How many hands do you want? (Enter an integer from 0 to 52)");
+        System.out.println("How many hands do you want? (Enter an integer from 1 to 52)");
         if(stdin.hasNextInt()){
             numHands = stdin.nextInt();
             while(numHands < 1 || numHands > 52){
-                System.out.println("Please enter a valid number of hand.(Enter an integer from 0 to 52)");
+                System.out.println("Please enter a valid number of hand.(Enter an integer from 1 to 52)");
                 numHands = stdin.nextInt();
-                //numHands = 1;
             }
         }
         // Creates an array of Hand objects
@@ -63,13 +62,12 @@ public class Dealer {
             
             // Requests input from player for wanted number of hands if game gets reset.
             if(numHands < 1){
-                System.out.println("How many hands do you want? (Enter an integer from 0 to 52)");
+                System.out.println("How many hands do you want? (Enter an integer from 1 to 52)");
                 if(stdin.hasNextInt()){
                     numHands = stdin.nextInt();
                     while(numHands < 1 || numHands > 52){
-                        System.out.println("Please enter a valid number of hand.(Enter an integer from 0 to 52)");
+                        System.out.println("Please enter a valid number of hand.(Enter an integer from 1 to 52)");
                         numHands = stdin.nextInt();
-                        //numHands = 1;
                     }
                 }
                 hands = new Hand[numHands];
@@ -84,13 +82,12 @@ public class Dealer {
                 System.out.println("Player " + (currentHand+1) + "/" + numHands + " : How many cards do you want for your hand? current card left: " + deck.getDeck().size());
                 if(stdin.hasNextInt()){
                     numCards = stdin.nextInt();
-                    //Checks if numCards is from 0 to 52 is inputted
-                    
-                    
+                 
+                    //Checks if numCards is from 1 to 52 is inputted
                     if(deck.getDeck().size() >= numCards){
                         while (numCards<=0||numCards>=53 ){
-                            System.out.println("An integer from 0 to 52 was not entered");
-                            System.out.println("Please enter a valid number of cards.(Enter an integer from 0 to 52)");
+                            System.out.println("An integer from 1 to 52 was not entered");
+                            System.out.println("Please enter a valid number of cards.(Enter an integer from 1 to 52)");
                             numCards = stdin.nextInt();
                         }
                         
@@ -102,14 +99,17 @@ public class Dealer {
                     else
                     {
                         if (deck.getDeck().size()>0){
-                            System.out.println("Total numer of cards should be less than 52, current card left: " + deck.getDeck().size());
+                            System.out.println("Total numer of cards should be less than 53, current card left: " + deck.getDeck().size());
                             System.out.println("Do you want to continue? (y/n)");
-                            if(stdin.next().startsWith("n"))
-                                break;
+                            if(stdin.next().startsWith("n")){
+                                //quit the game with answer 'n' from user
+                                System.out.println(deck);
+                                System.out.println();
+                                System.out.println("Goodbye");
+                                return;
+                            }
                         }
-                    }
-                    
-                    
+                    }  
                     
                 }
                 else{
@@ -148,8 +148,7 @@ public class Dealer {
         
         //prints the deck
         System.out.println(deck);
-        
-        
+
         System.out.println();
         System.out.println("Goodbye");
         
