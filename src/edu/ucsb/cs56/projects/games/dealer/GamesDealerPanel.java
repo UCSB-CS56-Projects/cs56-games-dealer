@@ -281,15 +281,19 @@ public class GamesDealerPanel extends JPanel{
                 
                 for(int i=1; i<numHands+1;i++){
                      JTextField playerCardInput_continue=new JTextField(5);
+                    //if player hit the continue after first round
                     playerInputArray[i-1]=playerCardInput_continue;
+                    //create question
                     String question_continue="Player " +i+"/"+numHands+": How many cards do you want?";
                     JLabel playerPromptLabel=new JLabel(question_continue, JLabel.RIGHT);
                     playerPromptLabel.setLabelFor(playerCardInput_continue);
+                    //reset the jpanel for continue
                     JPanel playerPromptLabelPanel_continue = new JPanel(new BorderLayout());
                     playerPromptLabelPanel_continue.add(playerPromptLabel,BorderLayout.NORTH);
                     playerPromptLabelPanel_continue.add(playerPromptLabelPanel_continue);
                     
                     JPanel playerTextFieldPanel  = new JPanel(new FlowLayout());
+                    //add the text field
                     playerTextFieldPanel.add(playerCardInput_continue);
                     playerPromptsPanel.add(playerTextFieldPanel);
                 }
