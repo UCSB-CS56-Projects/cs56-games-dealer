@@ -99,13 +99,12 @@ public class BlackJackGui extends JPanel{
         class hit implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                 if(decided == 0){
-                    if(!bjgg.getPlayer().isBusted()){
+                  if(!bjgg.getPlayer().isBusted() && decided == 0){
                         bjgg.playerHit();
                         if(bjgg.getPlayer().isBusted())
                             resultDisplay(bjgg.getPlayer().busted(),bjgg.result(true));
                     }  
-                }
+                
             }
         }
         
@@ -125,8 +124,7 @@ public class BlackJackGui extends JPanel{
             @Override
             public void actionPerformed(ActionEvent arg0){
                 
-                 if(decided == 0){
-                    if(!bjgg.getPlayer().isBusted()){
+                  if(!bjgg.getPlayer().isBusted() && decided == 0){
                         bjgg.houseHit();
                         if(bjgg.getHouse().isBusted())
                             resultDisplay(bjgg.getHouse().busted(),bjgg.result(true));
@@ -134,7 +132,7 @@ public class BlackJackGui extends JPanel{
                          resultDisplay("Dealer loses",bjgg.result(true));
                         else
                          resultDisplay("Dealer Wins/",bjgg.result(true));
-                    }  
+                     
                 }
             }
         }
