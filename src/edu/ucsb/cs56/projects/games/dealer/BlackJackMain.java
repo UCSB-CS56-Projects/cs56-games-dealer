@@ -52,18 +52,18 @@ public class BlackJackMain {
             out.println("\nDo you want to continue? (y/n)  " + "Your score = " + bjg.getPlayer().get_score());
             prompt=stdin.nextLine();
           
-             if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
-                shouldRun=false;
+            if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
+               shouldRun=false;
             
             else{
                 out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
                 points_bet = Integer.parseInt(stdin.nextLine());
                 
-            while(points_bet > bjg.getPlayer().get_score() && bjg.getPlayer().get_score() > 0 || points_bet < 0){
-                out.println("Invalid Number Entered.");
-                out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
-                points_bet = Integer.parseInt(stdin.nextLine());
-            }
+                while(points_bet > bjg.getPlayer().get_score() && bjg.getPlayer().get_score() > 0 || points_bet < 0){
+                    out.println("Invalid Number Entered.");
+                    out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
+                    points_bet = Integer.parseInt(stdin.nextLine());
+                }
                 if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
                     shouldRun=false;
                 bjg.clearHands();
