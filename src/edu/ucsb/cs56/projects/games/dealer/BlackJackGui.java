@@ -20,6 +20,7 @@ public class BlackJackGui extends JPanel{
     JPanel resultPanel;
     boolean standButtonHitted = false;
     BlackJackGameGui bjgg;
+    int decided = 0;
     
     /**
      * Costructor of BlackJackGui
@@ -99,12 +100,12 @@ public class BlackJackGui extends JPanel{
         class hit implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                if(!bjgg.getPlayer().isBusted()&&!standButtonHitted){
-                    bjgg.playerHit();
-                    if(bjgg.getPlayer().isBusted()){
-                        resultDisplay(bjgg.getPlayer().busted(),bjgg.result(true));
-                    }
-                    
+                 if(decided == 0){
+                    if(!bjgg.getPlayer().isBusted()&&!standButtonHitted){
+                        bjgg.playerHit();
+                        if(bjgg.getPlayer().isBusted())
+                            resultDisplay(bjgg.getPlayer().busted(),bjgg.result(true));
+                    }  
                 }
             }
         }
@@ -124,16 +125,17 @@ public class BlackJackGui extends JPanel{
         class stand implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent arg0){
-                standButtonHitted=true;
-                if(!bjgg.getPlayer().isBusted()){
-                    bjgg.houseHit();
-                    if(bjgg.getHouse().isBusted()){
-                        resultDisplay(bjgg.getHouse().busted(),bjgg.result(true));
-                    }
-                    else{
-                        resultDisplay(bjgg.result(true),"");
-                    }
-                    
+                
+                 if(decided == 0){
+                    if(!bjgg.getPlayer().isBusted()){
+                        bjgg.houseHit();
+                        if(bjgg.getHouse().isBusted())
+                            resultDisplay(bjgg.getHouse().busted(),bjgg.result(true));
+                        else if (bjgg.getplayervalue() > bjgg.gethousevalue())
+                         resultDisplay("Dealer loses",bjgg.result(true));
+                        else
+                         resultDisplay("Dealer Wins/",bjgg.result(true));
+                    }  
                 }
             }
         }
@@ -183,7 +185,7 @@ public class BlackJackGui extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 resultPanel.removeAll();
                 gamePanel.removeAll();
-                standButtonHitted=false;
+                decided = 0;
                 bjgg.getPlayer().clearHand();
                 bjgg.getHouse().clearHand();
                 gamePanel.revalidate();
@@ -204,6 +206,7 @@ public class BlackJackGui extends JPanel{
         gbc.gridx=0;
         gbc.gridy=1;
         add(resultPanel,gbc);
+        decided = 1;
     }
     
     /**
@@ -250,6 +253,15 @@ public class BlackJackGui extends JPanel{
                 display(house);
                 playerHit();
             }
+        }
+        
+        
+         public int getplayervalue(){
+            return player.getHandValue();
+        }
+        
+        public int gethousevalue(){
+            return house.getHandValue();
         }
         
         /**
