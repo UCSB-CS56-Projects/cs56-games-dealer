@@ -280,16 +280,17 @@ public class GamesDealerPanel extends JPanel{
                 cardOutputPanel.add(playerPromptsPanel, BorderLayout.CENTER);
                 
                 for(int i=1; i<numHands+1;i++){
-                    JTextField playerCardInput=new JTextField(5);
-                    playerInputArray[i-1]=playerCardInput;
-                    String question="Player " +i+"/"+numHands+": How many cards do you want?";
-                    JLabel playerPromptLabel=new JLabel(question, JLabel.RIGHT);
-                    playerPromptLabel.setLabelFor(playerCardInput);
-                    JPanel playerPromptLabelPanel = new JPanel(new BorderLayout());
-                    playerPromptLabelPanel.add(playerPromptLabel,BorderLayout.NORTH);
-                    playerPromptsPanel.add(playerPromptLabelPanel);
+                     JTextField playerCardInput_continue=new JTextField(5);
+                    playerInputArray[i-1]=playerCardInput_continue;
+                    String question_continue="Player " +i+"/"+numHands+": How many cards do you want?";
+                    JLabel playerPromptLabel=new JLabel(question_continue, JLabel.RIGHT);
+                    playerPromptLabel.setLabelFor(playerCardInput_continue);
+                    JPanel playerPromptLabelPanel_continue = new JPanel(new BorderLayout());
+                    playerPromptLabelPanel_continue.add(playerPromptLabel,BorderLayout.NORTH);
+                    playerPromptLabelPanel_continue.add(playerPromptLabelPanel_continue);
+                    
                     JPanel playerTextFieldPanel  = new JPanel(new FlowLayout());
-                    playerTextFieldPanel.add(playerCardInput);
+                    playerTextFieldPanel.add(playerCardInput_continue);
                     playerPromptsPanel.add(playerTextFieldPanel);
                 }
                 cardOutputPanel.add(displayCardsButton, BorderLayout.SOUTH);
