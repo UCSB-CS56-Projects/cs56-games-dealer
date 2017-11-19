@@ -23,8 +23,8 @@ public class BlackJackMain {
         int numOfDecks=Integer.parseInt(stdin.nextLine());
         out.println("How many points do you want to bet? Current you have 10 points.");
         int points_bet = Integer.parseInt(stdin.nextLine());
-        while(points_bet > 10){
-            out.println("You do not have enough points.");
+        while(points_bet > 10 || points_bet < 0){
+            out.println("Invalid Number entered. You have 10 points.");
             out.println("How many points do you want to bet? Current you have 10 points.");
             points_bet = Integer.parseInt(stdin.nextLine());
         }
@@ -51,17 +51,25 @@ public class BlackJackMain {
             bjg.result(points_bet);
             out.println("\nDo you want to continue? (y/n)  " + "Your score = " + bjg.getPlayer().get_score());
             prompt=stdin.nextLine();
-            out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
-            points_bet = Integer.parseInt(stdin.nextLine());
-            while(points_bet > bjg.getPlayer().get_score() && bjg.getPlayer().get_score() > 0){
-                out.println("You do not have enough points.");
+          
+             if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
+                shouldRun=false;
+            
+            else{
+                out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
+                points_bet = Integer.parseInt(stdin.nextLine());
+                
+            while(points_bet > bjg.getPlayer().get_score() && bjg.getPlayer().get_score() > 0 || points_bet < 0){
+                out.println("Invalid Number Entered.");
                 out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
                 points_bet = Integer.parseInt(stdin.nextLine());
             }
-            if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
-                shouldRun=false;
-            bjg.clearHands();
+                if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
+                    shouldRun=false;
+                bjg.clearHands();
+            }
         }while(shouldRun && bjg.getPlayer().get_score() > 0);
+        
         if(bjg.getPlayer().get_score() <= 0)
             out.println("You lost all your points!");
         out.println("Thanks for playing, Bye!");
