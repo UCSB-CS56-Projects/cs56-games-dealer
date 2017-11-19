@@ -51,7 +51,7 @@ public class BlackJackMain {
             bjg.result(points_bet);
             out.println("\nDo you want to continue? (y/n)  " + "Your score = " + bjg.getPlayer().get_score());
             prompt=stdin.nextLine();
-          
+            //terminated the game if user enters n
             if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
                shouldRun=false;
             
@@ -59,17 +59,19 @@ public class BlackJackMain {
                 out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
                 points_bet = Integer.parseInt(stdin.nextLine());
                 
+                //make a while loop to ensure user entered a valid number
                 while(points_bet > bjg.getPlayer().get_score() && bjg.getPlayer().get_score() > 0 || points_bet < 0){
                     out.println("Invalid Number Entered.");
                     out.println("How many points do you want to bet? Current you have "+ bjg.getPlayer().get_score()+  " points.");
                     points_bet = Integer.parseInt(stdin.nextLine());
                 }
+                //terminated the game if user enters n
                 if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')
                     shouldRun=false;
                 bjg.clearHands();
             }
         }while(shouldRun && bjg.getPlayer().get_score() > 0);
-        
+        //if player lose all points, end the game
         if(bjg.getPlayer().get_score() <= 0)
             out.println("You lost all your points!");
         out.println("Thanks for playing, Bye!");
