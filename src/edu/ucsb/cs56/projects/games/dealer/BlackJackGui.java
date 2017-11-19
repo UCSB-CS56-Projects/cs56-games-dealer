@@ -18,7 +18,6 @@ public class BlackJackGui extends JPanel{
     JLabel dealerPoints,playerPoints;
     ArrayList<JLabel> images;
     JPanel resultPanel;
-    boolean standButtonHitted = false;
     BlackJackGameGui bjgg;
     int decided = 0;
     
@@ -101,7 +100,7 @@ public class BlackJackGui extends JPanel{
             @Override
             public void actionPerformed(ActionEvent arg0) {
                  if(decided == 0){
-                    if(!bjgg.getPlayer().isBusted()&&!standButtonHitted){
+                    if(!bjgg.getPlayer().isBusted()){
                         bjgg.playerHit();
                         if(bjgg.getPlayer().isBusted())
                             resultDisplay(bjgg.getPlayer().busted(),bjgg.result(true));
