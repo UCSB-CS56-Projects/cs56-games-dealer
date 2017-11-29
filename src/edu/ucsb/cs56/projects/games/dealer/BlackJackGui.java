@@ -177,7 +177,7 @@ public class BlackJackGui extends JPanel{
                         else{
                             points = points - betpoint;
                             setflase(hitButton,standButton);
-                            resultDisplay("Dealer Wins/",bjgg.result(true));
+                            resultDisplay("Dealer Wins",bjgg.result(true));
                             
                         }   
                 }
@@ -212,17 +212,7 @@ public class BlackJackGui extends JPanel{
         gbc1.gridx=0;
         gbc1.gridy=1;
         resultPanel.add(resultLabel,gbc1);
-        
-        
-        
-        if(!state2.equals("")){
-            resultLabel=new JLabel(state2);
-            gbc1.fill=GridBagConstraints.VERTICAL;
-            gbc1.gridx=0;
-            gbc1.gridy=2;
-            resultPanel.add(resultLabel,gbc1);
-        }
-        
+         
         gbc1.insets=new Insets(20,0,0,0);
         gbc1.gridx=0;
         gbc1.gridy=3;
