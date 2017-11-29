@@ -35,6 +35,8 @@ public class BlackJackGui extends JPanel{
     
     /**
      * Shows the welcom screen and Play button
+     * @param a
+     * Constructor of string a for welcome class
      */
      public void welcome(String a){
         JPanel welcome = new JPanel(new GridBagLayout());

@@ -19,7 +19,8 @@ public class Dealer {
     /**
      Main function to interact with the user,
      shuffle the deck, and print cards
-     
+     @throws IOException
+     tests for case where invalid input is done.
      @param args Command line arguments entered by user
      */
     

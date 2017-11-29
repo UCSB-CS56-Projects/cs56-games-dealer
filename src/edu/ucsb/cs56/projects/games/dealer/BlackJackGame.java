@@ -19,9 +19,11 @@ public class BlackJackGame {
 		d.shuffle();
 	}
 	/**
-	 * Constructor of BlackJackGame with numer of decks and player name.
+	 * 
 	 * @param numOfDecks
+	 * Constructor of BlackJackGame with number of Decks
 	 * @param playerName
+	 * Constructor of BlackJackGame with player's name
 	 */
 	public BlackJackGame(int numOfDecks,String playerName){
 		house=new BlackJackHouse();
@@ -106,6 +108,8 @@ public class BlackJackGame {
 
 	/**
 	 * To determine the player wins or loses or pushes.
+	 * @param points
+	 holds the points held by player
 	 */
 	public void result(int points){
 		if((house.isBusted()||
@@ -125,8 +129,9 @@ public class BlackJackGame {
 	}
 	
 	/**
-	 * To add a pause to make the game look real. 
+	 *  
 	 * @param time
+	 * Adds a pause to make the game look real.
 	 */
 	public void sleep(int time){
 		try {

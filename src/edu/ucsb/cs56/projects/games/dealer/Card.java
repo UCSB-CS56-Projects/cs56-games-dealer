@@ -14,7 +14,10 @@ public class Card implements Comparable<Card>{
     /**
      * Construct a new Card with specific rank and suit.
      * 
-     * @param rank,suit
+     * @param rank
+     * holds string name value of the rank
+     * @param suit
+     * holds string name value of the suit
      */
     public Card(String rank,String suit) {
     	this.rank=rank;
@@ -46,7 +49,7 @@ public class Card implements Comparable<Card>{
     /**
      * Overridden toString function to print this Card.
      *
-     * @returnn Returns the rank of suit of the Card
+     * @return Returns the rank of suit of the Card
      */
 
     @Override
@@ -59,8 +62,8 @@ public class Card implements Comparable<Card>{
 
     /**
      * Determine if this Card and the other Card o are the same.
-     *
      * @param o
+     * holds the status of object o where determines the equality of card values.
      * @return Returns true if two Cards are same, false if not.
      */
     @Override

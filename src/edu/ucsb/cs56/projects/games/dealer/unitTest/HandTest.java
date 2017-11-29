@@ -16,7 +16,8 @@ import edu.ucsb.cs56.projects.games.dealer.Card;
  *
  * @author Kin Kwan Poon
  * @version UCSB, CS56,F16
- * @see Deck,Hand
+ * @see Deck
+ * @see Hand
  */
 public class HandTest{
     private Deck d;

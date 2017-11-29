@@ -16,11 +16,16 @@ public class DealerPanelHelper{
 
     /**
      * Constructor of DealerPanelHelper
-     * @param numHands
-     * @param playerInputArrayInts
-     * @param shuffle
-     * @param deck
-     * @param hands
+     * @param numHands 
+     holds the integer number value of hands held.
+     * @param playerInputArrayInts 
+     holds integer of player's input for array
+     * @param shuffle 
+     holds string value of y/n for shuffle determination
+     * @param deck 
+     holds methods/objects from Deck
+     * @param hands 
+     holds the cards pulled from Deck
      */
 
     public DealerPanelHelper(int numHands, int[] playerInputArrayInts, String shuffle, Deck deck, Hand[] hands){
