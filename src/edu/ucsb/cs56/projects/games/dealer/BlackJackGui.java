@@ -21,7 +21,6 @@ public class BlackJackGui extends JPanel{
     BlackJackGameGui bjgg;
     int decided = 0;
     JTextField playerInput; // Where the user inputs how many hands they want
-    int decided = 0;
     int points = 10;
     int betpoint = 0;
     
