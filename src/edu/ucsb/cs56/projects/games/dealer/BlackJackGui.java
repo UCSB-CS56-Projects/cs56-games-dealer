@@ -278,10 +278,14 @@ public class BlackJackGui extends JPanel{
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             betpoint = Integer.parseInt(playerInput.getText());
-                            if(betpoint > 10 || betpoint < 0){
-                                
+                            if(betpoint < 0){
                                 String promptreenter="Invalid number entered. You currently have " + points +" points";
                                 promptLabel.setText(promptreenter);
+                                return;
+                            }
+                            else if (betpoint > 10){
+                                String promptreenter="Invalid number entered. You currently have " + points +" points";
+                                promptLabel.setText(prompt2);
                                 return;
                             }
                             resultPanel.removeAll();
