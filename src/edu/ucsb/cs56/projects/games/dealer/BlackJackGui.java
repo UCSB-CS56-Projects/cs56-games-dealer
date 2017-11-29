@@ -30,16 +30,17 @@ public class BlackJackGui extends JPanel{
      */
     public BlackJackGui(){
         super();
-        welcome();
+        String a ="Welcome to BlackJack!";
+        welcome(a);
     }
     
     /**
      * Shows the welcom screen and Play button
      */
-     public void welcome(){
+     public void welcome(String a){
         JPanel welcome = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        JLabel welcomePrompt = new JLabel("Welcome to BlackJack!");
+        JLabel welcomePrompt = new JLabel(a);
         welcomePrompt.setFont(new Font("Sans Serif",Font.PLAIN,20));
 
         c.insets=new Insets(250,0,0,0);
@@ -231,22 +232,7 @@ public class BlackJackGui extends JPanel{
         JLabel promptLabel=new JLabel(prompt);
         promptLabel.setLabelFor(playerInput);
         resultPanel.add(promptLabel,gbc1);
-        /*class New_Game implements ActionListener{
-               @Override
-               public void actionPerformed(ActionEvent e) {
-                    betpoint = Integer.parseInt(playerInput.getText());
-                         if(betpoint < 0 || betpoint > 10){
-                              String promptreenter="Invalid number entered. You currently have " + points +" points";
-                              promptLabel.setText(promptreenter);
-                              return;
-                          }
-                          resultPanel.removeAll();
-                          resultPanel.repaint();
-                          revalidate();
-                          game();
-                      }
-                  }
-        */
+         
         /**
          * The inner class of the continue button
          */
@@ -264,40 +250,7 @@ public class BlackJackGui extends JPanel{
                     gamePanel.repaint();
                     points = 10;
                     
-                    
-                    GridBagConstraints c = new GridBagConstraints();
-                    JLabel welcomePrompt = new JLabel("You lost all of your points!");
-                    welcomePrompt.setFont(new Font("Sans Serif",Font.PLAIN,20));
-                    
-                    c.insets=new Insets(250,0,0,0);
-                    c.gridx=1;
-                    c.gridy=1;
-                    resultPanel.add(welcomePrompt,c);
-                    
-                    c.insets=new Insets(20,0,0,0);
-                    c.gridx=1;
-                    c.gridy=2;
-                    String prompt="How many points do you want to bet? You currently have " + points +" points";
-                    // Label to display prompt for user to input how many hands they want.
-                    JLabel promptLabel=new JLabel(prompt);
-                    promptLabel.setLabelFor(playerInput);
-                    resultPanel.add(promptLabel,c);
-                    
-                    
-                    c.insets=new Insets(0,0,0,0);
-                    c.gridx=1;
-                    c.gridy=3;
-                    playerInput=new JTextField(5);
-                    JPanel inputPanel = new JPanel(new FlowLayout());
-                    inputPanel.add(playerInput);
-                    resultPanel.add(inputPanel,c);
-                
-                    JButton playButton = new JButton("New Game");
-                    playButton.addActionListener(new New_Game());
-                    c.insets=new Insets(30,0,0,0);
-                    c.gridx=1;
-                    c.gridy=4;
-                    resultPanel.add(playButton,c);
+                    welcome("You lost all of your points!");
                     return;
                 }
                
