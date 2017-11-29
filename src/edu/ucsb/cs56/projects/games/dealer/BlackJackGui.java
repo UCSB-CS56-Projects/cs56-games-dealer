@@ -132,8 +132,7 @@ public class BlackJackGui extends JPanel{
                         bjgg.playerHit();
                       if(bjgg.getPlayer().isBusted()){
                             points = points - betpoint;
-                            hitButton.setEnabled(false);
-                            standButton.setEnabled(false);
+                            setflase(hitButton,standButton);
                             resultDisplay(bjgg.getPlayer().busted(),bjgg.result(true));
                       }
                     }  
@@ -166,14 +165,12 @@ public class BlackJackGui extends JPanel{
                       }
                         else if (bjgg.getplayervalue() > bjgg.gethousevalue()){
                             points = points + betpoint;
-                            standButton.setEnabled(false);
-                            hitButton.setEnabled(false);
+                            setflase(hitButton,standButton);
                             resultDisplay("Dealer loses",bjgg.result(true));
                         }
                         else{
                             points = points - betpoint;
-                            standButton.setEnabled(false);
-                            hitButton.setEnabled(false);
+                            setflase(hitButton,standButton);
                             resultDisplay("Dealer Wins/",bjgg.result(true));
                             
                         }   
@@ -365,6 +362,11 @@ public class BlackJackGui extends JPanel{
             gbc.gridx=0;
             gbc.gridy=0;
         }
+    }
+    
+    public void setflase(JButton a,JButton b){
+        a.setEnabled(false);
+        b.setEnabled(false);
     }
     
     /**
