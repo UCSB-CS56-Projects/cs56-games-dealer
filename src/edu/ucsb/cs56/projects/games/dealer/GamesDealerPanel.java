@@ -234,29 +234,28 @@ public class GamesDealerPanel extends JPanel{
         playerInputPanelnumHands.add(submitButton);
         
         
-        class Continue implements ActionListener{
+         class Continue implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 promptLabel.setText(prompt);
                 cardOutputPanel.removeAll();
                 shuffleBoxPanel.remove(continueButton);
                 
-                int numHands;
+                int user_input_hand;
                 shuffledAns = (String) shuffleBox.getSelectedItem();
-                numHands = Integer.parseInt(playerInput.getText());
+                user_input_hand = Integer.parseInt(playerInput.getText());
                 //no need to reset the number of hand when you continue the game
                 System.out.println(shuffledAns);
-                playerInputArray = new JTextField[numHands];
+                playerInputArray = new JTextField[user_input_hand];
                 
-                GridLayout grid = new GridLayout(numHands,1,1,1);
+                GridLayout grid = new GridLayout(user_input_hand,1,1,1);
                 playerPromptsPanel = new JPanel(grid);
                 
                 cardOutputPanel.add(playerPromptsPanel, BorderLayout.CENTER);
                 
-                for(int i=1; i<numHands+1;i++){
-                    
+                for(int i=1; i<user_input_hand+1;i++){
                     JTextField playerCardInput=new JTextField(5);
                     playerInputArray[i-1]=playerCardInput;
-                    String question="Player " + i + "/" + numHands+": How many cards do you want?";
+                    String question="Player " + i + "/" + user_input_hand+": How many cards do you want? You have " + (52 - total_count) + " cards left";
                     JLabel playerPromptLabel=new JLabel(question, JLabel.RIGHT);
                     
                     playerPromptLabel.setLabelFor(playerCardInput);
@@ -264,7 +263,7 @@ public class GamesDealerPanel extends JPanel{
                     playerPromptLabelPanel.add(playerPromptLabel,BorderLayout.NORTH);
                     playerPromptsPanel.add(playerPromptLabelPanel);
                     
-                    JPanel playerTextFieldPanel  = new JPanel(new FlowLayout());
+                    JPanel playerTextFieldPanel  = new JPanel();
                     playerTextFieldPanel.add(playerCardInput);
                     playerPromptsPanel.add(playerTextFieldPanel);
                 }
