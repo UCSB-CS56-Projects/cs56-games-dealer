@@ -245,7 +245,7 @@ public class BlackJackGui extends JPanel{
                 }
                
                 betpoint = Integer.parseInt(playerInput.getText());
-                settext(promptLabel,points, betpoint, resultPanel, gamePanel);
+                settext(promptLabel,points, betpoint, resultPanel);
                
             }
         }
@@ -300,7 +300,7 @@ public class BlackJackGui extends JPanel{
         b.setEnabled(false);
     }
     
-    public void settext(JLabel promp, int point, int bet, JPanel a, JPanel b){
+    public void settext(JLabel promp, int point, int bet, JPanel a){
         if(bet < 0 || bet > point){
             System.out.println("hehe");
             String promptreenter="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
@@ -309,12 +309,12 @@ public class BlackJackGui extends JPanel{
         }
         else{
             a.removeAll();
-            b.removeAll();
+            gamePanel.removeAll();
             decided = 0;
             bjgg.getPlayer().clearHand();
             bjgg.getHouse().clearHand();
-            b.revalidate();
-            b.repaint();
+            gamePanel.revalidate();
+            gamePanel.repaint();
             game();
         }
     }
