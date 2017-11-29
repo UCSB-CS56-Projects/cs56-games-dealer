@@ -300,8 +300,7 @@ public class BlackJackGui extends JPanel{
                     resultPanel.add(playButton,c);
                     return;
                 }
-                
-                else{
+               
                 betpoint = Integer.parseInt(playerInput.getText());
                 if(betpoint < 0 || betpoint > points){
                     String prompt2="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
@@ -316,7 +315,7 @@ public class BlackJackGui extends JPanel{
                 gamePanel.revalidate();
                 gamePanel.repaint();
                 game();
-                }
+               
             }
         }
         
