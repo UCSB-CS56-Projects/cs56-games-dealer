@@ -231,7 +231,7 @@ public class BlackJackGui extends JPanel{
         JLabel promptLabel=new JLabel(prompt);
         promptLabel.setLabelFor(playerInput);
         resultPanel.add(promptLabel,gbc1);
-        class New_Game implements ActionListener{
+        /*class New_Game implements ActionListener{
                @Override
                public void actionPerformed(ActionEvent e) {
                     betpoint = Integer.parseInt(playerInput.getText());
@@ -246,7 +246,7 @@ public class BlackJackGui extends JPanel{
                           game();
                       }
                   }
-        
+        */
         /**
          * The inner class of the continue button
          */
