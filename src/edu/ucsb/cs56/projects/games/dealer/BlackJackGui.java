@@ -226,6 +226,26 @@ public class BlackJackGui extends JPanel{
         JLabel promptLabel=new JLabel(prompt);
         promptLabel.setLabelFor(playerInput);
         resultPanel.add(promptLabel,gbc1);
+        class New_Game implements ActionListener{
+               @Override
+               public void actionPerformed(ActionEvent e) {
+                    betpoint = Integer.parseInt(playerInput.getText());
+                         if(betpoint < 0){
+                              String promptreenter="Invalid number entered. You currently have " + points +" points";
+                              promptLabel.setText(promptreenter);
+                              return;
+                          }
+                          else if (betpoint > 10){
+                              String promptreenter="Invalid number entered. You currently have " + points +" points";
+                              promptLabel.setText(prompt2);
+                              return;
+                          }
+                          resultPanel.removeAll();
+                          resultPanel.repaint();
+                          revalidate();
+                          game();
+                      }
+                  }
         
         /**
          * The inner class of the continue button
@@ -270,27 +290,6 @@ public class BlackJackGui extends JPanel{
                     JPanel inputPanel = new JPanel(new FlowLayout());
                     inputPanel.add(playerInput);
                     resultPanel.add(inputPanel,c);
-            
-                    class New_Game implements ActionListener{
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            betpoint = Integer.parseInt(playerInput.getText());
-                            if(betpoint < 0){
-                                String promptreenter="Invalid number entered. You currently have " + points +" points";
-                                promptLabel.setText(promptreenter);
-                                return;
-                            }
-                            else if (betpoint > 10){
-                                String promptreenter="Invalid number entered. You currently have " + points +" points";
-                                promptLabel.setText(prompt2);
-                                return;
-                            }
-                            resultPanel.removeAll();
-                            resultPanel.repaint();
-                            revalidate();
-                            game();
-                        }
-                    }
                 
                     JButton playButton = new JButton("New Game");
                     playButton.addActionListener(new New_Game());
