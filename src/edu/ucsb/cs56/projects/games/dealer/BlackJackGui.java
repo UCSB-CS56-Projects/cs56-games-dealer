@@ -29,8 +29,8 @@ public class BlackJackGui extends JPanel{
      */
     public BlackJackGui(){
         super();
-        String a ="Welcome to BlackJack!";
-        welcome(a);
+        String message ="Welcome to BlackJack!";
+        welcome(message);
     }
     
     /**
@@ -38,10 +38,10 @@ public class BlackJackGui extends JPanel{
      * @param a
      * Constructor of string a for welcome class
      */
-     public void welcome(String a){
+     public void welcome(String message){
         JPanel welcome = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        JLabel welcomePrompt = new JLabel(a);
+        JLabel welcomePrompt = new JLabel(message);
         welcomePrompt.setFont(new Font("Sans Serif",Font.PLAIN,20));
 
         c.insets=new Insets(250,0,0,0);
