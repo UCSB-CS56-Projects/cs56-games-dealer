@@ -6,7 +6,6 @@ mainClassName = "edu.ucsb.cs56.projects.games.dealer.Main"
 
 defaultTasks 'clean', 'run'
 
-// tag::repositories[]
 repositories { mavenCentral() }
 
 run {
@@ -24,7 +23,19 @@ javadoc {
 }
 
 
-sourceSets.main.java.srcDirs = ['src']
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+    test {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
