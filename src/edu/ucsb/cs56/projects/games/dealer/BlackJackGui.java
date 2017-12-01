@@ -211,13 +211,11 @@ public class BlackJackGui extends JPanel{
                     points = points + betpoint;
                     DisableButtons();
                     ResultDisplay("Dealer loses",game.result(true));
+                    return;
                 }
-                else{
                     points = points - betpoint;
                     DisableButtons();
                     ResultDisplay("Dealer Wins",game.result(true));
-                    
-                }
             }
         }
     }
