@@ -14,11 +14,13 @@ import javax.swing.*;
 
 public class BlackJackGui extends JPanel{
     JPanel gamePanel;
-    GridBagConstraints gbc;
+    GridBagConstraints gridbagconstraints;
     JLabel dealerPoints,playerPoints;
     ArrayList<JLabel> images;
     JPanel resultPanel;
-    BlackJackGameGui bjgg;
+    BlackJackGameGui game;
+    JButton hitButton;
+    JButton standButton;
     int decided = 0;
     JTextField playerInput; // Where the user inputs how many hands they want
     int points = 10;
@@ -30,167 +32,167 @@ public class BlackJackGui extends JPanel{
     public BlackJackGui(){
         super();
         String message ="Welcome to BlackJack!";
-        welcome(message);
+        Start_Page(message); //message will show in the center of the start page
     }
     
     /**
      * Shows the welcom screen and Play button
-     * @param a
+     * @param message
      * Constructor of string a for welcome class
      */
-     public void welcome(String message){
-        JPanel welcome = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+     public void Start_Page(String message){
+        JPanel Start_Page = new JPanel(new GridBagLayout());
+        GridBagConstraints Grid = new GridBagConstraints();
         JLabel welcomePrompt = new JLabel(message);
         welcomePrompt.setFont(new Font("Sans Serif",Font.PLAIN,20));
 
-        c.insets=new Insets(250,0,0,0);
-        c.gridx=1;
-        c.gridy=1;
-        welcome.add(welcomePrompt,c);
+        Grid.insets=new Insets(250,0,0,0);
+        Grid.gridx=1;
+        Grid.gridy=1;
+        Start_Page.add(welcomePrompt,Grid);
         
-        c.insets=new Insets(20,0,0,0);
-        c.gridx=1;
-        c.gridy=2;
-        String prompt="How many points do you want to bet? You currently have " + points +" points";
+        Grid.insets=new Insets(20,0,0,0);
+        Grid.gridx=1;
+        Grid.gridy=2;
+        String prompt_bet="How many points do you want to bet? You currently have " + points +" points";
         // Label to display prompt for user to input how many hands they want.
-        JLabel promptLabel=new JLabel(prompt);
+        JLabel promptLabel=new JLabel(prompt_bet);
         promptLabel.setLabelFor(playerInput);
-        welcome.add(promptLabel,c);
+        Start_Page.add(promptLabel,Grid);
          
-        c.insets=new Insets(0,0,0,0);
-        c.gridx=1;
-        c.gridy=3;
+        Grid.insets=new Insets(0,0,0,0);
+        Grid.gridx=1;
+        Grid.gridy=3;
         playerInput=new JTextField(5);
         JPanel inputPanel = new JPanel(new FlowLayout());
         inputPanel.add(playerInput);
-        welcome.add(inputPanel,c);
+        Start_Page.add(inputPanel,Grid);
         /**
          * A inner class for play button
          */
-        class play implements ActionListener{
+        class Play implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 betpoint = Integer.parseInt(playerInput.getText());
                 if(betpoint < 0){    
-                    String prompt2="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
-                    promptLabel.setText(prompt2);
+                    String prompt_invalid="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
+                    promptLabel.setText(prompt_invalid);
                     return;
                 }
                 else if(betpoint > 10){
-                    String prompt2="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
-                    promptLabel.setText(prompt2);
+                    String prompt_invalid="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
+                    promptLabel.setText(prompt_invalid);
                     return;
                 }
                 System.out.println(betpoint);
-                welcome.removeAll();
-                welcome.repaint();
+                Start_Page.removeAll();
+                Start_Page.repaint();
                 revalidate();
-                game();
+                Game();
+                EnableButtons();
             }
         }
-        JButton playButton = new JButton("Play");
-        playButton.addActionListener(new play());
-        c.insets=new Insets(10,0,0,0);
-        c.gridx=1;
-        c.gridy=4;
-        welcome.add(playButton,c);  
-        add(welcome);
+        JButton PlayButton = new JButton("Play");
+        PlayButton.addActionListener(new Play());
+        Grid.insets=new Insets(10,0,0,0);
+        Grid.gridx=1;
+        Grid.gridy=4;
+        Start_Page.add(PlayButton,Grid);
+        add(Start_Page);
     }
     
     
     /**
      * The actual game play in GUI
      */
-    public void game(){
+    public void Game(){
         gamePanel = new JPanel(new GridBagLayout());
-        gbc = new GridBagConstraints();
+        gridbagconstraints = new GridBagConstraints();
         images = new ArrayList<JLabel>();
         JLabel dealerLabel= new JLabel("Dealer: ");
         JLabel playerLabel = new JLabel("Player: ");
         gbcConfig("dealer",0,0);
-        gamePanel.add(dealerLabel,gbc);
+        gamePanel.add(dealerLabel,gridbagconstraints);
         
         gbcConfig("player",0,0);
-        gamePanel.add(playerLabel, gbc);
-        gbc.gridx=0;
-        gbc.gridy=0;
-        add(gamePanel,gbc);
+        gamePanel.add(playerLabel, gridbagconstraints);
+        gridbagconstraints.gridx=0;
+        gridbagconstraints.gridy=0;
+        add(gamePanel,gridbagconstraints);
         revalidate();
         repaint();
         
-        bjgg=new BlackJackGameGui();
+        game=new BlackJackGameGui();
         dealerPoints= new JLabel(Integer.toString(
-                                                  bjgg.getHouse().getHandValue()));
+                                                  game.getHouse().getHandValue()));
         playerPoints = new JLabel(Integer.toString(
-                                                   bjgg.getPlayer().getHandValue()));
-        bjgg.start();
-        JButton hitButton = new JButton("Hit");
-        JButton standButton = new JButton("Stand");
+                                                   game.getPlayer().getHandValue()));
+        game.start();
+        hitButton = new JButton("Hit");
+        standButton = new JButton("Stand");
         
         
         /**
          * The inner class for hit button
          */
-        class hit implements ActionListener{
+        class Hit implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                  if(!bjgg.getPlayer().isBusted() && decided == 0){
-                        bjgg.playerHit();
-                      if(bjgg.getPlayer().isBusted()){
+                  if(!game.getPlayer().isBusted() && decided == 0){
+                        game.playerHit();
+                      if(game.getPlayer().isBusted()){
                             points = points - betpoint;
-                            setflase(hitButton,standButton);
-                            resultDisplay(bjgg.getPlayer().busted(),bjgg.result(true));
+                            DisableButtons();
+                            ResultDisplay(game.getPlayer().busted(),game.result(true));
                       }
                     }  
                 
             }
         }
         
-        hitButton.addActionListener(new hit());
-        gbc.anchor=GridBagConstraints.LAST_LINE_START;
-        gbc.insets=new Insets(0,0,0,10);
-        gbc.gridx=0;
-        gbc.gridy=3;
-        gbc.gridwidth=1;
-        gamePanel.add(hitButton,gbc);
+        hitButton.addActionListener(new Hit());
+        gridbagconstraints.anchor=GridBagConstraints.LAST_LINE_START;
+        gridbagconstraints.insets=new Insets(0,0,0,10);
+        gridbagconstraints.gridx=0;
+        gridbagconstraints.gridy=3;
+        gridbagconstraints.gridwidth=1;
+        gamePanel.add(hitButton,gridbagconstraints);
         
         /**
          * The inner class of stand button
          */
-        class stand implements ActionListener{
+        class Stand implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent arg0){
                 
-                  if(!bjgg.getPlayer().isBusted() && decided == 0){
-                        bjgg.houseHit();
-                      if(bjgg.getHouse().isBusted()){
+                  if(!game.getPlayer().isBusted() && decided == 0){
+                        game.houseHit();
+                      if(game.getHouse().isBusted()){
                           points = points + betpoint;
-                          standButton.setEnabled(false);
-                          hitButton.setEnabled(false);
-                            resultDisplay(bjgg.getHouse().busted(),bjgg.result(true));
+                          DisableButtons();
+                          ResultDisplay(game.getHouse().busted(),game.result(true));
                       }
-                        else if (bjgg.getplayervalue() > bjgg.gethousevalue()){
+                        else if (game.getplayervalue() > game.gethousevalue()){
                             points = points + betpoint;
-                            setflase(hitButton,standButton);
-                            resultDisplay("Dealer loses",bjgg.result(true));
+                            DisableButtons();
+                            ResultDisplay("Dealer loses",game.result(true));
                         }
                         else{
                             points = points - betpoint;
-                            setflase(hitButton,standButton);
-                            resultDisplay("Dealer Wins",bjgg.result(true));
+                            DisableButtons();
+                            ResultDisplay("Dealer Wins",game.result(true));
                             
                         }   
                 }
             }
         }
         
-        standButton.addActionListener(new stand());
-        gbc.anchor=GridBagConstraints.LAST_LINE_END;
-        gbc.gridx=0;
-        gbc.gridy=4;
-        gbc.gridwidth=1;
-        gamePanel.add(standButton,gbc);
+        standButton.addActionListener(new Stand());
+        gridbagconstraints.anchor=GridBagConstraints.LAST_LINE_END;
+        gridbagconstraints.gridx=0;
+        gridbagconstraints.gridy=4;
+        gridbagconstraints.gridwidth=1;
+        gamePanel.add(standButton,gridbagconstraints);
         
     }
     
@@ -205,24 +207,24 @@ public class BlackJackGui extends JPanel{
      * @param state1 the win/lose state of player, or a busted state
      * @param state2 the win/lose  state of player
      */
-     public void resultDisplay(String state1,String state2){
-        GridBagConstraints gbc1 = new GridBagConstraints();
+     public void ResultDisplay(String state1,String state2){
+        GridBagConstraints resultgrid = new GridBagConstraints();
         resultPanel = new JPanel(new GridBagLayout());
         JLabel resultLabel=new JLabel(state1);
-        gbc1.fill=GridBagConstraints.VERTICAL;
-        gbc1.gridx=0;
-        gbc1.gridy=1;
-        resultPanel.add(resultLabel,gbc1);
+        resultgrid.fill=GridBagConstraints.VERTICAL;
+        resultgrid.gridx=0;
+        resultgrid.gridy=1;
+        resultPanel.add(resultLabel,resultgrid);
          
-        gbc1.insets=new Insets(20,0,0,0);
-        gbc1.gridx=0;
-        gbc1.gridy=3;
+        resultgrid.insets=new Insets(20,0,0,0);
+        resultgrid.gridx=0;
+        resultgrid.gridy=3;
         
-        String prompt="How many points do you want to bet? You currently have " + points+" points";
+        String prompt_bet="How many points do you want to bet? You currently have " + points + " points";
         // Label to display prompt for user to input how many hands they want.
-        JLabel promptLabel=new JLabel(prompt);
+        JLabel promptLabel=new JLabel(prompt_bet);
         promptLabel.setLabelFor(playerInput);
-        resultPanel.add(promptLabel,gbc1);
+        resultPanel.add(promptLabel,resultgrid);
          
         /**
          * The inner class of the continue button
@@ -235,43 +237,44 @@ public class BlackJackGui extends JPanel{
                     resultPanel.removeAll();
                     gamePanel.removeAll();
                     decided = 0;
-                    bjgg.getPlayer().clearHand();
-                    bjgg.getHouse().clearHand();
+                    game.getPlayer().clearHand();
+                    game.getHouse().clearHand();
                     gamePanel.revalidate();
                     gamePanel.repaint();
                     points = 10;
-                    
-                    welcome("You lost all of your points!");
+                    //Start a new game with the message "you lost all of your points!"
+                    //if player try to bet any points when dont have any left
+                    String message = "You lost all of your points!";
+                    Start_Page(message);
                     return;
                 }
                
                 betpoint = Integer.parseInt(playerInput.getText());
-                settext(promptLabel,points, betpoint, resultPanel);
-               
+                Settext(promptLabel,points, betpoint);
             }
         }
         
-        gbc1.insets=new Insets(0,0,0,0);
-        gbc1.gridx=0;
-        gbc1.gridy=4;
+        resultgrid.insets=new Insets(0,0,0,0);
+        resultgrid.gridx=0;
+        resultgrid.gridy=4;
         playerInput=new JTextField(5);
         JPanel inputPanel = new JPanel(new FlowLayout());
         inputPanel.add(playerInput);
-        resultPanel.add(inputPanel,gbc1);
+        resultPanel.add(inputPanel,resultgrid);
         
         
         JButton continueButton = new JButton("Continue");
         continueButton.addActionListener(new Continue());
-        gbc1.fill=GridBagConstraints.VERTICAL;
-        gbc1.insets=new Insets(0,0,0,0);
-        gbc1.gridx=0;
-        gbc1.gridy=5;
-        resultPanel.add(continueButton,gbc1);
+        resultgrid.fill=GridBagConstraints.VERTICAL;
+        resultgrid.insets=new Insets(0,0,0,0);
+        resultgrid.gridx=0;
+        resultgrid.gridy=5;
+        resultPanel.add(continueButton,resultgrid);
         
-        gbc.anchor=GridBagConstraints.LINE_START;
-        gbc.gridx=0;
-        gbc.gridy=1;
-        add(resultPanel,gbc);
+        gridbagconstraints.anchor=GridBagConstraints.LINE_START;
+        gridbagconstraints.gridx=0;
+        gridbagconstraints.gridy=1;
+        add(resultPanel,gridbagconstraints);
         decided = 1;
     }
     
@@ -283,40 +286,44 @@ public class BlackJackGui extends JPanel{
      */
     public void gbcConfig(String hand, int right , int top){
         if(hand.equals("dealer")){
-            gbc.fill=GridBagConstraints.HORIZONTAL;
-            gbc.anchor=GridBagConstraints.FIRST_LINE_START;
-            gbc.insets=new Insets(50+top,0,0,600-right);
-            gbc.gridx=0;
-            gbc.gridy=0;
+            gridbagconstraints.fill=GridBagConstraints.HORIZONTAL;
+            gridbagconstraints.anchor=GridBagConstraints.FIRST_LINE_START;
+            gridbagconstraints.insets=new Insets(50+top,0,0,600-right);
+            gridbagconstraints.gridx=0;
+            gridbagconstraints.gridy=0;
         }else if(hand.equals("player")){
-            gbc.anchor= GridBagConstraints.LAST_LINE_START;
-            gbc.insets=new Insets(250,0,top,600-right);
-            gbc.gridx=0;
-            gbc.gridy=0;
+            gridbagconstraints.anchor= GridBagConstraints.LAST_LINE_START;
+            gridbagconstraints.insets=new Insets(250,0,top,600-right);
+            gridbagconstraints.gridx=0;
+            gridbagconstraints.gridy=0;
         }
     }
     
-    public void setflase(JButton a,JButton b){
-        a.setEnabled(false);
-        b.setEnabled(false);
+    public void DisableButtons(){
+        hitButton.setEnabled(false);
+        standButton.setEnabled(false);
     }
     
-    public void settext(JLabel promp, int point, int bet, JPanel a){
+    public void EnableButtons(){
+        hitButton.setEnabled(true);
+        standButton.setEnabled(true);
+    }
+    
+    public void Settext(JLabel promp, int point, int bet){
         if(bet < 0 || bet > point){
-            System.out.println("hehe");
             String promptreenter="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
             promp.setText(promptreenter);
-            
         }
         else{
-            a.removeAll();
+            resultPanel.removeAll();
             gamePanel.removeAll();
             decided = 0;
-            bjgg.getPlayer().clearHand();
-            bjgg.getHouse().clearHand();
+            game.getPlayer().clearHand();
+            game.getHouse().clearHand();
             gamePanel.revalidate();
             gamePanel.repaint();
-            game();
+            Game();
+            EnableButtons();
         }
     }
     
@@ -409,16 +416,16 @@ public class BlackJackGui extends JPanel{
                 images.add(label);
                 if(h==house){
                     gbcConfig("dealer",i,0);
-                    gamePanel.add(images.get(images.size()-1),gbc);
+                    gamePanel.add(images.get(images.size()-1),gridbagconstraints);
                     gbcConfig("dealer",0,20);
                     pointsUpdate();
-                    gamePanel.add(dealerPoints,gbc);
+                    gamePanel.add(dealerPoints,gridbagconstraints);
                 }else if (h==player){
                     gbcConfig("player",i,0);
-                    gamePanel.add(images.get(images.size()-1),gbc);
+                    gamePanel.add(images.get(images.size()-1),gridbagconstraints);
                     gbcConfig("player",0,20);
                     pointsUpdate();
-                    gamePanel.add(playerPoints,gbc);
+                    gamePanel.add(playerPoints,gridbagconstraints);
                 }
                 gamePanel.revalidate();
                 gamePanel.repaint();
