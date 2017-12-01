@@ -73,7 +73,9 @@ public class BlackJackGui extends JPanel{
         class Play implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
+                //get player input for the betpoint
                 betpoint = Integer.parseInt(playerInput.getText());
+                //if player enters a invalid number, show prompt ask for another input
                 if(betpoint < 0){    
                     String prompt_invalid="Invalid number entered. How many points do you want to bet? You currently have " + points +" points";
                     promptLabel.setText(prompt_invalid);
@@ -84,11 +86,12 @@ public class BlackJackGui extends JPanel{
                     promptLabel.setText(prompt_invalid);
                     return;
                 }
-                System.out.println(betpoint);
+                //clear the page and enter the game
                 Start_Page.removeAll();
                 Start_Page.repaint();
                 revalidate();
                 Game();
+                //enable the hit and stand buttons
                 EnableButtons();
             }
         }
@@ -186,7 +189,7 @@ public class BlackJackGui extends JPanel{
                 }
             }
         }
-        
+        //add stand button to the panel
         standButton.addActionListener(new Stand());
         gridbagconstraints.anchor=GridBagConstraints.LAST_LINE_END;
         gridbagconstraints.gridx=0;
@@ -232,8 +235,10 @@ public class BlackJackGui extends JPanel{
         class Continue implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 betpoint = Integer.parseInt(playerInput.getText());
-                
+                //check if player still have points to bet
                 if (points == 0 && betpoint != 0){
+                    //Start a new game with the message "you lost all of your points!"
+                    //if player try to bet any points when dont have any left
                     resultPanel.removeAll();
                     gamePanel.removeAll();
                     decided = 0;
@@ -242,8 +247,6 @@ public class BlackJackGui extends JPanel{
                     gamePanel.revalidate();
                     gamePanel.repaint();
                     points = 10;
-                    //Start a new game with the message "you lost all of your points!"
-                    //if player try to bet any points when dont have any left
                     String message = "You lost all of your points!";
                     Start_Page(message);
                     return;
@@ -253,7 +256,7 @@ public class BlackJackGui extends JPanel{
                 Settext(promptLabel,points, betpoint);
             }
         }
-        
+        //add input field to the panel
         resultgrid.insets=new Insets(0,0,0,0);
         resultgrid.gridx=0;
         resultgrid.gridy=4;
@@ -262,7 +265,7 @@ public class BlackJackGui extends JPanel{
         inputPanel.add(playerInput);
         resultPanel.add(inputPanel,resultgrid);
         
-        
+        //add continue button to the panel
         JButton continueButton = new JButton("Continue");
         continueButton.addActionListener(new Continue());
         resultgrid.fill=GridBagConstraints.VERTICAL;
@@ -299,11 +302,13 @@ public class BlackJackGui extends JPanel{
         }
     }
     
+    //disable hit and stand buttons
     public void DisableButtons(){
         hitButton.setEnabled(false);
         standButton.setEnabled(false);
     }
     
+    //enable hit and stand buttons
     public void EnableButtons(){
         hitButton.setEnabled(true);
         standButton.setEnabled(true);
