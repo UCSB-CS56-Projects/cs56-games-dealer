@@ -38,6 +38,7 @@ public class Deck {
      * Deck Constructor to make numOfDecks Decks into one Deck 
      * for games that require more than one deck. 
      * @param numOfDecks
+     holds integer value of numbers of decks at play
      */
     public Deck(int numOfDecks) {
     	deck = new ArrayList<Card>();

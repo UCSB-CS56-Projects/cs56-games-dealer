@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+
+mainClassName = "edu.ucsb.cs56.projects.games.dealer.Main"
+
+defaultTasks 'clean', 'run'
+
+repositories { mavenCentral() }
+
+run {
+standardInput = System.in
+}
+
+task runGUI(dependsOn: jar, type: JavaExec){
+	main = "edu.ucsb.cs56.projects.games.dealer.MainGui"
+	classpath = sourceSets.main.runtimeClasspath
+	description = "Runs the GUI version of this project"
+}
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+    test {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    testCompile 'junit:junit:4.12'
+    compile 'junit:junit:4.12'
+}

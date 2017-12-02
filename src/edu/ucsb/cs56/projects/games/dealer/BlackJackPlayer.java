@@ -9,10 +9,12 @@ import java.util.ArrayList;
  */
 public class BlackJackPlayer extends Hand {
 	private String name;
+     private int score = 10;
 	
 	/**
 	 * Constructor of BlackJackPlayer
 	 * @param name
+	 * stores the string value entered for name
 	 */
 	public BlackJackPlayer(String name){
 		super();
@@ -26,6 +28,15 @@ public class BlackJackPlayer extends Hand {
 	public String getName(){
 		return name;
 	}
+    public int get_score(){
+        return score;
+    }
+    public void lose_score(int point){
+        score = score - point;
+    }
+    public void gain_score(int point){
+        score = score + point;
+    }
 	
 	/**
 	 * 
@@ -63,6 +74,7 @@ public class BlackJackPlayer extends Hand {
  	
  	/**
  	 * The action will do if busted.
+	 * @return if the player busts.
  	 */
  	public String busted(){
  		System.out.println(name+" busted.");
@@ -70,6 +82,7 @@ public class BlackJackPlayer extends Hand {
  	}
  	/**
  	 * The action will do if win.
+	 * @return if the player wins.
  	 */
  	public String win(){
  		System.out.println(name+" wins.");
@@ -77,6 +90,7 @@ public class BlackJackPlayer extends Hand {
  	}
  	/**
  	 * The action will do if lose.
+	 * @return if the player loses.
  	 */
  	public String lose(){
  		System.out.println(name+" loses.");
@@ -84,6 +98,7 @@ public class BlackJackPlayer extends Hand {
  	}
  	/**
  	 * The action will do if push.
+	 * @return if the player pushes.
  	 */
  	public String push(){
  		System.out.println(name+" pushes.");
