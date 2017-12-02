@@ -15,6 +15,7 @@ standardInput = System.in
 task runGUI(dependsOn: jar, type: JavaExec){
 	main = "edu.ucsb.cs56.projects.games.dealer.MainGui"
 	classpath = sourceSets.main.runtimeClasspath
+	description = "Runs the GUI version of this project"
 }
 
 javadoc {
