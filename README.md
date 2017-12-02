@@ -20,7 +20,7 @@ What is this?
 This is an interface with classes such as card, deck, and hand that can be used to make card games. 
 Dealer itself is an application to shuffle a deck of 52 playing cards and deal them to the user using command lines. 
 
-JavaDoc: https://jamesw121.github.io/cs56-games-dealer/javadoc/
+JavaDoc: https://ucsb-cs56-projects.github.io/cs56-games-dealer/javadoc/
 
 How To Run
 ==========
