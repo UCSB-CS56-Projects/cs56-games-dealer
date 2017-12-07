@@ -134,5 +134,17 @@ You will be given two buttons, "Blackjack" and "Dealer". Each one will lead to c
 
 F16 final remarks:
 ===================
-The dealer interface has been updated to include card images and the game Blackjack has been created. Both console and GUI versions exist which can be run with 'ant run' and 'ant runGUI'. The code for the main menu is located in 'MainGui.java' and here additional games that are created can be added. One thing that can be improved for the Blackjack game is that when the player wins or loses, the continue button pushes the other GUI components to the left. This can be fixed so that they remain stationary instead. Also, the card class can be refactored. At the moment there are methods in the card class that are used specifically for Blackjack such as the rankValue method. These methods can be refactored into the Blackjack game so that Card remains generalized for other games.   
+The dealer interface has been updated to include card images and the game Blackjack has been created. Both console and GUI versions exist which can be run with 'ant run' and 'ant runGUI'. The code for the main menu is located in 'MainGui.java' and here additional games that are created can be added. One thing that can be improved for the Blackjack game is that when the player wins or loses, the continue button pushes the other GUI components to the left. This can be fixed so that they remain stationary instead. Also, the card class can be refactored. At the moment there are methods in the card class that are used specifically for Blackjack such as the rankValue method. These methods can be refactored into the Blackjack game so that Card remains generalized for other games. 
+
+F17 final remarks:
+===================
+This project is now able to run with Gradle. Console could be run with 'gradle run' and GUI version could be run with 'gradle runGUI'. 
+
+New features have been added:
+1. A betting system is added to the Blackjack game for both console and GUI version. Players will be asked to bet points on each game, and game will end if player lose all points.
+2. The program is now able to handle invalid inputs. For example, when player enters negative numbers, the program will ask for another input instead of crashing.
+3. 'Hit' and 'Stand' buttons in Blackjack game are now being disabled after each game when result is showing.
+4. Readme file has been updated with a more detailed instruction and screenshots.
+5. Two redundant files has been removed. 'GamesDealerPanelcopy.java' and 'DealerPanelHelpercopy.java' as well as some dead code.
+6. 'build.xml' has been updated; Errors and warnings have been fixed.
 
