@@ -16,7 +16,9 @@ e. The README.md clearly describes what the project is intended to do. It explai
 
 f. This project is based on Ant. All of its targets have clear descriptions. 
 The README.md says that the console could be run with gradle. When we try this on CSIL we get the following message:
+
 `bash: gradle: command not found...`
+
 `Install package 'gradle' to provide command 'gradle'? [N/y] `
 
 g. There are a total of 1750 points that can be earned by resolving issues. All the issues are clear. 
