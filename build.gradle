@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'jacoco'
 
 
 mainClassName = "edu.ucsb.cs56.projects.games.dealer.Main"
@@ -46,4 +47,14 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     testCompile 'junit:junit:4.12'
     compile 'junit:junit:4.12'
+}
+
+
+jacocoTestReport {
+    group = "Reporting"
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/coverage"
+    }
 }
