@@ -132,7 +132,12 @@ public class Dealer {
             }
             else{
                 //No longer wants to continue
-                break;
+                System.out.println("Do you want to go home? (y/n)");
+                if(stdin.next().startsWith("y")){
+                    Main.main(args);
+                } else {
+                    break;
+                }
             }
             
             
