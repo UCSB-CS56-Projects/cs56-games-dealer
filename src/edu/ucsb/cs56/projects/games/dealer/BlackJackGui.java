@@ -146,13 +146,17 @@ public class BlackJackGui extends JPanel{
         JPanel inputPanel = new JPanel(new FlowLayout());
         inputPanel.add(playerInput);
         resultPanel.add(inputPanel,resultgrid);
-        //add continue button    
+        //add continue and home buttons    
         JButton continueButton = new JButton("Continue");
         continueButton.addActionListener(new Continue());
+        JButton homeButton = new JButton("Go Home");
+        homeButton.addActionListener(new home(this));
         resultgrid.fill=GridBagConstraints.VERTICAL;
         resultgrid.gridy=5;
         resultPanel.add(continueButton,resultgrid);
-        
+        resultPanel.add(homeButton,resultgrid);
+
+
         gridBagConstraints.anchor=GridBagConstraints.LINE_START;
         gridBagConstraints.gridy=1;
         add(resultPanel,gridBagConstraints);
@@ -184,7 +188,20 @@ public class BlackJackGui extends JPanel{
             Settext(betpoint);
         }
     }
-    
+   
+
+    class home implements ActionListener{
+        private JPanel frame;
+        public home(JPanel frame){
+            this.frame= frame;
+        }
+        public void actionPerformed(ActionEvent e) {
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+       	    MainGui.main(new String[0]);
+        }
+    } 
     
     class Hit implements ActionListener{
         @Override
