@@ -236,7 +236,12 @@ public class GamesDealerPanel extends JPanel{
 
 	class home implements ActionListener{
             public void actionPerformed(ActionEvent e) {
-            
+	        String[] empty = new String[0];
+                MainGui.main(empty);
+                /*frame.setSize(350, 500);
+	        frame.setContentPane(new GamesDealerPanel());
+	        frame.invalidate();
+                frame.validate(); */
             }
         }
 

@@ -132,13 +132,8 @@ public class Dealer {
             }
             else{
                 //No longer wants to continue
-                System.out.println("Do you want to go home? (y/n)");
-                if(stdin.next().startsWith("y")){
-                    Main.main(args);
-                } else {
-                    break;
-                }
-            }
+                break;
+}
             
             
         }while(true);
@@ -147,7 +142,12 @@ public class Dealer {
         System.out.println(deck);
 
         System.out.println();
-        System.out.println("Goodbye");
+        System.out.println("Do you want to go home? (y/n)");
+        if(stdin.next().startsWith("y")){
+            Main.main(args);
+        } else {
+            System.out.println("Goodbye");
+        }
         
     }
 }
