@@ -2,11 +2,6 @@ package edu.ucsb.cs56.projects.games.dealer;
 import static java.lang.System.in;
 import static java.lang.System.out;
 import java.util.Scanner;
-import java.io.*;
-import java.lang.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.util.*;
 
 /**
  * The console version of the game BlackJack
@@ -90,16 +85,5 @@ public class BlackJackMain {
             } else {
                 out.println("Goodbye");
 	    }
-
-
-
-               /* out.println("Do you want to go home? (y/n)");
-                if(stdin.next().startsWith("y")){
-                    Main.main(args);
-                } else {
-                    out.println("Goodbye");
-                }
-*/
     }
-    
 }
