@@ -2,15 +2,21 @@
 
 a. Dealer has two programs; one to draw cards from a deck and list out the specific cards, and another to play Blackjack, a game that makes the user draw to compete with the dealer up to 21.
 
-b. As a dealer, you can choose to shuffle a deck of cards, and deal any number of them to up to fifty two players, either through the command line or GUI. As a dealer, you know which cards remain in the deck and what each player drew. 
+b. As a dealer, I can choose to shuffle a deck of cards, and deal any number of them to up to fifty two players, either through the command line or GUI. As a dealer, you know which cards remain in the deck and what each player drew. 
 
-As a blackjack player, you can play a game of Blackjack with a dealer by betting points, either through the command line or GUI. You can hit or stand every turn. 
+As a blackjack player, I can play a game of Blackjack with a dealer by betting points, either through the command line or GUI. You can hit or stand every turn. 
+
+As a user, I can choose between different games in the main menu, where when chosen, create a new window of that game in GUI or lines of code in the regular run.
 
 c. The software runs on both GUI and command line. The program displays options to shuffle and disperse cards in Dealer, and gives options to bet, hit and stand in Blackjack.
 
 d. As a game user I can press a "Quit" button or type quit at the command line so that I can quit the current game when done.
+
 As a dealer I can deal different decks, such as a 54 card deck that includes two jokers, so that different games can be made.
+
 As a game user I can press a "Blackjack" button or type 3 in the first query so that I can play a game of blackjack. 
+
+As a Blackjack player, I can make the game multiplayer to play with
 
 e. The README.md clearly describes what the project is intended to do. It explains how to run the application and how the application works.Something that can be added is an explanation of how the blackjack class is implemented using the dealer class. 
 
