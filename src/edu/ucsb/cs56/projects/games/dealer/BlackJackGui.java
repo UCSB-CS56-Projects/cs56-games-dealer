@@ -363,8 +363,8 @@ public class BlackJackGui extends JPanel{
         public void houseHit(){
             house.getHand().get(0).showHidden();
             images.get(0).setIcon(new ImageIcon(path(hiddenCard)));
-            SoundEffect.playSound("deal", 1,4);
             display(house);
+            SoundEffect.playSound("deal", 1,4);
             while(house.isHitting()&&!house.isBusted()){
                 house.addtoHand(1, d);
                 display(house);
