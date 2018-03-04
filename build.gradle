@@ -55,6 +55,6 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled false
-        html.destination "${buildDir}/reports/coverage"
+        html.destination "src/edu/ucsb/cs56/projects/games/dealer/unitTest/reports/coverage"
     }
 }

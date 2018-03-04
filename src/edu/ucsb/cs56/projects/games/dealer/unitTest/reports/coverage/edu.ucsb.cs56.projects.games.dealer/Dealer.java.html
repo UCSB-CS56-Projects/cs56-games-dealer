@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Dealer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cs56-games-dealer</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.projects.games.dealer</a> &gt; <span class="el_source">Dealer.java</span></div><h1>Dealer.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.projects.games.dealer;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+
+/**
+ This class is used to deal cards to the user.
+ 
+ @author Jeremy White and Andrew Cooney
+ @author Antonio Cantor
+ @author Tristan Starck and Kelly Bielaski
+ @version cs56 W16 2/15/16
+ */
+
+<span class="nc" id="L17">public class Dealer {</span>
+    
+    /**
+     Main function to interact with the user,
+     shuffle the deck, and print cards
+     @throws IOException
+     tests for case where invalid input is done.
+     @param args Command line arguments entered by user
+     */
+    
+    public static void main(String[] args) throws IOException {
+<span class="nc" id="L28">        Scanner stdin = new Scanner(System.in);</span>
+        int numCards;
+<span class="nc" id="L30">        int numHands = 0;</span>
+<span class="nc" id="L31">        boolean keepDealing = true;</span>
+<span class="nc" id="L32">        Hand[] hands  = new Hand[numHands];</span>
+        
+        //Create unshuffled deck
+<span class="nc" id="L35">        Deck deck=new Deck();</span>
+        
+        
+        do{
+         
+<span class="nc bnc" id="L40" title="All 2 branches missed.">         if(numHands == 0){</span>
+            // Requests input from player for how many hands they want to play with
+<span class="nc" id="L42">            System.out.println(&quot;How many hands do you want? (Enter an integer from 1 to 52)&quot;);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if(stdin.hasNextInt()){</span>
+<span class="nc" id="L44">                numHands = stdin.nextInt();</span>
+<span class="nc bnc" id="L45" title="All 4 branches missed.">                while(numHands &lt;= 0 || numHands &gt; 52){</span>
+<span class="nc" id="L46">                    System.out.println(&quot;Please enter a valid number of hand.(Enter an integer from 1 to 52)&quot;);</span>
+                    
+<span class="nc" id="L48">                    numHands = stdin.nextInt();</span>
+                }
+            }
+            // Creates an array of Hand objects
+<span class="nc" id="L52">            hands = new Hand[numHands];</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            for(int i = 0; i &lt; numHands; i++){</span>
+<span class="nc" id="L54">                hands[i] = new Hand();</span>
+            }
+            }
+         
+            // Position in array that gives us the current hand
+<span class="nc" id="L59">            int currentHand = 0;</span>
+            
+            // Requests input from player to shuffle the deck
+<span class="nc" id="L62">            System.out.println(&quot;Do you want the deck shuffled? (y/n)&quot;);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            if (stdin.next().startsWith(&quot;y&quot;)){</span>
+<span class="nc" id="L64">                deck.shuffle();</span>
+            }
+            else{
+<span class="nc" id="L67">                System.out.println(&quot;The cards will remain unshuffled&quot;);</span>
+            }
+            
+            // Asks each player how many cards they want.
+            // for(; currentHand &lt; numHands; currentHand++){
+            
+<span class="nc bnc" id="L73" title="All 4 branches missed.">            while(currentHand &lt; numHands&amp;&amp; deck.getDeck().size()&gt;0){</span>
+<span class="nc" id="L74">                System.out.println(&quot;Player &quot; + (currentHand+1) + &quot;/&quot; + numHands + &quot; : How many cards do you want for your hand? current card left: &quot; + deck.getDeck().size());</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                if(stdin.hasNextInt()){</span>
+<span class="nc" id="L76">                    numCards = stdin.nextInt();</span>
+                 
+                    //Checks if numCards is from 1 to 52 is inputted
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                    if(deck.getDeck().size() &gt;= numCards){</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">                        while (numCards&lt;=0||numCards&gt;=53 ){</span>
+<span class="nc" id="L81">                            System.out.println(&quot;An integer from 1 to 52 was not entered&quot;);</span>
+<span class="nc" id="L82">                            System.out.println(&quot;Please enter a valid number of cards.(Enter an integer from 1 to 52)&quot;);</span>
+<span class="nc" id="L83">                            numCards = stdin.nextInt();</span>
+                        }
+                        
+<span class="nc" id="L86">                        hands[currentHand].addtoHand(numCards, deck);</span>
+                        //Prints hand
+<span class="nc" id="L88">                        System.out.println(hands[currentHand]);</span>
+<span class="nc" id="L89">                        currentHand++;</span>
+                    }
+                    else
+                    {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                        if (deck.getDeck().size()&gt;0){</span>
+<span class="nc" id="L94">                            System.out.println(&quot;Total numer of cards should be less than 53, current card left: &quot; + deck.getDeck().size());</span>
+<span class="nc" id="L95">                            System.out.println(&quot;Do you want to continue? (y/n)&quot;);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                            if(stdin.next().startsWith(&quot;n&quot;)){</span>
+                                //quit the game with answer 'n' from user
+<span class="nc" id="L98">                                System.out.println(deck);</span>
+<span class="nc" id="L99">                                System.out.println();</span>
+<span class="nc" id="L100">                                System.out.println(&quot;Goodbye&quot;);</span>
+<span class="nc" id="L101">                                return;</span>
+                            }
+                        }
+                    }  
+                    
+                }
+                else{
+<span class="nc" id="L108">                    System.out.println(&quot;No number entered, five cards will be dealt&quot;);</span>
+<span class="nc" id="L109">                    numCards = 5;</span>
+<span class="nc" id="L110">                    hands[currentHand].addtoHand(numCards, deck);</span>
+<span class="nc" id="L111">                    System.out.println(hands[currentHand]);</span>
+<span class="nc" id="L112">                    break;</span>
+                }
+            }
+<span class="nc" id="L115">            System.out.println(&quot;Do you want to continue? (y/n)&quot;);</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            if(stdin.next().startsWith(&quot;y&quot;)){</span>
+                //Want to continue but no cards in deck
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                if (deck.getDeck().size()&lt;=0){</span>
+<span class="nc" id="L119">                    System.out.println(deck);</span>
+<span class="nc" id="L120">                    System.out.println(&quot;Do you want to reset? (y/n)&quot;);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">                    if(stdin.next().startsWith(&quot;y&quot;)){</span>
+                        //Resets both hand and deck to default
+<span class="nc" id="L123">                        numHands = 0;</span>
+<span class="nc" id="L124">                        deck = new Deck();</span>
+                    }
+                    else{
+                        //Doesn't want to reset
+                        break;
+                    }
+                }
+<span class="nc" id="L131">                System.out.println(&quot;OK&quot;);</span>
+            }
+            else{
+                //No longer wants to continue
+                break;
+}
+            
+            
+<span class="nc" id="L139">        }while(true);</span>
+        
+        //prints the deck
+<span class="nc" id="L142">        System.out.println(deck);</span>
+
+<span class="nc" id="L144">        System.out.println();</span>
+<span class="nc" id="L145">        System.out.println(&quot;Do you want to go home? (y/n)&quot;);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if(stdin.next().startsWith(&quot;y&quot;)){</span>
+<span class="nc" id="L147">            Main.main(args);</span>
+        } else {
+<span class="nc" id="L149">            System.out.println(&quot;Goodbye&quot;);</span>
+        }
+        
+<span class="nc" id="L152">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SoundEffect.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cs56-games-dealer</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.projects.games.dealer</a> &gt; <span class="el_source">SoundEffect.java</span></div><h1>SoundEffect.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.projects.games.dealer;
+
+import java.io.File;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+
+/**
+ * This class is used to play a sound effect.
+ * @author Kin Kwan Poon
+ * @version cs56 F16
+ *
+ */
+<span class="nc" id="L17">public class SoundEffect {</span>
+	/**
+	 * This is a overloaded play sound method, which will play a random sound
+	 * within the specific category. 
+	 * (e.g. There are 4 sound effects for deal card to hand.) 
+	 * @param filenamePrefix The name of the category
+	 * @param randomBegins the beginning number of the category
+	 * @param randomEnds the end number of the category
+	 */
+	public static void playSound(String filenamePrefix,int randomBegins,int randomEnds){
+<span class="fc" id="L27">		int random=randomBegins+(int)(Math.random()*((randomEnds-randomBegins)+1));</span>
+<span class="fc" id="L28">		filenamePrefix+=Integer.toString(random)+&quot;.wav&quot;;</span>
+<span class="fc" id="L29">		playSound(filenamePrefix);</span>
+<span class="fc" id="L30">	}</span>
+	/**
+	 * This is the method to play a sound effect.
+	 * @param filename the filename under sound directory
+	 */
+    public static synchronized void playSound(String filename) {
+<span class="fc" id="L36">	new Thread(new Runnable() {</span>
+		public void run() {
+		    try {
+			Clip clip;
+<span class="fc" id="L40">			File sound = new File(&quot;sound/&quot;+filename);</span>
+<span class="fc" id="L41">			AudioInputStream inputStream = AudioSystem.getAudioInputStream(sound);</span>
+<span class="fc" id="L42">			AudioFormat format = inputStream.getFormat();</span>
+<span class="fc" id="L43">			DataLine.Info info=new DataLine.Info(Clip.class,format);</span>
+<span class="fc" id="L44">			clip = (Clip) AudioSystem.getLine(info);</span>
+<span class="fc" id="L45">			clip.open(inputStream);</span>
+<span class="fc" id="L46">			clip.start();</span>
+<span class="fc" id="L47">		    } catch (Exception e) {</span>
+<span class="fc" id="L48">			System.out.println(&quot;play sound error: &quot; + e.getMessage() );</span>
+<span class="fc" id="L49">		    }</span>
+<span class="fc" id="L50">		}</span>
+<span class="fc" id="L51">	    }).start();</span>
+<span class="fc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

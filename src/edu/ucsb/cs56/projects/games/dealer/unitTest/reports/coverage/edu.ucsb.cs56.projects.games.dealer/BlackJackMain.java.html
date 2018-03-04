@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BlackJackMain.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cs56-games-dealer</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.projects.games.dealer</a> &gt; <span class="el_source">BlackJackMain.java</span></div><h1>BlackJackMain.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.projects.games.dealer;
+import static java.lang.System.in;
+import static java.lang.System.out;
+import java.util.Scanner;
+import java.io.*;
+
+/**
+ * The console version of the game BlackJack
+ * @author Kin Kwan Poon
+ * @version cs56 F16
+ *
+ */
+<span class="nc" id="L13">public class BlackJackMain {</span>
+    
+    public static void main(String[] args) throws IOException {
+        BlackJackGame bjg;
+<span class="nc" id="L17">        Scanner stdin=new Scanner(in);</span>
+        String prompt;
+<span class="nc" id="L19">        boolean shouldRun=true;</span>
+<span class="nc" id="L20">        out.println(&quot;Welcome to BlackJack!&quot;);</span>
+<span class="nc" id="L21">        out.println(&quot;What is your name?&quot;);</span>
+<span class="nc" id="L22">        String name = stdin.nextLine();</span>
+<span class="nc" id="L23">        out.println(&quot;How many decks do you want to play?&quot;);</span>
+<span class="nc" id="L24">        int numOfDecks=Integer.parseInt(stdin.nextLine());</span>
+<span class="nc" id="L25">        out.println(&quot;How many points do you want to bet? Current you have 10 points.&quot;);</span>
+<span class="nc" id="L26">        int points_bet = Integer.parseInt(stdin.nextLine());</span>
+<span class="nc bnc" id="L27" title="All 4 branches missed.">        while(points_bet &gt; 10 || points_bet &lt; 0){</span>
+<span class="nc" id="L28">            out.println(&quot;Invalid Number entered. You have 10 points.&quot;);</span>
+<span class="nc" id="L29">            out.println(&quot;How many points do you want to bet? Current you have 10 points.&quot;);</span>
+<span class="nc" id="L30">            points_bet = Integer.parseInt(stdin.nextLine());</span>
+        }
+<span class="nc" id="L32">        out.println(&quot;You are playing with &quot;+numOfDecks+&quot; Decks.&quot;);</span>
+<span class="nc" id="L33">        bjg=new BlackJackGame(numOfDecks,name);</span>
+        
+        do{
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            if(bjg.remainingCard()&lt;10){</span>
+<span class="nc" id="L37">                out.println(&quot;There are not enough cards to play!\n&quot;</span>
+                            + &quot;The game will now exit&quot;);
+<span class="nc" id="L39">                break;</span>
+            }
+<span class="nc" id="L41">            bjg.start();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            while(!bjg.getPlayer().isBusted()){</span>
+<span class="nc" id="L43">                out.println(&quot;Do you want to hit? (y/n)&quot;);</span>
+<span class="nc" id="L44">                prompt=stdin.nextLine();</span>
+<span class="nc bnc" id="L45" title="All 4 branches missed.">                if(prompt.charAt(0)=='Y'||prompt.charAt(0)=='y')</span>
+<span class="nc" id="L46">                    bjg.playerHit();</span>
+                else
+                    break;
+            }
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if(!bjg.getPlayer().isBusted())</span>
+<span class="nc" id="L51">                bjg.houseHit();</span>
+<span class="nc" id="L52">            bjg.result(points_bet);</span>
+<span class="nc" id="L53">            out.println(&quot;\nDo you want to continue? (y/n)  &quot; + &quot;Your score = &quot; + bjg.getPlayer().get_score());</span>
+<span class="nc" id="L54">            prompt=stdin.nextLine();</span>
+            //terminated the game if user enters n
+<span class="nc bnc" id="L56" title="All 4 branches missed.">            if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n') {</span>
+<span class="nc" id="L57">	        shouldRun=false;</span>
+               
+	    } else {
+<span class="nc" id="L60">                out.println(&quot;How many points do you want to bet? Current you have &quot;+ bjg.getPlayer().get_score()+  &quot; points.&quot;);</span>
+<span class="nc" id="L61">                points_bet = Integer.parseInt(stdin.nextLine());</span>
+                
+                //make a while loop to ensure user entered a valid number
+<span class="nc bnc" id="L64" title="All 6 branches missed.">                while(points_bet &gt; bjg.getPlayer().get_score() &amp;&amp; bjg.getPlayer().get_score() &gt; 0 || points_bet &lt; 0){</span>
+<span class="nc" id="L65">                    out.println(&quot;Invalid Number Entered.&quot;);</span>
+<span class="nc" id="L66">                    out.println(&quot;How many points do you want to bet? Current you have &quot;+ bjg.getPlayer().get_score()+  &quot; points.&quot;);</span>
+<span class="nc" id="L67">                    points_bet = Integer.parseInt(stdin.nextLine());</span>
+                }
+                //terminated the game if user enters n
+<span class="nc bnc" id="L70" title="All 4 branches missed.">                if(prompt.charAt(0)=='N'||prompt.charAt(0)=='n')</span>
+<span class="nc" id="L71">                    shouldRun=false;</span>
+<span class="nc" id="L72">                bjg.clearHands();</span>
+            }
+<span class="nc bnc" id="L74" title="All 4 branches missed.">        }while(shouldRun &amp;&amp; bjg.getPlayer().get_score() &gt; 0);</span>
+        //if player lose all points, end the game
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if(bjg.getPlayer().get_score() &lt;= 0)</span>
+<span class="nc" id="L77">            out.println(&quot;You lost all your points!&quot;);</span>
+<span class="nc" id="L78">            out.println(&quot;Thanks for playing, Bye!&quot;);</span>
+
+<span class="nc" id="L80">	    out.println(&quot;Do you want to go home? (y/n)&quot;);</span>
+<span class="nc" id="L81">            prompt=stdin.nextLine();</span>
+            //terminated the game if user enters n
+<span class="nc bnc" id="L83" title="All 4 branches missed.">            if(prompt.charAt(0)=='Y'||prompt.charAt(0)=='y') {</span>
+<span class="nc" id="L84">		out.println(&quot;Hello&quot;);</span>
+<span class="nc" id="L85">		Main.main(args);</span>
+            } else {
+<span class="nc" id="L87">                out.println(&quot;Goodbye&quot;);</span>
+	    }
+<span class="nc" id="L89">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
