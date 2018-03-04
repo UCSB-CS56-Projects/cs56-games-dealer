@@ -29,7 +29,9 @@ public class BlackJackGui extends JPanel{
     JTextField playerInput=new JTextField(5); // Where the user inputs how many hands they want
     int points = 10;
     int betpoint = 0;
-    
+    Color feltgreen = new Color(39,119,20); 
+    //Color defaultcolor = gamePanel.getBackground();
+
     /**
      * Costructor of BlackJackGui
      */
@@ -45,6 +47,7 @@ public class BlackJackGui extends JPanel{
      * Constructor of string a for welcome class
      */
      public void startPage(String message){
+
         start = new JPanel(new GridBagLayout());
         GridBagConstraints Grid = new GridBagConstraints();
         JLabel welcomePrompt = new JLabel(message);
@@ -62,7 +65,7 @@ public class BlackJackGui extends JPanel{
         promptLabel=new JLabel(prompt_bet);
         promptLabel.setLabelFor(playerInput);
         start.add(promptLabel,Grid);
-         
+ 
         Grid.gridy=3;
         JPanel inputPanel = new JPanel(new FlowLayout());
         inputPanel.add(playerInput);
@@ -79,14 +82,20 @@ public class BlackJackGui extends JPanel{
         Grid.gridy=5;
         start.add(HomeButton,Grid);
 
+        setBackground(null);
+
         add(start);
     }
-    
+   
+
+
+ 
     /**
      * The actual game play in GUI
      */
     public void gamePlay(){
         gamePanel = new JPanel(new GridBagLayout());
+        gamePanel.setBackground(feltgreen);
         gridBagConstraints = new GridBagConstraints();
         images = new ArrayList<JLabel>();
 
@@ -134,6 +143,7 @@ public class BlackJackGui extends JPanel{
      public void resultDisplay(String state1,String state2){
         GridBagConstraints resultgrid = new GridBagConstraints();
         resultPanel = new JPanel(new GridBagLayout());
+        resultPanel.setBackground(feltgreen);
         JLabel resultLabel=new JLabel(state1);
         resultgrid.fill=GridBagConstraints.VERTICAL;
         resultgrid.gridy=1;
@@ -150,6 +160,7 @@ public class BlackJackGui extends JPanel{
         
         resultgrid.gridy=4;
         JPanel inputPanel = new JPanel(new FlowLayout());
+        inputPanel.setBackground(feltgreen);
         inputPanel.add(playerInput);
         resultPanel.add(inputPanel,resultgrid);
         //add continue and home buttons    
@@ -265,6 +276,7 @@ public class BlackJackGui extends JPanel{
             revalidate();
             gamePlay();
             EnableButtons();
+            setBackground(feltgreen);
         }
     }
     
