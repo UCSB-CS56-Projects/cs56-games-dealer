@@ -33,6 +33,25 @@ public class CardTest {
     }
 
     @Test
+    public void test2_ClubsEqualsNull(){
+        Card c1 = new Card("2","Clubs");
+        assertFalse("They should not be equal",c1.equals(null));
+    }
+
+    @Test
+    public void test2_ClubsEqualsInteger(){
+        Card c1 = new Card("2","Clubs");
+        assertFalse("They should not be equal",c1.equals(5));
+    }
+
+    @Test
+    public void testSpadesAceEqualsHeartsAce(){
+        Card c1 = new Card("Ace","Spades");
+        Card c2 = new Card("Ace","Hearts");
+        assertFalse("They should not be equal",c1.equals(c2));
+    }
+
+    @Test
     public void testSpadesAceGreaterThanHeartsAce(){
     	Card c1 = new Card("Ace","Spades");
     	Card c2 = new Card("Ace","Hearts");
@@ -52,7 +71,14 @@ public class CardTest {
     	Card c2 = new Card("King","Hearts");
     	assertEquals(1,c1.compareTo(c2));
     }
-    
+   
+    @Test
+    public void testHeartsAceGreaterThanSpadeAce(){
+        Card c1 = new Card("Ace","Hearts");
+        Card c2 = new Card("Ace","Spades");
+        assertEquals(-1,c1.compareTo(c2));
+    }
+ 
     @Test 
     public void testAceValue(){
     	Card c1 = new Card("Ace","Clubs");
@@ -81,5 +107,83 @@ public class CardTest {
     	assertEquals(3,c1.rankValue(true).intValue());
     }
     
-    
+    @Test
+    public void testThreeValueFalse(){
+        Card c1 = new Card("3","Clubs");
+        assertEquals(3,c1.rankValue(false).intValue());
+    }
+
+    @Test
+    public void testThreeValueHidden(){
+        Card c1 = new Card("3","Clubs");
+        c1.hide();
+        assertEquals(0,c1.rankValue(true).intValue());
+    }
+   
+    @Test
+    public void testThreeValueShowHidden(){
+        Card c1 = new Card("3","Clubs");
+        c1.hide();
+        c1.showHidden();
+        assertEquals(3,c1.rankValue(true).intValue());
+    }
+
+    @Test
+    public void testJackValueNoBool(){
+        Card c1 = new Card("Jack","Clubs");
+        assertEquals(11,c1.rankValue().intValue());
+    }
+
+    @Test
+    public void testQueenValueNoBool(){
+        Card c1 = new Card("Queen","Clubs");
+        assertEquals(12,c1.rankValue().intValue());
+    }
+
+    @Test
+    public void testDiamondValueNoBool(){
+        Card c1 = new Card("Jack","Diamonds");
+        assertEquals(1,c1.suitVaule().intValue());
+    }
+
+    @Test
+    public void testFooValueNoBool(){
+        Card c1 = new Card("Queen","Foo");
+        assertEquals(0,c1.suitVaule().intValue());
+    }
+
+
+    @Test
+    public void testToStringHiddenCard(){
+        Card c1 = new Card("Ace","Spades");
+        c1.hide();
+        assertEquals(c1.toString(), "X of X");
+    }
+
+    @Test
+    public void testGetRankOfAceSpades(){
+        Card c1 = new Card("Ace","Spades");
+        assertEquals(c1.getRank(), "Ace");
+    }
+
+    @Test
+    public void testGetRankOfHidden(){
+        Card c1 = new Card("Ace","Spades");
+        c1.hide();
+        assertEquals(c1.getRank(), "X");
+    }
+
+    @Test
+    public void testGetSuitOfAceSpades(){
+        Card c1 = new Card("Ace","Spades");
+        assertEquals(c1.getSuit(), "Spades");
+    }
+
+    @Test
+    public void testGetSuitOfHidden(){
+        Card c1 = new Card("Ace","Spades");
+        c1.hide();
+        assertEquals(c1.getSuit(), "X");
+    }
+
 }
