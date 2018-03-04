@@ -415,7 +415,7 @@ public class BlackJackGui extends JPanel{
                 gamePanel.repaint();
                 i+=200;
             }
-            sleep(500);
+            //sleep(500);
         }
         
         /**
