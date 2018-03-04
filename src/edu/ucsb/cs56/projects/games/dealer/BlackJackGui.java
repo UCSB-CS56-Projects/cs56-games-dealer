@@ -70,9 +70,15 @@ public class BlackJackGui extends JPanel{
          //add play button
         JButton PlayButton = new JButton("Play");
         PlayButton.addActionListener(new Play());
+        JButton HomeButton = new JButton("Go Home");
+        HomeButton.addActionListener(new home(this));
+
         Grid.insets=new Insets(10,0,0,0);
         Grid.gridy=4;
         start.add(PlayButton,Grid);
+        Grid.gridy=5;
+        start.add(HomeButton,Grid);
+
         add(start);
     }
     
@@ -154,6 +160,7 @@ public class BlackJackGui extends JPanel{
         resultgrid.fill=GridBagConstraints.VERTICAL;
         resultgrid.gridy=5;
         resultPanel.add(continueButton,resultgrid);
+        resultgrid.gridy=6;
         resultPanel.add(homeButton,resultgrid);
 
 
