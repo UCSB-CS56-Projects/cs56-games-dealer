@@ -12,7 +12,7 @@ project history
  
  F17 | JamesW121 KiwanSung 5pm | 
 
- W18 | adiltruong ernestosandoval 5pm | Added JaCoCo for code support 
+ W18 | adiltruong ernestosandoval 5pm | Added JaCoCo for code coverage 
 ```
 
 What is this?
