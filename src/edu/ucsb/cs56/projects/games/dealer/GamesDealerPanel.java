@@ -233,7 +233,24 @@ public class GamesDealerPanel extends JPanel{
         submitButton.addActionListener(new submit());
         playerInputPanelnumHands.add(submitButton);
         
-        
+
+	class home implements ActionListener{
+            private JPanel frame;
+            public home(JPanel frame){
+                this.frame= frame;
+            }
+            public void actionPerformed(ActionEvent e) {
+	        JComponent comp = (JComponent) e.getSource();
+                Window win = SwingUtilities.getWindowAncestor(comp);
+                win.dispose();
+		MainGui.main(new String[0]);
+            }
+        }
+
+	JButton homeButton = new JButton("Go Home");
+	homeButton.addActionListener(new home(this)) ;      
+	playerInputPanelnumHands.add(homeButton);
+ 
          class Continue implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 promptLabel.setText(prompt);

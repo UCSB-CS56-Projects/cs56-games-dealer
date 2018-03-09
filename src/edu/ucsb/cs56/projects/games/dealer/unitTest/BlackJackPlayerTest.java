@@ -20,6 +20,32 @@ public class BlackJackPlayerTest {
     public void setUp(){
     	d=new Deck();
 	}
+
+    @Test
+    public void testGetName(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        assertEquals("test", h1.getName());
+    }
+
+    @Test
+    public void testGetScore(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        assertEquals(10, h1.get_score());
+    }
+
+    @Test
+    public void testLoseScore(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        h1.lose_score(1);
+        assertEquals(9, h1.get_score());
+    }
+
+    @Test
+    public void testGainScore(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        h1.gain_score(1);
+        assertEquals(11, h1.get_score());
+    }
 	
     @Test
     public void testHandVaule1(){
@@ -89,6 +115,7 @@ public class BlackJackPlayerTest {
     	h2.addtoHand(3, d);// Jack to King
     	assertTrue(h2.isBusted());
     }   
+
     @Test
     public void testBusted2(){
     	BlackJackPlayer h1=new BlackJackPlayer("test");
@@ -99,5 +126,59 @@ public class BlackJackPlayerTest {
     	h2.addtoHand(2, d);// Queen and King
     	assertTrue(h2.isBusted());
     }
-    
+   
+    @Test
+    public void testBusted3(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        assertTrue(!h1.isBusted());
+    }
+
+    @Test
+    public void testToString1(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        h1.addtoHand(1, d);
+        assertEquals("test: \nAce of Spades (11)\n", h1.toString());
+    }
+
+    @Test
+    public void testToString2(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        h1.addtoHand(2, d);
+        assertEquals("test: \nAce of Spades, 2 of Spades (13)\n", h1.toString());
+    }
+
+    @Test
+    public void testClearHand(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        h1.addtoHand(10, d);
+        h1.clearHand();
+        assertEquals("test: \n (0)\n", h1.toString());
+    }
+
+    @Test
+    public void testBusted(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        assertEquals("test busted.", h1.busted());
+    }
+
+    @Test
+    public void testWin(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        assertEquals("test wins.", h1.win());
+    }
+
+    @Test
+    public void testLose(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        assertEquals("test loses.", h1.lose());
+    }
+
+    @Test
+    public void testPush(){
+        BlackJackPlayer h1=new BlackJackPlayer("test");
+        assertEquals("test pushes.", h1.push());
+    }
+
+
+
 }

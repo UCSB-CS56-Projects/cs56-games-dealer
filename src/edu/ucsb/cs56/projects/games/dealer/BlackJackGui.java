@@ -29,7 +29,9 @@ public class BlackJackGui extends JPanel{
     JTextField playerInput=new JTextField(5); // Where the user inputs how many hands they want
     int points = 10;
     int betpoint = 0;
-    
+    Color feltgreen = new Color(39,119,20); 
+    //Color defaultcolor = gamePanel.getBackground();
+
     /**
      * Costructor of BlackJackGui
      */
@@ -45,6 +47,7 @@ public class BlackJackGui extends JPanel{
      * Constructor of string a for welcome class
      */
      public void startPage(String message){
+
         start = new JPanel(new GridBagLayout());
         GridBagConstraints Grid = new GridBagConstraints();
         JLabel welcomePrompt = new JLabel(message);
@@ -62,7 +65,7 @@ public class BlackJackGui extends JPanel{
         promptLabel=new JLabel(prompt_bet);
         promptLabel.setLabelFor(playerInput);
         start.add(promptLabel,Grid);
-         
+ 
         Grid.gridy=3;
         JPanel inputPanel = new JPanel(new FlowLayout());
         inputPanel.add(playerInput);
@@ -70,17 +73,29 @@ public class BlackJackGui extends JPanel{
          //add play button
         JButton PlayButton = new JButton("Play");
         PlayButton.addActionListener(new Play());
+        JButton HomeButton = new JButton("Go Home");
+        HomeButton.addActionListener(new home(this));
+
         Grid.insets=new Insets(10,0,0,0);
         Grid.gridy=4;
         start.add(PlayButton,Grid);
+        Grid.gridy=5;
+        start.add(HomeButton,Grid);
+
+        setBackground(null);
+
         add(start);
     }
-    
+   
+
+
+ 
     /**
      * The actual game play in GUI
      */
     public void gamePlay(){
         gamePanel = new JPanel(new GridBagLayout());
+        gamePanel.setBackground(feltgreen);
         gridBagConstraints = new GridBagConstraints();
         images = new ArrayList<JLabel>();
 
@@ -128,6 +143,7 @@ public class BlackJackGui extends JPanel{
      public void resultDisplay(String state1,String state2){
         GridBagConstraints resultgrid = new GridBagConstraints();
         resultPanel = new JPanel(new GridBagLayout());
+        resultPanel.setBackground(feltgreen);
         JLabel resultLabel=new JLabel(state1);
         resultgrid.fill=GridBagConstraints.VERTICAL;
         resultgrid.gridy=1;
@@ -144,15 +160,21 @@ public class BlackJackGui extends JPanel{
         
         resultgrid.gridy=4;
         JPanel inputPanel = new JPanel(new FlowLayout());
+        inputPanel.setBackground(feltgreen);
         inputPanel.add(playerInput);
         resultPanel.add(inputPanel,resultgrid);
-        //add continue button    
+        //add continue and home buttons    
         JButton continueButton = new JButton("Continue");
         continueButton.addActionListener(new Continue());
+        JButton homeButton = new JButton("Go Home");
+        homeButton.addActionListener(new home(this));
         resultgrid.fill=GridBagConstraints.VERTICAL;
         resultgrid.gridy=5;
         resultPanel.add(continueButton,resultgrid);
-        
+        resultgrid.gridy=6;
+        resultPanel.add(homeButton,resultgrid);
+
+
         gridBagConstraints.anchor=GridBagConstraints.LINE_START;
         gridBagConstraints.gridy=1;
         add(resultPanel,gridBagConstraints);
@@ -184,7 +206,20 @@ public class BlackJackGui extends JPanel{
             Settext(betpoint);
         }
     }
-    
+   
+
+    class home implements ActionListener{
+        private JPanel panel;
+        public home(JPanel panel){
+            this.panel= panel;
+        }
+        public void actionPerformed(ActionEvent e) {
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+       	    MainGui.main(new String[0]);
+        }
+    } 
     
     class Hit implements ActionListener{
         @Override
@@ -241,6 +276,7 @@ public class BlackJackGui extends JPanel{
             revalidate();
             gamePlay();
             EnableButtons();
+            setBackground(feltgreen);
         }
     }
     
@@ -346,8 +382,8 @@ public class BlackJackGui extends JPanel{
         public void houseHit(){
             house.getHand().get(0).showHidden();
             images.get(0).setIcon(new ImageIcon(path(hiddenCard)));
-            SoundEffect.playSound("deal", 1,4);
             display(house);
+            SoundEffect.playSound("deal", 1,4);
             while(house.isHitting()&&!house.isBusted()){
                 house.addtoHand(1, d);
                 display(house);
@@ -398,7 +434,7 @@ public class BlackJackGui extends JPanel{
                 gamePanel.repaint();
                 i+=200;
             }
-            sleep(500);
+            //sleep(500);
         }
         
         /**

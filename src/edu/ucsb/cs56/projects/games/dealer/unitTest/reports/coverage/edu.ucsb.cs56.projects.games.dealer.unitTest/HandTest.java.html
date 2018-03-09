@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HandTest.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cs56-games-dealer</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.projects.games.dealer.unitTest</a> &gt; <span class="el_source">HandTest.java</span></div><h1>HandTest.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.projects.games.dealer.unitTest;
+
+import java.util.ArrayList;
+import org.junit.Test;
+import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import edu.ucsb.cs56.projects.games.dealer.Deck;
+import edu.ucsb.cs56.projects.games.dealer.Hand;
+import edu.ucsb.cs56.projects.games.dealer.Card;
+
+/**
+ * The test class HandTest, to test the Deck, and Hand classes
+ *
+ * @author Kin Kwan Poon
+ * @version UCSB, CS56,F16
+ * @see Deck
+ * @see Hand
+ */
+<span class="fc" id="L22">public class HandTest{</span>
+    private Deck d;
+    private ArrayList&lt;Card&gt; unshuffleDeck;
+<span class="fc" id="L25">    private final String[] ranks={&quot;Ace&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,</span>
+				  &quot;9&quot;,&quot;10&quot;,&quot;Jack&quot;,&quot;Queen&quot;,&quot;King&quot;};
+<span class="fc" id="L27">    private final String[] suits={&quot;Spades&quot;,&quot;Hearts&quot;,&quot;Clubs&quot;,&quot;Diamonds&quot;};</span>
+
+    @Before
+    public void setUp(){
+<span class="fc" id="L31">	d=new Deck();</span>
+<span class="fc" id="L32">	unshuffleDeck=new ArrayList&lt;Card&gt;();</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">	for(int i=0;i&lt;4;i++){</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">	    for(int j=0;j&lt;13;j++){</span>
+<span class="fc" id="L35">		unshuffleDeck.add(new Card(ranks[j],suits[i]));</span>
+	    }
+	}
+	
+<span class="fc" id="L39">    }</span>
+
+    public void shuffle(){
+<span class="fc" id="L42">	d.shuffle();</span>
+<span class="fc" id="L43">    }</span>
+
+    
+    @Test
+    public void testUnshuffleDeck(){
+<span class="fc" id="L48">	assertEquals(unshuffleDeck,d.getDeck());</span>
+<span class="fc" id="L49">    }</span>
+
+    @Test
+    public void testShuffleDeck(){
+<span class="fc" id="L53">	shuffle();</span>
+<span class="fc" id="L54">	assertFalse(&quot;Shuffled Deck should not equal to unshuffled Deck&quot;,</span>
+<span class="fc" id="L55">		    unshuffleDeck.equals(d.getDeck()));</span>
+<span class="fc" id="L56">    }</span>
+
+    @Test
+    public void testOneCardtoHand(){
+<span class="fc" id="L60">	Hand h = new Hand();</span>
+<span class="fc" id="L61">	h.addtoHand(1,d);</span>
+<span class="fc" id="L62">	assertEquals(unshuffleDeck.get(0),h.getHand().get(0));</span>
+<span class="fc" id="L63">	assertEquals(1,h.getHand().size());</span>
+<span class="fc" id="L64">    }</span>
+
+    @Test
+    public void testDeckRemoveCard(){
+<span class="fc" id="L68">	d.draw(1,new Hand());</span>
+<span class="fc" id="L69">	assertEquals(unshuffleDeck.get(1),d.getDeck().get(0));</span>
+<span class="fc" id="L70">	assertEquals(51,d.getDeck().size());</span>
+<span class="fc" id="L71">    }</span>
+
+    @Test
+    public void testShuffleDeckRemoveCard(){
+<span class="fc" id="L75">	shuffle();</span>
+<span class="fc" id="L76">	d.draw(13,new Hand());</span>
+<span class="fc" id="L77">	assertEquals(39,d.getDeck().size());</span>
+<span class="fc" id="L78">    }</span>
+
+    @Test
+    public void testFiveCardtoHand(){
+<span class="fc" id="L82">	Hand h = new Hand();</span>
+<span class="fc" id="L83">	h.addtoHand(5,d);</span>
+<span class="fc" id="L84">	assertEquals(unshuffleDeck.get(0),h.getHand().get(0));</span>
+<span class="fc" id="L85">	assertEquals(unshuffleDeck.get(1),h.getHand().get(1));</span>
+<span class="fc" id="L86">	assertEquals(unshuffleDeck.get(2),h.getHand().get(2));</span>
+<span class="fc" id="L87">	assertEquals(unshuffleDeck.get(3),h.getHand().get(3));</span>
+<span class="fc" id="L88">	assertEquals(unshuffleDeck.get(4),h.getHand().get(4));</span>
+<span class="fc" id="L89">	assertEquals(5,h.getHand().size());</span>
+<span class="fc" id="L90">    }</span>
+
+    @Test
+    public void testTwoCardtoTwoHand(){
+<span class="fc" id="L94">	Hand h1=new Hand();</span>
+<span class="fc" id="L95">	Hand h2=new Hand();</span>
+<span class="fc" id="L96">	h1.addtoHand(2,d);</span>
+<span class="fc" id="L97">	h2.addtoHand(2,d);</span>
+<span class="fc" id="L98">	assertEquals(unshuffleDeck.get(0),h1.getHand().get(0));</span>
+<span class="fc" id="L99">	assertEquals(unshuffleDeck.get(1),h1.getHand().get(1));</span>
+<span class="fc" id="L100">	assertEquals(unshuffleDeck.get(2),h2.getHand().get(0));</span>
+<span class="fc" id="L101">	assertEquals(unshuffleDeck.get(3),h2.getHand().get(1));</span>
+<span class="fc" id="L102">	assertEquals(2,h1.getHand().size());</span>
+<span class="fc" id="L103">	assertEquals(2,h2.getHand().size());</span>
+<span class="fc" id="L104">    }</span>
+
+    @Test
+    public void testEmptyDeck(){
+<span class="fc" id="L108">	d.draw(52,new Hand());</span>
+<span class="fc" id="L109">	assertEquals(&quot;NO MORE CARDS IN THE DECK&quot;,d.toString());</span>
+<span class="fc" id="L110">    }</span>
+    
+    @Test
+    public void testRemoveLastCard(){
+<span class="fc" id="L114">    	Hand h1=new Hand();</span>
+<span class="fc" id="L115">    	h1.addtoHand(2, d);</span>
+<span class="fc" id="L116">    	h1.removeLastCard();</span>
+<span class="fc" id="L117">    	assertEquals(&quot;Your hand:\nAce of Spades&quot;,h1.toString());</span>
+<span class="fc" id="L118">    }</span>
+
+    @Test
+    public void testPrintHandMultipleCards(){
+<span class="fc" id="L122">        Hand h1=new Hand();</span>
+<span class="fc" id="L123">        h1.addtoHand(2, d);</span>
+<span class="fc" id="L124">        assertEquals(&quot;Your hand:\nAce of Spades, 2 of Spades&quot;,h1.toString());</span>
+<span class="fc" id="L125">    }</span>
+    
+    @Test
+    public void testTwoDecks(){
+<span class="fc" id="L129">    	Deck d2=new Deck(2);</span>
+<span class="fc" id="L130">    	Hand h1=new Hand();</span>
+<span class="fc" id="L131">    	h1.addtoHand(53, d2);</span>
+<span class="fc" id="L132">    	assertEquals(unshuffleDeck.get(0),h1.getHand().get(52));</span>
+<span class="fc" id="L133">    }</span>
+    
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

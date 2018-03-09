@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BlackJackGui.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cs56-games-dealer</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.projects.games.dealer</a> &gt; <span class="el_source">BlackJackGui.java</span></div><h1>BlackJackGui.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.projects.games.dealer;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
+import javax.swing.*;
+
+/**
+ * The Gui version of the game BlackJackGui
+ * @author Kin Kwan Poon, Eric Xiao
+ * @version UCSB, CS56, F16
+ */
+
+public class BlackJackGui extends JPanel{
+    JPanel gamePanel;
+    GridBagConstraints gridBagConstraints;
+    JLabel dealerPoints,playerPoints;
+    ArrayList&lt;JLabel&gt; images;
+    JPanel resultPanel;
+    BlackJackGameGui game;
+    JButton hitButton;
+    JButton standButton;
+    JLabel promptLabel;
+    JPanel start;
+<span class="nc" id="L26">    JLabel dealerLabel= new JLabel(&quot;Dealer: &quot;);</span>
+<span class="nc" id="L27">    JLabel playerLabel = new JLabel(&quot;Player: &quot;);</span>
+<span class="nc" id="L28">    int decided = 0;</span>
+<span class="nc" id="L29">    JTextField playerInput=new JTextField(5); // Where the user inputs how many hands they want</span>
+<span class="nc" id="L30">    int points = 10;</span>
+<span class="nc" id="L31">    int betpoint = 0;</span>
+    
+    /**
+     * Costructor of BlackJackGui
+     */
+    public BlackJackGui(){
+<span class="nc" id="L37">        super();</span>
+<span class="nc" id="L38">        String message =&quot;Welcome to BlackJack!&quot;;</span>
+<span class="nc" id="L39">        startPage(message); //message will show in the center of the start page</span>
+<span class="nc" id="L40">    }</span>
+    
+    /**
+     * Shows the welcom screen and Play button
+     * @param message
+     * Constructor of string a for welcome class
+     */
+     public void startPage(String message){
+<span class="nc" id="L48">        start = new JPanel(new GridBagLayout());</span>
+<span class="nc" id="L49">        GridBagConstraints Grid = new GridBagConstraints();</span>
+<span class="nc" id="L50">        JLabel welcomePrompt = new JLabel(message);</span>
+<span class="nc" id="L51">        welcomePrompt.setFont(new Font(&quot;Sans Serif&quot;,Font.PLAIN,20));</span>
+
+<span class="nc" id="L53">        Grid.insets=new Insets(250,0,0,0);</span>
+<span class="nc" id="L54">        Grid.gridx=1;</span>
+<span class="nc" id="L55">        Grid.gridy=1;</span>
+<span class="nc" id="L56">        start.add(welcomePrompt,Grid);</span>
+        
+<span class="nc" id="L58">        Grid.insets=new Insets(20,0,0,0);</span>
+<span class="nc" id="L59">        Grid.gridy=2;</span>
+<span class="nc" id="L60">        String prompt_bet=&quot;How many points do you want to bet? You currently have &quot; + points +&quot; points&quot;;</span>
+        // Label to display prompt for user to input how many hands they want.
+<span class="nc" id="L62">        promptLabel=new JLabel(prompt_bet);</span>
+<span class="nc" id="L63">        promptLabel.setLabelFor(playerInput);</span>
+<span class="nc" id="L64">        start.add(promptLabel,Grid);</span>
+         
+<span class="nc" id="L66">        Grid.gridy=3;</span>
+<span class="nc" id="L67">        JPanel inputPanel = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L68">        inputPanel.add(playerInput);</span>
+<span class="nc" id="L69">        start.add(inputPanel,Grid);</span>
+         //add play button
+<span class="nc" id="L71">        JButton PlayButton = new JButton(&quot;Play&quot;);</span>
+<span class="nc" id="L72">        PlayButton.addActionListener(new Play());</span>
+<span class="nc" id="L73">        Grid.insets=new Insets(10,0,0,0);</span>
+<span class="nc" id="L74">        Grid.gridy=4;</span>
+<span class="nc" id="L75">        start.add(PlayButton,Grid);</span>
+<span class="nc" id="L76">        add(start);</span>
+<span class="nc" id="L77">    }</span>
+    
+    /**
+     * The actual game play in GUI
+     */
+    public void gamePlay(){
+<span class="nc" id="L83">        gamePanel = new JPanel(new GridBagLayout());</span>
+<span class="nc" id="L84">        gridBagConstraints = new GridBagConstraints();</span>
+<span class="nc" id="L85">        images = new ArrayList&lt;JLabel&gt;();</span>
+
+<span class="nc" id="L87">        gbcConfig(&quot;dealer&quot;,0,0);</span>
+<span class="nc" id="L88">        gamePanel.add(dealerLabel,gridBagConstraints);</span>
+        
+<span class="nc" id="L90">        gbcConfig(&quot;player&quot;,0,0);</span>
+<span class="nc" id="L91">        gamePanel.add(playerLabel, gridBagConstraints);</span>
+<span class="nc" id="L92">        add(gamePanel,gridBagConstraints);</span>
+<span class="nc" id="L93">        revalidate();</span>
+<span class="nc" id="L94">        repaint();</span>
+        
+<span class="nc" id="L96">        game=new BlackJackGameGui();</span>
+<span class="nc" id="L97">        dealerPoints= new JLabel(Integer.toString(game.getHouse().getHandValue()));</span>
+<span class="nc" id="L98">        playerPoints = new JLabel(Integer.toString(game.getPlayer().getHandValue()));</span>
+<span class="nc" id="L99">        game.start();</span>
+<span class="nc" id="L100">        hitButton = new JButton(&quot;Hit&quot;);</span>
+<span class="nc" id="L101">        standButton = new JButton(&quot;Stand&quot;);</span>
+        
+        //add hit button on game page
+<span class="nc" id="L104">        hitButton.addActionListener(new Hit());</span>
+<span class="nc" id="L105">        gridBagConstraints.anchor=GridBagConstraints.LAST_LINE_START;</span>
+<span class="nc" id="L106">        gridBagConstraints.insets=new Insets(0,0,0,10);</span>
+<span class="nc" id="L107">        gridBagConstraints.gridy=3;</span>
+<span class="nc" id="L108">        gamePanel.add(hitButton,gridBagConstraints);</span>
+        
+        //add stand button on game page
+<span class="nc" id="L111">        standButton.addActionListener(new Stand());</span>
+<span class="nc" id="L112">        gridBagConstraints.anchor=GridBagConstraints.LAST_LINE_END;</span>
+<span class="nc" id="L113">        gridBagConstraints.gridy=4;</span>
+<span class="nc" id="L114">        gamePanel.add(standButton,gridBagConstraints);</span>
+<span class="nc" id="L115">    }</span>
+    
+    /**
+     * Shows the game result in GUI by making a new panel,
+     * and show the contiue button for player to continue the game
+     * It takes up to two parameter:
+     * 1: If either dealer or player is busted
+     * state1 would be a busted message, then state2 would be a win/lose message.
+     * 2: If no one is busted, state1 would be the win/lose message,
+     * and state2 would be a empty string.
+     * @param state1 the win/lose state of player, or a busted state
+     * @param state2 the win/lose  state of player
+     */
+     public void resultDisplay(String state1,String state2){
+<span class="nc" id="L129">        GridBagConstraints resultgrid = new GridBagConstraints();</span>
+<span class="nc" id="L130">        resultPanel = new JPanel(new GridBagLayout());</span>
+<span class="nc" id="L131">        JLabel resultLabel=new JLabel(state1);</span>
+<span class="nc" id="L132">        resultgrid.fill=GridBagConstraints.VERTICAL;</span>
+<span class="nc" id="L133">        resultgrid.gridy=1;</span>
+<span class="nc" id="L134">        resultPanel.add(resultLabel,resultgrid);</span>
+         
+<span class="nc" id="L136">        resultgrid.insets=new Insets(20,0,0,0);</span>
+<span class="nc" id="L137">        resultgrid.gridy=3;</span>
+        
+<span class="nc" id="L139">        String prompt_bet=&quot;How many points do you want to bet? You currently have &quot; + points + &quot; points&quot;;</span>
+        // Label to display prompt for user to input how many hands they want.
+<span class="nc" id="L141">        promptLabel=new JLabel(prompt_bet);</span>
+<span class="nc" id="L142">        promptLabel.setLabelFor(playerInput);</span>
+<span class="nc" id="L143">        resultPanel.add(promptLabel,resultgrid);</span>
+        
+<span class="nc" id="L145">        resultgrid.gridy=4;</span>
+<span class="nc" id="L146">        JPanel inputPanel = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L147">        inputPanel.add(playerInput);</span>
+<span class="nc" id="L148">        resultPanel.add(inputPanel,resultgrid);</span>
+        //add continue and home buttons    
+<span class="nc" id="L150">        JButton continueButton = new JButton(&quot;Continue&quot;);</span>
+<span class="nc" id="L151">        continueButton.addActionListener(new Continue());</span>
+<span class="nc" id="L152">        JButton homeButton = new JButton(&quot;Go Home&quot;);</span>
+<span class="nc" id="L153">        homeButton.addActionListener(new home(this));</span>
+<span class="nc" id="L154">        resultgrid.fill=GridBagConstraints.VERTICAL;</span>
+<span class="nc" id="L155">        resultgrid.gridy=5;</span>
+<span class="nc" id="L156">        resultPanel.add(continueButton,resultgrid);</span>
+<span class="nc" id="L157">        resultPanel.add(homeButton,resultgrid);</span>
+
+
+<span class="nc" id="L160">        gridBagConstraints.anchor=GridBagConstraints.LINE_START;</span>
+<span class="nc" id="L161">        gridBagConstraints.gridy=1;</span>
+<span class="nc" id="L162">        add(resultPanel,gridBagConstraints);</span>
+<span class="nc" id="L163">        decided = 1;</span>
+<span class="nc" id="L164">    }</span>
+    
+    
+<span class="nc" id="L167">    class Continue implements ActionListener{</span>
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L169">            betpoint = Integer.parseInt(playerInput.getText());</span>
+            
+<span class="nc bnc" id="L171" title="All 4 branches missed.">            if (points == 0 &amp;&amp; betpoint != 0){</span>
+<span class="nc" id="L172">                resultPanel.removeAll();</span>
+<span class="nc" id="L173">                gamePanel.removeAll();</span>
+<span class="nc" id="L174">                decided = 0;</span>
+<span class="nc" id="L175">                game.getPlayer().clearHand();</span>
+<span class="nc" id="L176">                game.getHouse().clearHand();</span>
+<span class="nc" id="L177">                gamePanel.revalidate();</span>
+<span class="nc" id="L178">                gamePanel.repaint();</span>
+<span class="nc" id="L179">                points = 10;</span>
+                //Start a new game with the message &quot;you lost all of your points!&quot;
+                //if player try to bet any points when dont have any left
+<span class="nc" id="L182">                String message = &quot;You lost all of your points!&quot;;</span>
+<span class="nc" id="L183">                startPage(message);</span>
+<span class="nc" id="L184">                return;</span>
+            }
+            
+<span class="nc" id="L187">            betpoint = Integer.parseInt(playerInput.getText());</span>
+<span class="nc" id="L188">            Settext(betpoint);</span>
+<span class="nc" id="L189">        }</span>
+    }
+   
+
+    class home implements ActionListener{
+        private JPanel frame;
+<span class="nc" id="L195">        public home(JPanel frame){</span>
+<span class="nc" id="L196">            this.frame= frame;</span>
+<span class="nc" id="L197">        }</span>
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L199">            JComponent comp = (JComponent) e.getSource();</span>
+<span class="nc" id="L200">            Window win = SwingUtilities.getWindowAncestor(comp);</span>
+<span class="nc" id="L201">            win.dispose();</span>
+<span class="nc" id="L202">       	    MainGui.main(new String[0]);</span>
+<span class="nc" id="L203">        }</span>
+    } 
+    
+<span class="nc" id="L206">    class Hit implements ActionListener{</span>
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+<span class="nc bnc" id="L209" title="All 4 branches missed.">            if(!game.getPlayer().isBusted() &amp;&amp; decided == 0){</span>
+<span class="nc" id="L210">                game.playerHit();</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                if(game.getPlayer().isBusted()){</span>
+<span class="nc" id="L212">                    points = points - betpoint;</span>
+<span class="nc" id="L213">                    DisableButtons();</span>
+<span class="nc" id="L214">                    resultDisplay(game.getPlayer().busted(),game.result(true));</span>
+                }
+            }
+            
+<span class="nc" id="L218">        }</span>
+    }
+    
+<span class="nc" id="L221">    class Stand implements ActionListener{</span>
+        @Override
+        public void actionPerformed(ActionEvent arg0){
+            
+<span class="nc bnc" id="L225" title="All 4 branches missed.">            if(!game.getPlayer().isBusted() &amp;&amp; decided == 0){</span>
+<span class="nc" id="L226">                game.houseHit();</span>
+<span class="nc" id="L227">                DisableButtons();</span>
+<span class="nc bnc" id="L228" title="All 4 branches missed.">                if(game.getHouse().isBusted() || game.getplayervalue() &gt; game.gethousevalue()){</span>
+<span class="nc" id="L229">                    points = points + betpoint;</span>
+<span class="nc" id="L230">                    resultDisplay(&quot;Dealer loses&quot;,game.result(true));</span>
+<span class="nc" id="L231">                    return;</span>
+                }
+                else{
+<span class="nc" id="L234">                    points = points - betpoint;</span>
+<span class="nc" id="L235">                    resultDisplay(&quot;Dealer Wins&quot;,game.result(true));</span>
+                }
+            }
+<span class="nc" id="L238">        }</span>
+    }
+    
+<span class="nc" id="L241">    class Play implements ActionListener{</span>
+        @Override
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L244">            betpoint = Integer.parseInt(playerInput.getText());</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">            if(betpoint &lt; 0){</span>
+<span class="nc" id="L246">                String prompt_invalid=&quot;Invalid number entered. How many points do you want to bet? You currently have &quot; + points +&quot; points&quot;;</span>
+<span class="nc" id="L247">                promptLabel.setText(prompt_invalid);</span>
+<span class="nc" id="L248">                return;</span>
+            }
+<span class="nc bnc" id="L250" title="All 2 branches missed.">            else if(betpoint &gt; 10){</span>
+<span class="nc" id="L251">                String prompt_invalid=&quot;Invalid number entered. How many points do you want to bet? You currently have &quot; + points +&quot; points&quot;;</span>
+<span class="nc" id="L252">                promptLabel.setText(prompt_invalid);</span>
+<span class="nc" id="L253">                return;</span>
+            }
+<span class="nc" id="L255">            System.out.println(betpoint);</span>
+<span class="nc" id="L256">            start.removeAll();</span>
+<span class="nc" id="L257">            start.repaint();</span>
+<span class="nc" id="L258">            revalidate();</span>
+<span class="nc" id="L259">            gamePlay();</span>
+<span class="nc" id="L260">            EnableButtons();</span>
+<span class="nc" id="L261">        }</span>
+    }
+    
+    
+    /**
+     * To change the GridBagConstraints of the GridBagLayout.
+     * @param hand Delaer hand or player hand
+     * @param right the pixel to move to right
+     * @param top the pixel to move to botttom
+     */
+    public void gbcConfig(String hand, int right , int top){
+<span class="nc bnc" id="L272" title="All 2 branches missed.">        if(hand.equals(&quot;dealer&quot;)){</span>
+<span class="nc" id="L273">            gridBagConstraints.fill=GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L274">            gridBagConstraints.anchor=GridBagConstraints.FIRST_LINE_START;</span>
+<span class="nc" id="L275">            gridBagConstraints.insets=new Insets(50+top,0,0,600-right);</span>
+<span class="nc" id="L276">            gridBagConstraints.gridx=0;</span>
+<span class="nc" id="L277">            gridBagConstraints.gridy=0;</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        }else if(hand.equals(&quot;player&quot;)){</span>
+<span class="nc" id="L279">            gridBagConstraints.anchor= GridBagConstraints.LAST_LINE_START;</span>
+<span class="nc" id="L280">            gridBagConstraints.insets=new Insets(250,0,top,600-right);</span>
+<span class="nc" id="L281">            gridBagConstraints.gridx=0;</span>
+<span class="nc" id="L282">            gridBagConstraints.gridy=0;</span>
+        }
+<span class="nc" id="L284">    }</span>
+    
+    public void DisableButtons(){
+<span class="nc" id="L287">        hitButton.setEnabled(false);</span>
+<span class="nc" id="L288">        standButton.setEnabled(false);</span>
+<span class="nc" id="L289">    }</span>
+    
+    public void EnableButtons(){
+<span class="nc" id="L292">        hitButton.setEnabled(true);</span>
+<span class="nc" id="L293">        standButton.setEnabled(true);</span>
+<span class="nc" id="L294">    }</span>
+    
+    public void Settext(int bet){
+<span class="nc bnc" id="L297" title="All 4 branches missed.">        if(bet &lt; 0 || bet &gt; points){</span>
+<span class="nc" id="L298">            String promptreenter=&quot;Invalid number entered. How many points do you want to bet? You currently have &quot; + points +&quot; points&quot;;</span>
+<span class="nc" id="L299">            promptLabel.setText(promptreenter);</span>
+<span class="nc" id="L300">        }</span>
+        else{
+<span class="nc" id="L302">            resultPanel.removeAll();</span>
+<span class="nc" id="L303">            gamePanel.removeAll();</span>
+<span class="nc" id="L304">            decided = 0;</span>
+<span class="nc" id="L305">            game.getPlayer().clearHand();</span>
+<span class="nc" id="L306">            game.getHouse().clearHand();</span>
+<span class="nc" id="L307">            gamePanel.revalidate();</span>
+<span class="nc" id="L308">            gamePanel.repaint();</span>
+<span class="nc" id="L309">            gamePlay();</span>
+<span class="nc" id="L310">            EnableButtons();</span>
+        }
+<span class="nc" id="L312">    }</span>
+    
+    /**
+     * An inner class that extends the game logic class to add display to the gui
+     */
+    class BlackJackGameGui extends BlackJackGame{
+        Card hiddenCard;
+<span class="nc" id="L319">        public BlackJackGameGui(){</span>
+<span class="nc" id="L320">            super(4,&quot;Player&quot;);</span>
+<span class="nc" id="L321">        }</span>
+        
+        /**
+         * Same as start method in BlackJackGame class
+         */
+        @Override
+        public void start(){
+<span class="nc bnc" id="L328" title="All 2 branches missed.">            for(int i=0;i&lt;2;i++){</span>
+<span class="nc" id="L329">                this.getHouse().addtoHand(1, d);</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">                if(i==0){</span>
+<span class="nc" id="L331">                    house.getHand().get(0).hide();</span>
+<span class="nc" id="L332">                    hiddenCard=house.getHand().get(0);</span>
+                }
+<span class="nc" id="L334">                display(house);</span>
+<span class="nc" id="L335">                playerHit();</span>
+            }
+<span class="nc" id="L337">        }</span>
+        
+        
+         public int getplayervalue(){
+<span class="nc" id="L341">            return player.getHandValue();</span>
+        }
+        
+        public int gethousevalue(){
+<span class="nc" id="L345">            return house.getHandValue();</span>
+        }
+        
+        /**
+         * Same as playerHit method in BlackJackGame class
+         */
+        @Override
+        public void playerHit(){
+<span class="nc" id="L353">            player.addtoHand(1, d);</span>
+<span class="nc" id="L354">            display(player);</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">            if(player.isBusted())</span>
+<span class="nc" id="L356">                player.busted();</span>
+<span class="nc" id="L357">        }</span>
+        
+        /**
+         * Same as houseHit method in BlackJackGame class
+         */
+        @Override
+        public void houseHit(){
+<span class="nc" id="L364">            house.getHand().get(0).showHidden();</span>
+<span class="nc" id="L365">            images.get(0).setIcon(new ImageIcon(path(hiddenCard)));</span>
+<span class="nc" id="L366">            display(house);</span>
+<span class="nc" id="L367">            SoundEffect.playSound(&quot;deal&quot;, 1,4);</span>
+<span class="nc bnc" id="L368" title="All 4 branches missed.">            while(house.isHitting()&amp;&amp;!house.isBusted()){</span>
+<span class="nc" id="L369">                house.addtoHand(1, d);</span>
+<span class="nc" id="L370">                display(house);</span>
+            }
+            
+<span class="nc" id="L373">        }</span>
+        /**
+         * Same as result method in BlackJackGame class,but this one return a string
+         */
+        public String result(boolean gui){
+<span class="nc bnc" id="L378" title="All 2 branches missed.">            if((house.isBusted()||</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">                player.getHandValue()&gt;house.getHandValue())</span>
+<span class="nc bnc" id="L380" title="All 2 branches missed.">               &amp;&amp;!player.isBusted())</span>
+<span class="nc" id="L381">                return player.win();</span>
+<span class="nc bnc" id="L382" title="All 2 branches missed.">            else if(player.isBusted()||</span>
+<span class="nc bnc" id="L383" title="All 2 branches missed.">                    !house.isBusted()&amp;&amp;</span>
+<span class="nc bnc" id="L384" title="All 2 branches missed.">                    player.getHandValue()&lt;house.getHandValue())</span>
+<span class="nc" id="L385">                return player.lose();</span>
+            else
+<span class="nc" id="L387">                return player.push();</span>
+        }
+        
+        /**
+         * The method to display the card image of a Hand
+         *@param h the Hand that need to be display
+         */
+        public void display(Hand h){
+<span class="nc" id="L395">            int i=200;</span>
+<span class="nc" id="L396">            System.out.println(h.toString());</span>
+<span class="nc bnc" id="L397" title="All 2 branches missed.">            for(Card c:h.getHand()){</span>
+<span class="nc" id="L398">                ImageIcon image = new ImageIcon(path(c));</span>
+<span class="nc" id="L399">                JLabel label = new JLabel(&quot;&quot;,image,JLabel.CENTER);</span>
+<span class="nc" id="L400">                images.add(label);</span>
+<span class="nc bnc" id="L401" title="All 2 branches missed.">                if(h==house){</span>
+<span class="nc" id="L402">                    gbcConfig(&quot;dealer&quot;,i,0);</span>
+<span class="nc" id="L403">                    gamePanel.add(images.get(images.size()-1),gridBagConstraints);</span>
+<span class="nc" id="L404">                    gbcConfig(&quot;dealer&quot;,0,20);</span>
+<span class="nc" id="L405">                    pointsUpdate();</span>
+<span class="nc" id="L406">                    gamePanel.add(dealerPoints,gridBagConstraints);</span>
+<span class="nc bnc" id="L407" title="All 2 branches missed.">                }else if (h==player){</span>
+<span class="nc" id="L408">                    gbcConfig(&quot;player&quot;,i,0);</span>
+<span class="nc" id="L409">                    gamePanel.add(images.get(images.size()-1),gridBagConstraints);</span>
+<span class="nc" id="L410">                    gbcConfig(&quot;player&quot;,0,20);</span>
+<span class="nc" id="L411">                    pointsUpdate();</span>
+<span class="nc" id="L412">                    gamePanel.add(playerPoints,gridBagConstraints);</span>
+                }
+<span class="nc" id="L414">                gamePanel.revalidate();</span>
+<span class="nc" id="L415">                gamePanel.repaint();</span>
+<span class="nc" id="L416">                i+=200;</span>
+<span class="nc" id="L417">            }</span>
+            //sleep(500);
+<span class="nc" id="L419">        }</span>
+        
+        /**
+         * Update the total points of both dealer and player hand
+         */
+        public void pointsUpdate(){
+<span class="nc" id="L425">            dealerPoints.setText(Integer.toString(house.getHandValue()));</span>
+<span class="nc" id="L426">            playerPoints.setText(Integer.toString(player.getHandValue()));</span>
+<span class="nc" id="L427">        }</span>
+        
+        /**
+         * returns a path of image to the specified card
+         * @param c card to find path to
+         */
+        public String path(Card c) {
+<span class="nc" id="L434">            String path = &quot;images/&quot;;</span>
+<span class="nc" id="L435">            String suit = String.valueOf(c.getSuit().charAt(0)).toLowerCase();</span>
+<span class="nc" id="L436">            String rank = String.valueOf(c.getRank().charAt(0));</span>
+<span class="nc bnc" id="L437" title="All 2 branches missed.">            if(!rank.equals(&quot;X&quot;)){</span>
+<span class="nc bnc" id="L438" title="All 2 branches missed.">                if(rank.equals(&quot;A&quot;))</span>
+<span class="nc" id="L439">                    rank = new String(&quot;1&quot;);</span>
+<span class="nc bnc" id="L440" title="All 2 branches missed.">                else if (rank.equals(&quot;J&quot;))</span>
+<span class="nc" id="L441">                    rank = new String(&quot;11&quot;);</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">                else if (rank.equals(&quot;Q&quot;))</span>
+<span class="nc" id="L443">                    rank = new String(&quot;12&quot;);</span>
+<span class="nc bnc" id="L444" title="All 2 branches missed.">                else if (rank.equals(&quot;K&quot;))</span>
+<span class="nc" id="L445">                    rank = new String(&quot;13&quot;);</span>
+<span class="nc bnc" id="L446" title="All 2 branches missed.">                else if(rank.equals(&quot;1&quot;))</span>
+<span class="nc" id="L447">                    rank= new String(&quot;10&quot;);</span>
+<span class="nc" id="L448">                path += suit;</span>
+<span class="nc bnc" id="L449" title="All 8 branches missed.">                if(!(rank.equals(&quot;10&quot;)||rank.equals(&quot;11&quot;) || rank.equals(&quot;12&quot;) || rank.equals(&quot;13&quot;)))</span>
+<span class="nc" id="L450">                    path += &quot;0&quot;;</span>
+<span class="nc" id="L451">                path += rank;</span>
+            }else
+<span class="nc" id="L453">                path+=&quot;back&quot;;</span>
+<span class="nc" id="L454">            path += &quot;.png&quot;;</span>
+<span class="nc" id="L455">            return path;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
