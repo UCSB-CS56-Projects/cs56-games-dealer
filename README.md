@@ -12,7 +12,7 @@ project history
  
  F17 | JamesW121 KiwanSung 5pm | 
 
- W18 | adiltruong ernestosandoval 5pm | Added jacoco for code support 
+ W18 | adiltruong ernestosandoval 5pm | Added JaCoCo for code support 
 ```
 
 What is this?
@@ -100,7 +100,7 @@ You will be given two buttons, "Blackjack" and "Dealer". Each one will lead to c
 
 -Results of hands and cards will be printed, the system will inquire user to continue playing.
 
--Dealer API can be used and imported to other games that need a dealer such as various card games including Texas Hold Em and Go Fish. Since Dealer is universalin other card, mainly casino games, implementing the API will the save the game makers a great deal of time. For this project, we apply the concepts to BlackJack.
+-Dealer API can be used and imported to other games that need a dealer such as various card games including Texas Hold Em and Go Fish. Since Dealer is universal in other card, mainly casino games, implementing the API will the save the game developers a great deal of time. For this project, we apply the concepts to BlackJack.
 
 ## If you run it by "ant run" ##
 #### Blackjack ####
