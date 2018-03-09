@@ -209,9 +209,9 @@ public class BlackJackGui extends JPanel{
    
 
     class home implements ActionListener{
-        private JPanel frame;
-        public home(JPanel frame){
-            this.frame= frame;
+        private JPanel panel;
+        public home(JPanel panel){
+            this.panel= panel;
         }
         public void actionPerformed(ActionEvent e) {
             JComponent comp = (JComponent) e.getSource();
