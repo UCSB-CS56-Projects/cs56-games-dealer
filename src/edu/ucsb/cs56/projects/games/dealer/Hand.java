@@ -24,6 +24,17 @@ public class Hand {
     }
 
     /**
+     * Return the ith card in the hand
+     *
+     * @param i index of card to return
+     */
+    public Card get(int i) {
+        return hand.get(i);
+    }
+
+
+
+    /**
      * Add a number of cards to the hand, and play a sound effect
      *
      * @param numCards number of cards to draw
@@ -33,7 +44,7 @@ public class Hand {
      public void addtoHand(int numCards, Deck d) {
          d.draw(numCards, this);
          handSize += numCards;
-         SoundEffect.playSound("deal",1,4);
+         //SoundEffect.playSound("deal",1,4);
     }
      
      public void removeLastCard(){

@@ -1,12 +1,14 @@
 package edu.ucsb.cs56.projects.games.dealer;
 
+import java.io.Serializable;
+
 /**
  * This class represents an individual card in a standard 52 card deck
  *
  * @author Kin Kwan Poon and Eric Xiao
  * @version cs56 F16
  */
-public class Card implements Comparable<Card>{
+public class Card implements Comparable<Card>, Serializable{
     private String rank;
     private String suit;
     private boolean hidden;
@@ -24,7 +26,20 @@ public class Card implements Comparable<Card>{
     	this.suit=suit;
     	hidden=false;
     }
-    
+
+    /**
+     * Construct a new Card with specific rank and suit.
+     * 
+     * @param rankValue
+     * holds int value of the rank
+     * @param suit
+     * holds string name value of the suit
+     */    
+    public Card(int rankValue, String suit){
+        String rank = String.valueOf(rankValue);
+        this.rank=rank;
+        this.suit=suit;
+    }
 
     /**
      * @return the rank of the card

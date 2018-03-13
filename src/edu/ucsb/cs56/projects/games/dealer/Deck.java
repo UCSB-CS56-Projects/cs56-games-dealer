@@ -66,7 +66,7 @@ public class Deck {
 
 	//Shuffles the deck with a 64 bit seed
 	Collections.shuffle(deck,random);
-	SoundEffect.playSound("shuffle.wav");
+	//SoundEffect.playSound("shuffle.wav");
 	try {
 		Thread.sleep(1500);
 	} catch (InterruptedException e) {
