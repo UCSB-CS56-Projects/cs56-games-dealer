@@ -121,7 +121,7 @@ public class HandTest{
     public void testPrintHandMultipleCards(){
         Hand h1=new Hand();
         h1.addtoHand(2, d);
-        assertEquals("Your hand:\nAce of Spades, 2 of Spades",h1.toString());
+        assertEquals("Your hand:\nAce of Spades, Two of Spades",h1.toString());
     }
     
     @Test

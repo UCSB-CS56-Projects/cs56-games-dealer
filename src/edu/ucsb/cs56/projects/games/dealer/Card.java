@@ -9,9 +9,50 @@ import java.io.Serializable;
  * @version cs56 F16
  */
 public class Card implements Comparable<Card>, Serializable{
-    private String rank;
-    private String suit;
+    private Rank rank;
+    private Suit suit;
     private boolean hidden;
+
+
+public enum Rank {
+    X(0), Ace(1), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), Ten(10), Jack(11), Queen(12), King(13);
+
+    private final int value;
+    private Rank(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
+
+public enum Suit {
+    X(0), Diamonds(1), Clubs(2), Hearts(3), Spades(4);
+
+    private final int value;
+    private Suit(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
+
+    /**
+     * Construct a new Card with specific rank and suit.
+     * 
+     * @param rankValue
+     * holds int value of the rank
+     * @param suit
+     * holds string name value of the suit
+     */
+    public Card(Card.Rank rank, Card.Suit suit){
+        this.rank=rank;
+        this.suit=suit;
+	this.hidden=false;
+    }
 
     /**
      * Construct a new Card with specific rank and suit.
@@ -22,9 +63,49 @@ public class Card implements Comparable<Card>, Serializable{
      * holds string name value of the suit
      */
     public Card(String rank,String suit) {
-    	this.rank=rank;
-    	this.suit=suit;
-    	hidden=false;
+        if (rank == "Ace") {
+            this.rank = Card.Rank.Ace;
+        } else if (rank == "2") {
+            this.rank = Card.Rank.Two;
+        } else if (rank == "3") {
+            this.rank = Card.Rank.Three;
+        } else if (rank == "4") {
+            this.rank = Card.Rank.Four;
+        } else if (rank == "5") {
+            this.rank = Card.Rank.Five;
+        } else if (rank == "6") {
+            this.rank = Card.Rank.Six;
+        } else if (rank == "7") {
+            this.rank = Card.Rank.Seven;
+        } else if (rank == "8") {
+            this.rank = Card.Rank.Eight;
+        } else if (rank == "9") {
+            this.rank = Card.Rank.Nine;
+        } else if (rank == "10") {
+            this.rank = Card.Rank.Ten;
+        } else if (rank == "Jack") {
+            this.rank = Card.Rank.Jack;
+        } else if (rank == "Queen") {
+            this.rank = Card.Rank.Queen;
+        } else if (rank == "King") {
+            this.rank = Card.Rank.King;
+        } else {
+	    this.rank = Card.Rank.X;
+	}
+
+	if (suit == "Diamonds") {
+	    this.suit = Card.Suit.Diamonds;
+	} else if (suit == "Clubs") {
+            this.suit = Card.Suit.Clubs;
+        } else if (suit == "Hearts") {
+            this.suit = Card.Suit.Hearts;
+        } else if (suit == "Spades") {
+            this.suit = Card.Suit.Spades;
+        } else {
+	    this.suit = Card.Suit.X;
+	}
+
+        hidden=false;
     }
 
     /**
@@ -34,33 +115,79 @@ public class Card implements Comparable<Card>, Serializable{
      * holds int value of the rank
      * @param suit
      * holds string name value of the suit
-     */    
+     */
     public Card(int rankValue, String suit){
         String rank = String.valueOf(rankValue);
-        this.rank=rank;
-        this.suit=suit;
-    }
+
+	if (rank == "Ace") {
+            this.rank = Card.Rank.Ace;
+        } else if (rank == "2") {
+            this.rank = Card.Rank.Two;
+	} else if (rank == "3") {
+            this.rank = Card.Rank.Three;
+        } else if (rank == "4") {
+            this.rank = Card.Rank.Four;
+        } else if (rank == "5") {
+            this.rank = Card.Rank.Five;
+        } else if (rank == "6") {
+            this.rank = Card.Rank.Six;
+        } else if (rank == "7") {
+            this.rank = Card.Rank.Seven;
+        } else if (rank == "8") {
+            this.rank = Card.Rank.Eight;
+        } else if (rank == "9") {
+            this.rank = Card.Rank.Nine;
+        } else if (rank == "10") {
+            this.rank = Card.Rank.Ten;
+        } else if (rank == "Jack") {
+            this.rank = Card.Rank.Jack;
+        } else if (rank == "Queen") {
+            this.rank = Card.Rank.Queen;
+        } else if (rank == "King") {
+            this.rank = Card.Rank.King;
+        } else {
+            this.rank = Card.Rank.X;
+        }
+
+        if (suit == "Diamonds") {
+            this.suit = Card.Suit.Diamonds;
+        } else if (suit == "Clubs") {
+            this.suit = Card.Suit.Clubs;
+        } else if (suit == "Hearts") {
+            this.suit = Card.Suit.Hearts;
+        } else if (suit == "Spades") {
+            this.suit = Card.Suit.Spades;
+        } else {
+            this.suit = Card.Suit.X;
+        }
+
+        hidden=false;
+
+	}
+
+
 
     /**
      * @return the rank of the card
      */
-    public String getRank() {
-    	if(!hidden)
-    		return this.rank;
-    	else
-    		return "X";
+    public Card.Rank getRank() {
+        if(!hidden)
+                return this.rank;
+        else
+                return Card.Rank.X;
     }
 
     /**
      * @return the suit of the card
      */
-    public String getSuit() {
-    	if(!hidden)
-    		return this.suit;
-    	else
-    		return "X";
+    public Card.Suit getSuit() {
+        if(!hidden)
+                return this.suit;
+        else
+                return Card.Suit.X;
     }
-    
+
+
     /**
      * Overridden toString function to print this Card.
      *
@@ -69,9 +196,9 @@ public class Card implements Comparable<Card>, Serializable{
 
     @Override
     public String toString() {
-    	if(!hidden)
+    	if(!hidden) {
     		return rank + " of " + suit;
-    	else
+    	} else
     		return "X of X";
     }
 
@@ -129,19 +256,7 @@ public class Card implements Comparable<Card>, Serializable{
 	 * @return the value of suit for comparable
 	 */
 	public Integer suitVaule(){
-		switch(this.suit){
-		case "Spades":
-			return 4;
-		case "Hearts":
-			return 3;
-		case "Clubs":
-			return 2;
-		case "Diamonds":
-			return 1;
-		default:
-			System.out.println("Wrong suit deteced");
-			return 0;
-		}
+		return suit.getValue();
 	}
 	
 	/**
@@ -149,16 +264,10 @@ public class Card implements Comparable<Card>, Serializable{
 	 */
 	public Integer rankValue(){
 		switch(this.rank){
-		case "Ace":
+		case Ace:
 			return 14;
-		case "King":
-			return 13;
-		case "Queen":
-			return 12;
-		case "Jack":
-			return 11;
 		default:
-			return Integer.parseInt(this.rank);
+			return this.rank.getValue();
 		}
 	}
 
@@ -173,20 +282,22 @@ public class Card implements Comparable<Card>, Serializable{
 				return 0;
 			}else{
 				switch(this.rank){
-				case "Ace":
+				case Ace:
 					return 1;
-				case "King":
+				case King:
 					return 10;
-				case "Queen":
+				case Queen:
 					return 10;
-				case "Jack":
+				case Jack:
 					return 10;
-				default:
-					return Integer.parseInt(this.rank);
+                                default:
+					return rank.getValue();
 				}
 			}
-		}else 
-			return rankValue();
+		}
+		else{ 
+                    return this.rankValue();
+                }
 	}
 	
 	/**

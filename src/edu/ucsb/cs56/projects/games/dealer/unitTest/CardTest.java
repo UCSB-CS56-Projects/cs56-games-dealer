@@ -163,27 +163,27 @@ public class CardTest {
     @Test
     public void testGetRankOfAceSpades(){
         Card c1 = new Card("Ace","Spades");
-        assertEquals(c1.getRank(), "Ace");
+        assertEquals(c1.getRank(), Card.Rank.Ace);
     }
 
     @Test
     public void testGetRankOfHidden(){
         Card c1 = new Card("Ace","Spades");
         c1.hide();
-        assertEquals(c1.getRank(), "X");
+        assertEquals(c1.getRank(), Card.Rank.X);
     }
 
     @Test
     public void testGetSuitOfAceSpades(){
         Card c1 = new Card("Ace","Spades");
-        assertEquals(c1.getSuit(), "Spades");
+        assertEquals(c1.getSuit(), Card.Suit.Spades);
     }
 
     @Test
     public void testGetSuitOfHidden(){
         Card c1 = new Card("Ace","Spades");
         c1.hide();
-        assertEquals(c1.getSuit(), "X");
+        assertEquals(c1.getSuit(), Card.Suit.X);
     }
 
 }

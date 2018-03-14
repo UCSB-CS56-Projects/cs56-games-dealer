@@ -144,7 +144,7 @@ public class BlackJackPlayerTest {
     public void testToString2(){
         BlackJackPlayer h1=new BlackJackPlayer("test");
         h1.addtoHand(2, d);
-        assertEquals("test: \nAce of Spades, 2 of Spades (13)\n", h1.toString());
+        assertEquals("test: \nAce of Spades, Two of Spades (13)\n", h1.toString());
     }
 
     @Test

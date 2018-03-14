@@ -451,19 +451,9 @@ public class BlackJackGui extends JPanel{
          */
         public String path(Card c) {
             String path = "images/";
-            String suit = String.valueOf(c.getSuit().charAt(0)).toLowerCase();
-            String rank = String.valueOf(c.getRank().charAt(0));
-            if(!rank.equals("X")){
-                if(rank.equals("A"))
-                    rank = new String("1");
-                else if (rank.equals("J"))
-                    rank = new String("11");
-                else if (rank.equals("Q"))
-                    rank = new String("12");
-                else if (rank.equals("K"))
-                    rank = new String("13");
-                else if(rank.equals("1"))
-                    rank= new String("10");
+            String suit = String.valueOf(c.getSuit().toString().charAt(0)).toLowerCase();
+            String rank = String.valueOf(c.getRank().getValue());
+            if(!rank.equals("0")){
                 path += suit;
                 if(!(rank.equals("10")||rank.equals("11") || rank.equals("12") || rank.equals("13")))
                     path += "0";

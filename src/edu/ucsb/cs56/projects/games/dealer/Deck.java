@@ -17,9 +17,11 @@ import javax.sound.sampled.*;
 
 public class Deck {
     private ArrayList<Card> deck;
-    private String[] ranks={"Ace","2","3","4","5","6","7","8",
-			    "9","10","Jack","Queen","King"};
-    private String[] suits={"Spades","Hearts","Clubs","Diamonds"};
+    private Card.Rank[] ranks = {Card.Rank.Ace, Card.Rank.Two, Card.Rank.Three, Card.Rank.Four,
+                                  Card.Rank.Five, Card.Rank.Six, Card.Rank.Seven, Card.Rank.Eight,
+                                  Card.Rank.Nine, Card.Rank.Ten, Card.Rank.Jack, Card.Rank.Queen,
+                                  Card.Rank.King};
+    private Card.Suit[] suits = {Card.Suit.Spades, Card.Suit.Hearts, Card.Suit.Clubs, Card.Suit.Diamonds};
 
     /**
      * Deck constructor to make deck arraylist contained an unshuffle deck.
