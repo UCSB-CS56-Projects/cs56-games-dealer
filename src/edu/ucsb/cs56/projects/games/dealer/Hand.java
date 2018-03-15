@@ -38,7 +38,7 @@ public class Hand {
 
      public void addtoHand(Card c) {
          hand.add(c);
-         //SoundEffect.playSound("deal",1,4);
+         SoundEffect.playSound("deal",1,4);
      }
 
     /**
@@ -50,7 +50,7 @@ public class Hand {
 
      public void addtoHand(int numCards, Deck d) {
          d.draw(numCards, this);
-         //SoundEffect.playSound("deal",1,4);
+         SoundEffect.playSound("deal",1,4);
      }
 
     /**
@@ -61,7 +61,6 @@ public class Hand {
 
      public void remove(Card c) {
          hand.remove(c);
-         //SoundEffect.playSound("deal",1,4);
      }
 
 
@@ -81,6 +80,16 @@ public class Hand {
      public void removeLastCard(){
     	 hand.remove(this.size()-1);
      }
+
+    /**
+     * Returns a random card from hand
+     * @return Card 
+     */
+    public Card obtainRandomCard() {
+        int randomNum = (int)(Math.random() * hand.size());
+        Card card = hand.get(randomNum);
+        return card;
+    }
 
     /**
      * @return an ArrayList containing each card in the hand

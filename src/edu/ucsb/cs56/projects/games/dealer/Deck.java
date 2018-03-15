@@ -68,7 +68,7 @@ public class Deck {
 
 	//Shuffles the deck with a 64 bit seed
 	Collections.shuffle(deck,random);
-	//SoundEffect.playSound("shuffle.wav");
+	SoundEffect.playSound("shuffle.wav");
 	try {
 		Thread.sleep(1500);
 	} catch (InterruptedException e) {
@@ -105,15 +105,46 @@ public class Deck {
 	return deckResult;
     }
 
+    /**
+     * Return the number of cards in hand
+     */
+
+    public int size() {
+        return deck.size();
+    }
+
 
     /**
-     *  Add a particular card to the deck
+     *  Add a particular card to the top of deck
+     *
+     *  @param c the card to add to deck
+     */
+
+    public void addToTop(Card c) {
+        deck.add(0, c);
+    }
+
+
+    /**
+     *  Add a particular card to the bottom of deck
+     *
+     *  @param c the card to add to deck
+     */
+
+    public void addToBottom(Card c) {
+        deck.add(this.size(), c);
+    }
+
+
+    /**
+     *  Add a particular card to the deck and shuffle it
      *
      *  @param c the card to add to deck
      */
 
     public void add(Card c) {
         deck.add(c);
+        this.shuffle();
     }
 
 
