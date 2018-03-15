@@ -48,7 +48,7 @@ public enum Suit {
      * @param suit
      * holds string name value of the suit
      */
-    public Card(Card.Rank rank, Card.Suit suit){
+    public Card(Rank rank, Suit suit){
         this.rank=rank;
         this.suit=suit;
 	this.hidden=false;
@@ -64,45 +64,45 @@ public enum Suit {
      */
     public Card(String rank,String suit) {
         if (rank == "Ace") {
-            this.rank = Card.Rank.Ace;
+            this.rank = Rank.Ace;
         } else if (rank == "2") {
-            this.rank = Card.Rank.Two;
+            this.rank = Rank.Two;
         } else if (rank == "3") {
-            this.rank = Card.Rank.Three;
+            this.rank = Rank.Three;
         } else if (rank == "4") {
-            this.rank = Card.Rank.Four;
+            this.rank = Rank.Four;
         } else if (rank == "5") {
-            this.rank = Card.Rank.Five;
+            this.rank = Rank.Five;
         } else if (rank == "6") {
-            this.rank = Card.Rank.Six;
+            this.rank = Rank.Six;
         } else if (rank == "7") {
-            this.rank = Card.Rank.Seven;
+            this.rank = Rank.Seven;
         } else if (rank == "8") {
-            this.rank = Card.Rank.Eight;
+            this.rank = Rank.Eight;
         } else if (rank == "9") {
-            this.rank = Card.Rank.Nine;
+            this.rank = Rank.Nine;
         } else if (rank == "10") {
-            this.rank = Card.Rank.Ten;
+            this.rank = Rank.Ten;
         } else if (rank == "Jack") {
-            this.rank = Card.Rank.Jack;
+            this.rank = Rank.Jack;
         } else if (rank == "Queen") {
-            this.rank = Card.Rank.Queen;
+            this.rank = Rank.Queen;
         } else if (rank == "King") {
-            this.rank = Card.Rank.King;
+            this.rank = Rank.King;
         } else {
-	    this.rank = Card.Rank.X;
+	    this.rank = Rank.X;
 	}
 
 	if (suit == "Diamonds") {
-	    this.suit = Card.Suit.Diamonds;
+	    this.suit = Suit.Diamonds;
 	} else if (suit == "Clubs") {
-            this.suit = Card.Suit.Clubs;
+            this.suit = Suit.Clubs;
         } else if (suit == "Hearts") {
-            this.suit = Card.Suit.Hearts;
+            this.suit = Suit.Hearts;
         } else if (suit == "Spades") {
-            this.suit = Card.Suit.Spades;
+            this.suit = Suit.Spades;
         } else {
-	    this.suit = Card.Suit.X;
+	    this.suit = Suit.X;
 	}
 
         hidden=false;
@@ -119,46 +119,46 @@ public enum Suit {
     public Card(int rankValue, String suit){
         String rank = String.valueOf(rankValue);
 
-	if (rank == "Ace") {
-            this.rank = Card.Rank.Ace;
+	if (rank == "1" || rank == "14") {
+            this.rank = Rank.Ace;
         } else if (rank == "2") {
-            this.rank = Card.Rank.Two;
+            this.rank = Rank.Two;
 	} else if (rank == "3") {
-            this.rank = Card.Rank.Three;
+            this.rank = Rank.Three;
         } else if (rank == "4") {
-            this.rank = Card.Rank.Four;
+            this.rank = Rank.Four;
         } else if (rank == "5") {
-            this.rank = Card.Rank.Five;
+            this.rank = Rank.Five;
         } else if (rank == "6") {
-            this.rank = Card.Rank.Six;
+            this.rank = Rank.Six;
         } else if (rank == "7") {
-            this.rank = Card.Rank.Seven;
+            this.rank = Rank.Seven;
         } else if (rank == "8") {
-            this.rank = Card.Rank.Eight;
+            this.rank = Rank.Eight;
         } else if (rank == "9") {
-            this.rank = Card.Rank.Nine;
+            this.rank = Rank.Nine;
         } else if (rank == "10") {
-            this.rank = Card.Rank.Ten;
-        } else if (rank == "Jack") {
-            this.rank = Card.Rank.Jack;
-        } else if (rank == "Queen") {
-            this.rank = Card.Rank.Queen;
-        } else if (rank == "King") {
-            this.rank = Card.Rank.King;
+            this.rank = Rank.Ten;
+        } else if (rank == "11") {
+            this.rank = Rank.Jack;
+        } else if (rank == "12") {
+            this.rank = Rank.Queen;
+        } else if (rank == "13") {
+            this.rank = Rank.King;
         } else {
-            this.rank = Card.Rank.X;
+            this.rank = Rank.X;
         }
 
         if (suit == "Diamonds") {
-            this.suit = Card.Suit.Diamonds;
+            this.suit = Suit.Diamonds;
         } else if (suit == "Clubs") {
-            this.suit = Card.Suit.Clubs;
+            this.suit = Suit.Clubs;
         } else if (suit == "Hearts") {
-            this.suit = Card.Suit.Hearts;
+            this.suit = Suit.Hearts;
         } else if (suit == "Spades") {
-            this.suit = Card.Suit.Spades;
+            this.suit = Suit.Spades;
         } else {
-            this.suit = Card.Suit.X;
+            this.suit = Suit.X;
         }
 
         hidden=false;
@@ -170,21 +170,21 @@ public enum Suit {
     /**
      * @return the rank of the card
      */
-    public Card.Rank getRank() {
+    public Rank getRank() {
         if(!hidden)
                 return this.rank;
         else
-                return Card.Rank.X;
+                return Rank.X;
     }
 
     /**
      * @return the suit of the card
      */
-    public Card.Suit getSuit() {
+    public Suit getSuit() {
         if(!hidden)
                 return this.suit;
         else
-                return Card.Suit.X;
+                return Suit.X;
     }
 
 
