@@ -143,7 +143,7 @@ public class CardTest {
     @Test
     public void testDiamondValueNoBool(){
         Card c1 = new Card(Card.Rank.Jack, Card.Suit.Diamonds);
-        assertEquals(1,c1.suitVaule().intValue());
+        assertEquals(1,c1.suitValue().intValue());
     }
 
     @Test

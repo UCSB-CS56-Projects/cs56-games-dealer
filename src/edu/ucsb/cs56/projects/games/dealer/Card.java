@@ -42,6 +42,7 @@ public class Card implements Comparable<Card>, Serializable{
         }
     }
 
+
     /**
      * Construct a new Card with specific rank and suit.
      * 
@@ -67,6 +68,7 @@ public class Card implements Comparable<Card>, Serializable{
                 return Rank.X;
     }
 
+
     /**
      * @return the suit of the card
      */
@@ -83,7 +85,6 @@ public class Card implements Comparable<Card>, Serializable{
      *
      * @return Returns the rank of suit of the Card
      */
-
     @Override
     public String toString() {
     	if(!hidden) {
@@ -91,6 +92,7 @@ public class Card implements Comparable<Card>, Serializable{
     	} else
     		return "X of X";
     }
+
 
     /**
      * Determine if this Card and the other Card o are the same.
@@ -122,6 +124,7 @@ public class Card implements Comparable<Card>, Serializable{
 	return this.rank.hashCode()^this.suit.hashCode();
     }
 
+
     /**
      * Compare this card to card c.
      * @return 1,0,-1 if this card is greater than / equals / less than the Card c.
@@ -129,7 +132,7 @@ public class Card implements Comparable<Card>, Serializable{
     @Override
     public int compareTo(Card c) {
         int rank=this.rankValue().compareTo(c.rankValue());
-        int suit=this.suitVaule().compareTo(c.suitVaule());
+        int suit=this.suitValue().compareTo(c.suitValue());
         if(rank>0)
             return 1;
         else if(rank<0)
@@ -143,24 +146,25 @@ public class Card implements Comparable<Card>, Serializable{
     }
 
 	
-	/**
-	 * @return the value of suit for comparable
-	 */
-	public Integer suitVaule(){
-		return suit.getValue();
-	}
+    /**
+     * @return the value of suit for comparable
+     */
+    public Integer suitValue(){
+        return suit.getValue();
+    }
 	
-	/**
-	 * @return the value of rank for comparable
-	 */
-	public Integer rankValue(){
-		switch(this.rank){
-		case Ace:
-			return 14;
-		default:
-			return this.rank.getValue();
-		}
-	}
+
+    /**
+     * @return the value of rank for comparable
+     */
+    public Integer rankValue(){
+        switch(this.rank){
+            case Ace:
+                return 14;
+            default:
+                return this.rank.getValue();
+        }
+    }
 
 	/**
 	 * For use in the game black jack only
@@ -190,20 +194,22 @@ public class Card implements Comparable<Card>, Serializable{
                     return this.rankValue();
                 }
 	}
+
 	
-	/**
-	 * Hide the card
-	 */
-	public void hide(){
-	    hidden=true;
-	}
-	
-	/**
-	 * Show the card
-	 */
-	public void showHidden(){
-	    hidden=false;
-	}
+    /**
+     * Hide the card
+     */
+    public void hide(){
+        hidden=true;
+    }
+
+
+    /**
+     * Show the card
+     */
+    public void showHidden(){
+        hidden=false;
+    }
 
     /**
      * @return the value of hidden
