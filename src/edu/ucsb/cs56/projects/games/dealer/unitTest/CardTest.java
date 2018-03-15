@@ -79,53 +79,10 @@ public class CardTest {
         assertEquals(-1,c1.compareTo(c2));
     }
  
-    @Test 
-    public void testAceValue(){
-    	Card c1 = new Card(Card.Rank.Ace, Card.Suit.Clubs);
-    	assertEquals(1,c1.rankValue(true).intValue());
-    }
-    
-    @Test
-    public void testJackValue(){
-    	Card c1 = new Card(Card.Rank.Jack, Card.Suit.Clubs);
-    	assertEquals(10,c1.rankValue(true).intValue());
-    }
-    @Test
-    public void testQueenValue(){
-    	Card c1 = new Card(Card.Rank.Queen, Card.Suit.Clubs);
-    	assertEquals(10,c1.rankValue(true).intValue());
-    }
-    @Test
-    public void testKingValue(){
-    	Card c1 = new Card(Card.Rank.King, Card.Suit.Clubs);
-    	assertEquals(10,c1.rankValue(true).intValue());
-    }
-    
     @Test
     public void testThreeValue(){
-    	Card c1 = new Card(Card.Rank.Three, Card.Suit.Clubs);
-    	assertEquals(3,c1.rankValue(true).intValue());
-    }
-    
-    @Test
-    public void testThreeValueFalse(){
         Card c1 = new Card(Card.Rank.Three, Card.Suit.Clubs);
-        assertEquals(3,c1.rankValue(false).intValue());
-    }
-
-    @Test
-    public void testThreeValueHidden(){
-        Card c1 = new Card(Card.Rank.Three, Card.Suit.Clubs);
-        c1.hide();
-        assertEquals(0,c1.rankValue(true).intValue());
-    }
-   
-    @Test
-    public void testThreeValueShowHidden(){
-        Card c1 = new Card(Card.Rank.Three, Card.Suit.Clubs);
-        c1.hide();
-        c1.showHidden();
-        assertEquals(3,c1.rankValue(true).intValue());
+        assertEquals(3,c1.rankValue().intValue());
     }
 
     @Test

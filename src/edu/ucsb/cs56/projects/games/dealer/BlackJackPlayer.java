@@ -47,9 +47,10 @@ public class BlackJackPlayer extends Hand {
 		int total=0;
 		boolean haveAce=false;
 		for(Card c:hand){
-			if(c.rankValue(true)==1)
+			BlackJackCard bjc = (BlackJackCard)c;
+			if(bjc.rankValue()==1)
 				haveAce=true;
-			total+=c.rankValue(true);
+			total+=bjc.rankValue();
 		}
 		if(haveAce&&total<=11)
 			total+=10;

@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ucsb.cs56.projects.games.dealer.BlackJackPlayer;
-import edu.ucsb.cs56.projects.games.dealer.Deck;
+import edu.ucsb.cs56.projects.games.dealer.BlackJackDeck;
 
 /**
  * This class is used to test the BlackJackPlayer class.
@@ -15,10 +15,10 @@ import edu.ucsb.cs56.projects.games.dealer.Deck;
  * @version UCSB, cs56, F16
  */
 public class BlackJackPlayerTest {
-    private Deck d;
+    private BlackJackDeck d;
     @Before
     public void setUp(){
-    	d=new Deck();
+    	d=new BlackJackDeck();
 	}
 
     @Test

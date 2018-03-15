@@ -1,7 +1,5 @@
 package edu.ucsb.cs56.projects.games.dealer;
 
-import java.io.Serializable;
-
 /**
  * This class represents an individual card in a standard 52 card deck
  *
@@ -9,10 +7,10 @@ import java.io.Serializable;
  * @version cs56 F16
  */
 
-public class Card implements Comparable<Card>, Serializable{
-    private Rank rank;
-    private Suit suit;
-    private boolean hidden;
+public class Card implements Comparable<Card> {
+    protected Rank rank;
+    protected Suit suit;
+    protected boolean hidden;
 
     public enum Rank {
         X(0), Ace(1), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), Ten(10), Jack(11), Queen(12), King(13);
@@ -87,9 +85,9 @@ public class Card implements Comparable<Card>, Serializable{
      */
     @Override
     public String toString() {
-    	if(!hidden) {
+    	if(!hidden)
     		return rank + " of " + suit;
-    	} else
+    	else
     		return "X of X";
     }
 
@@ -171,7 +169,7 @@ public class Card implements Comparable<Card>, Serializable{
 	 * @param blackJack Is the game black jack or not
 	 * @return the value of rank for comparable.
 	 */
-	public Integer rankValue(boolean blackJack){
+	/*public Integer rankValue(boolean blackJack){
 		if(blackJack){
 			if(hidden){
 				return 0;
@@ -195,7 +193,7 @@ public class Card implements Comparable<Card>, Serializable{
                 }
 	}
 
-	
+	*/
     /**
      * Hide the card
      */
