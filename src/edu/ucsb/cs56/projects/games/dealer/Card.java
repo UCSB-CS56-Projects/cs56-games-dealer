@@ -46,10 +46,10 @@ public class Card implements Comparable<Card>, Serializable{
     /**
      * Construct a new Card with specific rank and suit.
      * 
-     * @param rankValue
-     * holds int value of the rank
+     * @param rank
+     * holds Rank value of the rank
      * @param suit
-     * holds string name value of the suit
+     * holds Suit value of the suit
      */
     public Card(Rank rank, Suit suit){
         this.rank=rank;
