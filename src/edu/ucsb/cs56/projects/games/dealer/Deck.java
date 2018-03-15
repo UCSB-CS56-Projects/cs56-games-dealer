@@ -107,6 +107,28 @@ public class Deck {
 
 
     /**
+     *  Add a particular card to the deck
+     *
+     *  @param c the card to add to deck
+     */
+
+    public void add(Card c) {
+        deck.add(c);
+    }
+
+
+    /**
+     *  Remove a particular card from the deck
+     *
+     *  @param c the card to remove from deck
+     */
+
+    public void remove(Card c) {
+        deck.remove(c);
+    }
+
+
+    /**
      *  Draw a number of cards from the deck
      *
      *  @param numCards number of cards to draw
@@ -125,7 +147,7 @@ public class Deck {
 		//removes first element in the ArrayList
 		iterator.remove();
 		i++;
-		h.getHand().add(card);
+		h.addtoHand(card);
 	    }
 	}
     }
@@ -149,5 +171,14 @@ public class Deck {
      * @param filename The name of sound file 
      */
 
+    /**
+     * Returns a random card from deck
+     * @return Card 
+     */
+    public Card obtainRandomCard() {
+        int randomNum = (int)(Math.random() * deck.size());
+        Card card = deck.get(randomNum);
+        return card;
+    }
 
 }

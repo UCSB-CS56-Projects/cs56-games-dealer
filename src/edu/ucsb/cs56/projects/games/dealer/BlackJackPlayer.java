@@ -69,7 +69,6 @@ public class BlackJackPlayer extends Hand {
  	 */
  	public void clearHand(){
  		hand.clear();
- 		handSize=0;
  	}
  	
  	/**
@@ -111,7 +110,7 @@ public class BlackJackPlayer extends Hand {
  	@Override
  	public String toString(){
  		String result=""+name+": \n";
- 		for(int i=0;i<handSize;i++){
+ 		for(int i=0;i<this.size();i++){
  			if(i!=0){
  				result+=", ";
  			}

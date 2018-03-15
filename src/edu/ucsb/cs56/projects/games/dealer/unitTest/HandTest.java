@@ -22,9 +22,12 @@ import edu.ucsb.cs56.projects.games.dealer.Card;
 public class HandTest{
     private Deck d;
     private ArrayList<Card> unshuffleDeck;
-    private final String[] ranks={"Ace","2","3","4","5","6","7","8",
-				  "9","10","Jack","Queen","King"};
-    private final String[] suits={"Spades","Hearts","Clubs","Diamonds"};
+    private final Card.Rank[] ranks = {Card.Rank.Ace, Card.Rank.Two, Card.Rank.Three, Card.Rank.Four,
+                                  Card.Rank.Five, Card.Rank.Six, Card.Rank.Seven, Card.Rank.Eight,
+                                  Card.Rank.Nine, Card.Rank.Ten, Card.Rank.Jack, Card.Rank.Queen,
+                                  Card.Rank.King};
+    private final Card.Suit[] suits = {Card.Suit.Spades, Card.Suit.Hearts, Card.Suit.Clubs, Card.Suit.Diamonds};
+
 
     @Before
     public void setUp(){
