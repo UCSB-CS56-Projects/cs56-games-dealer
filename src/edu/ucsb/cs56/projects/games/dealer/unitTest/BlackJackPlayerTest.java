@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ucsb.cs56.projects.games.dealer.BlackJackPlayer;
-import edu.ucsb.cs56.projects.games.dealer.Deck;
+import edu.ucsb.cs56.projects.games.dealer.BlackJackDeck;
 
 /**
  * This class is used to test the BlackJackPlayer class.
@@ -15,10 +15,10 @@ import edu.ucsb.cs56.projects.games.dealer.Deck;
  * @version UCSB, cs56, F16
  */
 public class BlackJackPlayerTest {
-    private Deck d;
+    private BlackJackDeck d;
     @Before
     public void setUp(){
-    	d=new Deck();
+    	d=new BlackJackDeck();
 	}
 
     @Test
@@ -144,7 +144,7 @@ public class BlackJackPlayerTest {
     public void testToString2(){
         BlackJackPlayer h1=new BlackJackPlayer("test");
         h1.addtoHand(2, d);
-        assertEquals("test: \nAce of Spades, 2 of Spades (13)\n", h1.toString());
+        assertEquals("test: \nAce of Spades, Two of Spades (13)\n", h1.toString());
     }
 
     @Test

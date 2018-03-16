@@ -16,10 +16,12 @@ import javax.sound.sampled.*;
  */
 
 public class Deck {
-    private ArrayList<Card> deck;
-    private String[] ranks={"Ace","2","3","4","5","6","7","8",
-			    "9","10","Jack","Queen","King"};
-    private String[] suits={"Spades","Hearts","Clubs","Diamonds"};
+    protected ArrayList<Card> deck;
+    protected Card.Rank[] ranks = {Card.Rank.Ace, Card.Rank.Two, Card.Rank.Three, Card.Rank.Four,
+                                  Card.Rank.Five, Card.Rank.Six, Card.Rank.Seven, Card.Rank.Eight,
+                                  Card.Rank.Nine, Card.Rank.Ten, Card.Rank.Jack, Card.Rank.Queen,
+                                  Card.Rank.King};
+    protected Card.Suit[] suits = {Card.Suit.Spades, Card.Suit.Hearts, Card.Suit.Clubs, Card.Suit.Diamonds};
 
     /**
      * Deck constructor to make deck arraylist contained an unshuffle deck.
@@ -103,6 +105,59 @@ public class Deck {
 	return deckResult;
     }
 
+    /**
+     * Return the number of cards in hand
+     */
+
+    public int size() {
+        return deck.size();
+    }
+
+
+    /**
+     *  Add a particular card to the top of deck
+     *
+     *  @param c the card to add to deck
+     */
+
+    public void addToTop(Card c) {
+        deck.add(0, c);
+    }
+
+
+    /**
+     *  Add a particular card to the bottom of deck
+     *
+     *  @param c the card to add to deck
+     */
+
+    public void addToBottom(Card c) {
+        deck.add(this.size(), c);
+    }
+
+
+    /**
+     *  Add a particular card to the deck and shuffle it
+     *
+     *  @param c the card to add to deck
+     */
+
+    public void add(Card c) {
+        deck.add(c);
+        this.shuffle();
+    }
+
+
+    /**
+     *  Remove a particular card from the deck
+     *
+     *  @param c the card to remove from deck
+     */
+
+    public void remove(Card c) {
+        deck.remove(c);
+    }
+
 
     /**
      *  Draw a number of cards from the deck
@@ -123,7 +178,7 @@ public class Deck {
 		//removes first element in the ArrayList
 		iterator.remove();
 		i++;
-		h.getHand().add(card);
+		h.addtoHand(card);
 	    }
 	}
     }
@@ -147,5 +202,14 @@ public class Deck {
      * @param filename The name of sound file 
      */
 
+    /**
+     * Returns a random card from deck
+     * @return Card 
+     */
+    public Card obtainRandomCard() {
+        int randomNum = (int)(Math.random() * deck.size());
+        Card card = deck.get(randomNum);
+        return card;
+    }
 
 }

@@ -11,7 +11,6 @@ import java.util.*;
 
 public class Hand {
     protected ArrayList<Card> hand;
-    protected int handSize;
 
     /**
      * Hand constructor to make hand arraylist be an empty hand
@@ -20,11 +19,30 @@ public class Hand {
 
     public Hand() {
         hand = new ArrayList<Card>();
-        handSize=0;
     }
 
     /**
-     * Add a number of cards to the hand, and play a sound effect
+     * Return the ith card in the hand
+     *
+     * @param i index of card to return
+     */
+    public Card get(int i) {
+        return hand.get(i);
+    }
+
+    /**
+     * Add a particular card to the hand
+     *
+     * @param c the card to draw
+     */
+
+     public void addtoHand(Card c) {
+         hand.add(c);
+         SoundEffect.playSound("deal",1,4);
+     }
+
+    /**
+     * Add a number of cards to the hand
      *
      * @param numCards number of cards to draw
      * @param d the deck to draw from
@@ -32,19 +50,51 @@ public class Hand {
 
      public void addtoHand(int numCards, Deck d) {
          d.draw(numCards, this);
-         handSize += numCards;
          SoundEffect.playSound("deal",1,4);
+     }
+
+    /**
+     * Remove a particular card from the hand
+     *
+     * @param c the card to remove
+     */
+
+     public void remove(Card c) {
+         hand.remove(c);
+     }
+
+
+    /**
+     * Return the number of cards in hand
+     */
+
+    public int size() {
+        return hand.size();
     }
+
+
+    /**
+     * Remove the last card from the hand
+     */
      
      public void removeLastCard(){
-    	 hand.remove(handSize-1);
-    	 handSize--;
+    	 hand.remove(this.size()-1);
      }
+
+    /**
+     * Returns a random card from hand
+     * @return Card 
+     */
+    public Card obtainRandomCard() {
+        int randomNum = (int)(Math.random() * hand.size());
+        Card card = hand.get(randomNum);
+        return card;
+    }
 
     /**
      * @return an ArrayList containing each card in the hand
      */
-     public ArrayList<Card> getHand() {
+    public ArrayList<Card> getHand() {
 	return hand;
     }
 
@@ -57,10 +107,10 @@ public class Hand {
     @Override
     public String toString() {
         String result = "Your hand:\n";
-	for(int i = 0; i < handSize - 1; i++) {
+	for(int i = 0; i < this.size() - 1; i++) {
 	    result += hand.get(i) + ", ";
 	}
-	result += hand.get(handSize - 1);
+	result += hand.get(this.size() - 1);
 	return result;
     }
 }
