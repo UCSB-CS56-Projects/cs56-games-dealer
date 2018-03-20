@@ -150,3 +150,12 @@ New features have been added:
 5. Two redundant files has been removed. 'GamesDealerPanelcopy.java' and 'DealerPanelHelpercopy.java' as well as some dead code.
 6. 'build.xml' has been updated; Errors and warnings have been fixed.
 
+W18 final remarks:
+===================
+New features have been added:
+1. The Card, Hand, and Deck classes have been refactored such that they can be used as a library for dealing cards to any card game. For example, BlackJackCard is a class that inherits from the Card class. It overrides the rankValue method because the game BlackJack uses rank values unique to this game. In this case, we also need to create a class BlackJackDeck that contains BlackJackCards, not the parent Cards.
+2. The Card class has been updated to contain rank and value members of enumerated types, instead of strings. 
+3. JaCoCo code coverage was added to check different cases within the code were checked with tests. Future case can be full test coverage.
+4. Added home button to GUI as well as color background to Blackjack game. The GUI was made faster after hitting play but this introduced issue #59. 
+
+
