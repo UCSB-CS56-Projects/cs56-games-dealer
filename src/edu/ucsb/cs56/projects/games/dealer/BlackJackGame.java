@@ -8,14 +8,14 @@ package edu.ucsb.cs56.projects.games.dealer;
 public class BlackJackGame {
 	protected BlackJackHouse house;
 	protected BlackJackPlayer player;
-	protected Deck d;
+	protected BlackJackDeck d;
 	/**
 	 * Constructor of BlackJackGame 
 	 */
 	public BlackJackGame(){
 		house=new BlackJackHouse();
 		player=new BlackJackPlayer("Player");
-		d=new Deck();
+		d=new BlackJackDeck();
 		d.shuffle();
 	}
 	/**
@@ -28,7 +28,7 @@ public class BlackJackGame {
 	public BlackJackGame(int numOfDecks,String playerName){
 		house=new BlackJackHouse();
 		player=new BlackJackPlayer(playerName);
-		d=new Deck(numOfDecks);
+		d=new BlackJackDeck(numOfDecks);
 		d.shuffle();
 	}
 	

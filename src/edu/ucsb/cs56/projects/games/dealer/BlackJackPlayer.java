@@ -47,9 +47,10 @@ public class BlackJackPlayer extends Hand {
 		int total=0;
 		boolean haveAce=false;
 		for(Card c:hand){
-			if(c.rankValue(true)==1)
+			BlackJackCard bjc = (BlackJackCard)c;
+			if(bjc.rankValue()==1)
 				haveAce=true;
-			total+=c.rankValue(true);
+			total+=bjc.rankValue();
 		}
 		if(haveAce&&total<=11)
 			total+=10;
@@ -69,7 +70,6 @@ public class BlackJackPlayer extends Hand {
  	 */
  	public void clearHand(){
  		hand.clear();
- 		handSize=0;
  	}
  	
  	/**
@@ -111,7 +111,7 @@ public class BlackJackPlayer extends Hand {
  	@Override
  	public String toString(){
  		String result=""+name+": \n";
- 		for(int i=0;i<handSize;i++){
+ 		for(int i=0;i<this.size();i++){
  			if(i!=0){
  				result+=", ";
  			}
